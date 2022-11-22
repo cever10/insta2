@@ -1,0 +1,161 @@
+//본인 프로필
+
+import 'package:flutter/material.dart';
+import 'package:insta2/providerVar/providerVars.dart';
+import 'package:insta2/screens/compile_page.dart';
+import 'package:insta2/screens/main_home.dart';
+import 'package:provider/provider.dart';
+
+class MyPage extends StatefulWidget {
+  @override
+  State<MyPage> createState() => _MyPageState();
+}
+
+class _MyPageState extends State<MyPage> {
+  Widget _follower(String title, int value) {
+    return Column(
+      children: [
+        Text(
+          value.toString(),
+          style: TextStyle(fontSize: 50, color: Colors.black),
+        ),
+        Text(
+          title,
+          style: TextStyle(fontSize: 30, color: Colors.black),
+        )
+      ],
+    );
+  }
+
+  Widget _information(BuildContext context) {
+    providerVariable provar = Provider.of<providerVariable>(context);
+
+    return Padding(
+      padding: EdgeInsets.all(15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Stack(
+                children: [
+                  if (provar.checkmyimage == true)
+                    Image.file(
+                      provar.myimage,
+                      width: 400,
+                      height: 400,
+                    ),
+                  if (provar.checkmyimage == false)
+                    Image.asset(
+                      'images/normal_profile.png',
+                      width: 400,
+                      height: 400,
+                    ),
+                  Image.asset(
+                    'images/frame.png',
+                    width: 400,
+                    height: 400,
+                  ),
+                ],
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _follower('게시글', provar.myfeedcount),
+                    _follower('팔로잉', 13),
+                    _follower('팔로워', 15),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 15),
+          Text(
+            provar.myintroduction,
+            style: TextStyle(fontSize: 20, color: Colors.black),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _tapview() {
+    return GridView.builder(
+        padding: EdgeInsets.all(15),
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: 100,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 1,
+          mainAxisSpacing: 15,
+          crossAxisSpacing: 15,
+        ),
+        itemBuilder: (BuildContext context, int inedx) {
+          return Container(
+            color: Colors.grey,
+          );
+        });
+  }
+
+  Widget _compilebutton() {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.of(context).pop();
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (builder) => CompilePage()));
+      },
+      child: Text(
+        '프로필 편집',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 16,
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.grey,
+        minimumSize: Size(MediaQuery.of(context).size.width * 0.98, 48),
+        onSurface: Colors.white,
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    providerVariable provar = Provider.of<providerVariable>(context);
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          provar.myid,
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 50, 0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (builder) => main_home()));
+              },
+              icon: Icon(Icons.home),
+              color: Colors.black,
+            ),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          _information(context),
+          _compilebutton(),
+          _tapview(),
+        ]),
+      ),
+    );
+  }
+}

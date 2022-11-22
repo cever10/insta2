@@ -1,0 +1,181 @@
+//게시글 추가 페이지
+
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_picker_windows/image_picker_windows.dart';
+import 'package:insta2/providerVar/providerVars.dart';
+import 'package:insta2/screens/main_home.dart';
+import 'package:insta2/scripts.dart';
+import 'package:provider/provider.dart';
+
+class PostAddPage extends StatefulWidget {
+  const PostAddPage({super.key});
+
+  @override
+  State<PostAddPage> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<PostAddPage> {
+  TextEditingController contents = TextEditingController();
+
+  File _pickedImage = File('');
+
+  Future<void> _pickImage() async {
+    final ImagePickerWindows _picker = ImagePickerWindows();
+    PickedFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      var selected = File(image.path);
+      setState(() {
+        _pickedImage = selected;
+      });
+    }
+  }
+
+  Widget _profileinfo() {
+    return Stack(
+      children: [
+        if (_pickedImage.path == '')
+          Image.asset(
+            'images/post_picture.png',
+            width: 400,
+            height: 400,
+          ),
+        if (_pickedImage.path != '')
+          Image.file(
+            _pickedImage,
+            width: 400,
+            height: 400,
+          ),
+      ],
+    );
+  }
+
+  Widget _postinfo() {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(10),
+          child: Text('내용', style: TextStyle(fontSize: 12)),
+        ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.3,
+              0, MediaQuery.of(context).size.width * 0.3, 40),
+          child: TextField(
+            controller: contents,
+            decoration: InputDecoration(
+              labelText: '내용을 입력하세요.',
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _addpicturebutton(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        _pickImage();
+      },
+      child: Text(
+        '사진 업로드',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 16,
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.grey,
+        minimumSize: Size(MediaQuery.of(context).size.width * 0.98, 48),
+        onSurface: Colors.white,
+      ),
+    );
+  }
+
+  Widget _addpostbutton(BuildContext context) {
+    providerVariable provar = Provider.of<providerVariable>(context);
+
+    LocalStorage memberDB = LocalStorage("members.txt");
+    LocalStorage feedImgDB = LocalStorage(
+        provar.myid + '/feed' + provar.myfeedcount.toString() + '/feedimg.png');
+    LocalStorage feedDataDB = LocalStorage(
+        provar.myid + '/feed' + provar.myfeedcount.toString() + '/data.txt');
+
+    return ElevatedButton(
+      onPressed: () {
+        if (_pickedImage.path != '') {
+          memberDB.readFileToList().then((value) async {
+            await feedImgDB.createDir(provar.myid);
+            await feedImgDB.createDir2(
+                provar.myid + '/feed' + provar.myfeedcount.toString());
+            await feedImgDB.writeImageFile(_pickedImage);
+
+            value.replaceRange(
+                value.indexOf('id: ' + provar.myid) + 3,
+                value.indexOf('id: ' + provar.myid) + 4,
+                ['feedcount: ' + (provar.myfeedcount + 1).toString()]);
+            await memberDB.writeListToFile(value);
+            provar.updating4(provar.myfeedcount + 1);
+
+            //feedDataDB.w
+
+            Navigator.of(context).pop();
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (builder) => main_home()));
+          });
+        } else {
+          showWinToast('이미지를 넣어주세요', context);
+        }
+      },
+      child: Text(
+        '게시글 업로드',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 16,
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.grey,
+        minimumSize: Size(MediaQuery.of(context).size.width * 0.98, 48),
+        onSurface: Colors.white,
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          '게시글 업로드',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 50, 0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (builder) => main_home()));
+              },
+              icon: Icon(Icons.arrow_back),
+              color: Colors.black,
+            ),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          _profileinfo(),
+          _addpicturebutton(context),
+          _postinfo(),
+          _addpostbutton(context),
+        ]),
+      ),
+    );
+  }
+}
