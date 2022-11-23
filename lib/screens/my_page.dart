@@ -1,9 +1,12 @@
 //본인 프로필
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/screens/compile_page.dart';
 import 'package:insta2/screens/main_home.dart';
+import 'package:insta2/scripts.dart';
 import 'package:provider/provider.dart';
 
 class MyPage extends StatefulWidget {
@@ -81,19 +84,35 @@ class _MyPageState extends State<MyPage> {
     );
   }
 
-  Widget _tapview() {
+  Widget _tapview(BuildContext context) {
+    providerVariable provar = Provider.of<providerVariable>(context);
+
+    List<Widget> myFeeds = List<Widget>.empty(growable: true);
+    List<File> myFeedsImg = List<File>.empty(growable: true);
+
+    for (int i = 0; i < provar.myfeedcount; i++) {
+      LocalStorage feedImgDB =
+          LocalStorage(provar.myid + '/feed' + i.toString() + '/feedimg.png');
+
+      feedImgDB.get_filePath().then((value) {
+        myFeedsImg.add(value);
+
+        //myFeeds.add()
+      });
+    }
+
     return GridView.builder(
         padding: EdgeInsets.all(15),
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 100,
+        itemCount: provar.myfeedcount,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           childAspectRatio: 1,
           mainAxisSpacing: 15,
           crossAxisSpacing: 15,
         ),
-        itemBuilder: (BuildContext context, int inedx) {
+        itemBuilder: (BuildContext context, int index) {
           return Container(
             color: Colors.grey,
           );
@@ -153,7 +172,7 @@ class _MyPageState extends State<MyPage> {
         child: Column(children: [
           _information(context),
           _compilebutton(),
-          _tapview(),
+          _tapview(context),
         ]),
       ),
     );

@@ -190,9 +190,11 @@ class _MyWidgetState extends State<CompilePage> {
                       value.indexOf('id: ' + provar.myid) + 3,
                       ['introduction: ' + introduction.text]);
                   memberDB.writeListToFile(value);
-                });
 
-                provar.updating3(introduction.text);
+                  provar.updating3(introduction.text);
+
+                  showWinToast('프로필이 저장되었습니다', context);
+                });
               },
               child: Text(
                 '저장',

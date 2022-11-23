@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/scripts.dart';
 import 'package:insta2/widgets/navigatorList.dart';
+import 'package:provider/provider.dart';
 
 class main_home extends StatefulWidget {
   @override
@@ -12,10 +14,12 @@ class _main_homeState extends State<main_home> {
 
   @override
   Widget build(BuildContext context) {
+    providerVariable provar = Provider.of<providerVariable>(context);
+
     Future<bool> initInstaFeed() async {
-      await addInstaFeed(MainScrolView);
-      await addInstaFeed(MainScrolView);
-      await addInstaFeed(MainScrolView);
+      await addInstaFeed(MainScrolView, provar.myid);
+      await addInstaFeed(MainScrolView, provar.myid);
+      await addInstaFeed(MainScrolView, provar.myid);
       return true;
     }
 
@@ -37,7 +41,7 @@ class _main_homeState extends State<main_home> {
                         return ListView.builder(
                           itemBuilder: (context, index) {
                             if (MainScrolView.length == index + 2) {
-                              addInstaFeed(MainScrolView);
+                              addInstaFeed(MainScrolView, provar.myid);
                             }
 
                             return MainScrolView[index];

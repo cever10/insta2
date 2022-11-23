@@ -3,6 +3,7 @@ import 'package:insta2/screens/login_page.dart';
 import 'package:insta2/screens/main_home.dart';
 import 'package:insta2/screens/my_page.dart';
 import 'package:insta2/screens/post_add_page.dart';
+import 'package:insta2/screens/search_page.dart';
 import 'package:insta2/scripts.dart';
 
 class navigatorList extends StatelessWidget {
@@ -59,7 +60,11 @@ class navigatorList extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(30),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (builder) => search_page()));
+                    },
                     child: Row(
                       children: [
                         Icon(

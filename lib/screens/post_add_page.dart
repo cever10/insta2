@@ -101,6 +101,10 @@ class _MyWidgetState extends State<PostAddPage> {
         provar.myid + '/feed' + provar.myfeedcount.toString() + '/feedimg.png');
     LocalStorage feedDataDB = LocalStorage(
         provar.myid + '/feed' + provar.myfeedcount.toString() + '/data.txt');
+    LocalStorage feedfavoriteUserDB = LocalStorage(provar.myid +
+        '/feed' +
+        provar.myfeedcount.toString() +
+        '/favoriteUsers.txt');
 
     return ElevatedButton(
       onPressed: () {
@@ -118,7 +122,23 @@ class _MyWidgetState extends State<PostAddPage> {
             await memberDB.writeListToFile(value);
             provar.updating4(provar.myfeedcount + 1);
 
-            //feedDataDB.w
+            await feedDataDB.writeFile('contents: ' + contents.text + '\n');
+            await feedDataDB.writeFile('favorite: 0\n');
+            await feedDataDB.writeFile('comments: 0\n');
+            await feedDataDB
+                .writeFile('year: ' + DateTime.now().year.toString() + '\n');
+            await feedDataDB
+                .writeFile('month: ' + DateTime.now().month.toString() + '\n');
+            await feedDataDB
+                .writeFile('day: ' + DateTime.now().day.toString() + '\n');
+            await feedDataDB
+                .writeFile('hour: ' + DateTime.now().hour.toString() + '\n');
+            await feedDataDB.writeFile(
+                'minute: ' + DateTime.now().minute.toString() + '\n');
+            await feedDataDB.writeFile(
+                'second: ' + DateTime.now().second.toString() + '\n');
+
+            await feedfavoriteUserDB.writeFile('');
 
             Navigator.of(context).pop();
             Navigator.of(context)

@@ -69,7 +69,7 @@ double getNumBiggerHeight(double num, context) {
   }
 }
 
-Future<List<Widget>> addInstaFeed(List<Widget> wlist) async {
+Future<List<Widget>> addInstaFeed(List<Widget> wlist, String myid) async {
   LocalStorage memberDB = LocalStorage("members.txt");
   List<String> memberList = List<String>.empty(growable: true);
   List<String> memberNameList = List<String>.empty(growable: true);
@@ -79,9 +79,20 @@ Future<List<Widget>> addInstaFeed(List<Widget> wlist) async {
   int tempindex = 0;
   String tempname = '';
   String tempid = '';
+  String tempcontents = '';
+  String tempfavorite = '';
+  String tempcomments = '';
+  String tempyear = '';
+  String tempmonth = '';
+  String tempday = '';
+  String temphour = '';
+  String tempminute = '';
+  String tempsecond = '';
   File tempimg = File('');
   File tempprofileimg = File('');
+  Directory tempdir = Directory('');
   bool tempcheckimg = false;
+  bool checkFavoriteUser = false;
   List<String> templist = new List<String>.empty(growable: true);
 
   templist = await memberDB.readFileToList();
@@ -121,8 +132,44 @@ Future<List<Widget>> addInstaFeed(List<Widget> wlist) async {
   tempprofileimg = await imgdb.get_filePath();
   tempcheckimg = await imgdb.checkFile();
 
+  LocalStorage feedDataDB =
+      LocalStorage(tempid + '/feed' + tempdata.toString() + '/data.txt');
+
+  templist = await feedDataDB.readFileToList();
+  tempcontents = templist.elementAt(0).replaceAll(RegExp('contents: '), '');
+  tempfavorite = templist.elementAt(1).replaceAll(RegExp('favorite: '), '');
+  tempcomments = templist.elementAt(2).replaceAll(RegExp('comments: '), '');
+  tempyear = templist.elementAt(3).replaceAll(RegExp('year: '), '');
+  tempmonth = templist.elementAt(4).replaceAll(RegExp('month: '), '');
+  tempday = templist.elementAt(5).replaceAll(RegExp('day: '), '');
+  temphour = templist.elementAt(6).replaceAll(RegExp('hour: '), '');
+  tempminute = templist.elementAt(7).replaceAll(RegExp('minute: '), '');
+  tempsecond = templist.elementAt(8).replaceAll(RegExp('second: '), '');
+
+  LocalStorage feedfavoriteUserDB = LocalStorage(
+      tempid + '/feed' + tempdata.toString() + '/favoriteUsers.txt');
+
+  templist = await feedfavoriteUserDB.readFileToList();
+  checkFavoriteUser = templist.contains(myid);
+
   wlist.add(Padding(padding: EdgeInsets.all(50)));
-  wlist.add(instaFeed(tempimg, tempprofileimg, tempcheckimg, tempid, tempname));
+  wlist.add(instaFeed(
+      tempimg,
+      tempprofileimg,
+      tempcheckimg,
+      tempid,
+      tempname,
+      tempcontents,
+      tempfavorite,
+      tempdata.toString(),
+      checkFavoriteUser,
+      tempcomments,
+      tempyear,
+      tempmonth,
+      tempday,
+      temphour,
+      tempminute,
+      tempsecond));
 
   return wlist;
 }
@@ -169,7 +216,7 @@ class LocalStorage {
 
   Future<void> writeFile(String msg) async {
     final file = await _localFile;
-    file.writeAsString(msg, mode: FileMode.append);
+    await file.writeAsString(msg, mode: FileMode.append);
   }
 
   Future<void> writeListToFile(List<String> list) async {
