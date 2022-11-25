@@ -24,21 +24,29 @@ class _searchState extends State<search_page> {
     });
   }
 
-  Widget _searchHistory() {
-    return ListView(
-      children: List.generate(
-          10,
-          (index) => ListTile(
-                leading: Image.asset(
-                  'images/normal_profile.png',
-                  width: 50,
-                  height: 50,
-                ),
-                title: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text("이전 검색기록 $index"),
-                ),
-              )).toList(),
+  Widget _search_history() {
+    return Column(
+      children: [
+        for (int i = 0; i < 10; i++) ...[
+          Container(
+            height: 3,
+            width: 800,
+            color: Colors.white,
+          ),
+          Container(
+            height: 50,
+            width: 800,
+            color: Colors.black12,
+            child: Padding(
+              padding: const EdgeInsets.all(13.0),
+              child: Text(
+                "검색기록 $i",
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          ),
+        ],
+      ],
     );
   }
 
@@ -48,7 +56,7 @@ class _searchState extends State<search_page> {
       body: Row(
         children: [
           navigatorList(),
-          Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Column(children: [
             //검색창
             Container(
               width: 800,
@@ -84,6 +92,7 @@ class _searchState extends State<search_page> {
                           icon: Icon(
                             Icons.cancel,
                             size: 20,
+                            color: Colors.grey,
                           ),
                           onPressed: () {
                             setState(() {
@@ -97,13 +106,7 @@ class _searchState extends State<search_page> {
                 ),
               ),
             ),
-            focusNode.hasFocus
-                ? Container(
-                    height: 50,
-                    width: 800,
-                    color: Colors.red,
-                  )
-                : Container()
+            focusNode.hasFocus ? _search_history() : Container()
           ]),
         ],
       ),
