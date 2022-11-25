@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:insta2/widgets/navigatorList.dart';
+import 'package:provider/provider.dart';
 
 class search_page extends StatefulWidget {
   const search_page({super.key});
@@ -47,50 +48,63 @@ class _searchState extends State<search_page> {
       body: Row(
         children: [
           navigatorList(),
-          Column(
-            children: [
-              Container(
-                width: 800,
-                height: 50,
-                child: TextField(
-                  focusNode: focusNode,
-                  style: TextStyle(
-                    fontSize: 15,
+          Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            //검색창
+            Container(
+              width: 800,
+              height: 50,
+              child: TextField(
+                focusNode: focusNode,
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+                autofocus: true,
+                controller: _filter,
+                decoration: InputDecoration(
+                  labelText: '검색',
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(3)),
+                    borderSide: BorderSide(color: Colors.grey),
                   ),
-                  autofocus: true,
-                  controller: _filter,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.black12,
-                    hintText: "검색어를 입력하세요.",
-
-                    //검색 아이콘
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.black54,
-                      size: 20,
-                    ),
-
-                    //검색에서 x 누르면 클리어
-                    suffixIcon: focusNode.hasFocus
-                        ? IconButton(
-                            icon: Icon(
-                              Icons.cancel,
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _filter.clear();
-                                _searchText = "";
-                              });
-                            },
-                          )
-                        : Container(),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(3)),
+                    borderSide: BorderSide(color: Colors.grey),
                   ),
+
+                  //검색 아이콘
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.black54,
+                    size: 20,
+                  ),
+
+                  //검색에서 x 누르면 클리어
+                  suffixIcon: focusNode.hasFocus
+                      ? IconButton(
+                          icon: Icon(
+                            Icons.cancel,
+                            size: 20,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _filter.clear();
+                              focusNode.unfocus();
+                              _searchText = "";
+                            });
+                          },
+                        )
+                      : Container(),
                 ),
               ),
-            ],
-          ),
+            ),
+            focusNode.hasFocus
+                ? Container(
+                    height: 50,
+                    width: 800,
+                    color: Colors.red,
+                  )
+                : Container()
+          ]),
         ],
       ),
     );
