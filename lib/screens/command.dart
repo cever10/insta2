@@ -8,7 +8,7 @@ class Command extends StatefulWidget {
 }
 
 class _CommandState extends State<Command> {
-  int h_color = 0;
+  int h_color = 0, h_count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,18 +25,32 @@ class _CommandState extends State<Command> {
                 "ID + 댓글댓글",
                 style: TextStyle(fontSize: 20, color: Colors.black),
               ),
-              //mainAxisAlignment: MainAxisAlignment.end,
-
+              Text(
+                h_count.toString(),
+                style: TextStyle(fontSize: 15, color: Colors.grey),
+              ),
               IconButton(
-                icon: Icon(Icons.favorite_outline),
+                icon: Icon(Icons.favorite_border),
                 onPressed: () {
                   h_color += 1;
                   if (h_color % 2 == 1) {
-                    icon:
-                    Icon(Icons.favorite_outlined, color: Colors.red);
+                    onTap:
+                    () {
+                      icon:
+                      Icon(Icons.favorite_outlined, color: Colors.red);
+                    };
+                    setState(() {
+                      h_count += 1;
+                    });
                   } else {
-                    icon:
-                    Icon(Icons.favorite_outlined, color: Colors.white);
+                    onTap:
+                    () {
+                      icon:
+                      Icon(Icons.favorite_border);
+                    };
+                    setState(() {
+                      h_count -= 1;
+                    });
                   }
                 },
               )
