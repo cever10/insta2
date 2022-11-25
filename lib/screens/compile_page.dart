@@ -9,6 +9,7 @@ import 'package:image_picker_windows/image_picker_windows.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/screens/my_page.dart';
 import 'package:insta2/scripts.dart';
+import 'package:insta2/widgets/navigatorList.dart';
 import 'package:provider/provider.dart';
 
 class CompilePage extends StatefulWidget {
@@ -153,6 +154,7 @@ class _MyWidgetState extends State<CompilePage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      /*
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
@@ -174,44 +176,55 @@ class _MyWidgetState extends State<CompilePage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _profileinfo(context),
-            _editbutton(context),
-            _nameinfo(),
-            _IDinfo(),
-            _produceinfo(),
-            ElevatedButton(
-              onPressed: () {
-                memberDB.readFileToList().then((value) {
-                  value.replaceRange(
-                      value.indexOf('id: ' + provar.myid) + 2,
-                      value.indexOf('id: ' + provar.myid) + 3,
-                      ['introduction: ' + introduction.text]);
-                  memberDB.writeListToFile(value);
+      */
+      body: Row(
+        children: [
+          navigatorList(),
+          Expanded(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _profileinfo(context),
+                    _editbutton(context),
+                    _nameinfo(),
+                    //_IDinfo(),
+                    _produceinfo(),
+                    ElevatedButton(
+                      onPressed: () {
+                        memberDB.readFileToList().then((value) {
+                          value.replaceRange(
+                              value.indexOf('id: ' + provar.myid) + 2,
+                              value.indexOf('id: ' + provar.myid) + 3,
+                              ['introduction: ' + introduction.text]);
+                          memberDB.writeListToFile(value);
 
-                  provar.updating3(introduction.text);
+                          provar.updating3(introduction.text);
 
-                  showWinToast('프로필이 저장되었습니다', context);
-                });
-              },
-              child: Text(
-                '저장',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
+                          showWinToast('프로필이 저장되었습니다', context);
+                        });
+                      },
+                      child: Text(
+                        '저장',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey,
+                        minimumSize: Size(335, 47),
+                        onSurface: Colors.white,
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.all(50))
+                  ],
                 ),
               ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.grey,
-                minimumSize: Size(335, 47),
-                onSurface: Colors.white,
-              ),
             ),
-            Padding(padding: EdgeInsets.all(50))
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

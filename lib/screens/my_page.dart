@@ -1,12 +1,11 @@
 //본인 프로필
 
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/screens/compile_page.dart';
 import 'package:insta2/screens/main_home.dart';
 import 'package:insta2/scripts.dart';
+import 'package:insta2/widgets/navigatorList.dart';
 import 'package:provider/provider.dart';
 
 class MyPage extends StatefulWidget {
@@ -33,37 +32,52 @@ class _MyPageState extends State<MyPage> {
   Widget _information(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
 
-    return Padding(
-      padding: EdgeInsets.all(15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Stack(
-                children: [
-                  if (provar.checkmyimage == true)
-                    Image.file(
-                      provar.myimage,
-                      width: 400,
-                      height: 400,
-                    ),
-                  if (provar.checkmyimage == false)
-                    Image.asset(
-                      'images/normal_profile.png',
-                      width: 400,
-                      height: 400,
-                    ),
-                  Image.asset(
-                    'images/frame.png',
-                    width: 400,
-                    height: 400,
-                  ),
-                ],
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Stack(
+          children: [
+            if (provar.checkmyimage == true)
+              Image.file(
+                provar.myimage,
+                width: 400,
+                height: 400,
               ),
-              Expanded(
-                child: Row(
+            if (provar.checkmyimage == false)
+              Image.asset(
+                'images/normal_profile.png',
+                width: 400,
+                height: 400,
+              ),
+            Image.asset(
+              'images/frame.png',
+              width: 400,
+              height: 400,
+            ),
+          ],
+        ),
+        Expanded(
+          child: Container(
+            height: 400,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    50,
+                    50,
+                    0,
+                    50,
+                  ),
+                  child: Text(
+                    provar.myid,
+                    style: TextStyle(
+                      fontSize: 50,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _follower('게시글', provar.myfeedcount),
@@ -71,35 +85,16 @@ class _MyPageState extends State<MyPage> {
                     _follower('팔로워', 15),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          const SizedBox(height: 15),
-          Text(
-            provar.myintroduction,
-            style: TextStyle(fontSize: 20, color: Colors.black),
-          )
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  Widget _tapview(BuildContext context) {
+  Widget _tapview(BuildContext context, List<Widget> myFeeds) {
     providerVariable provar = Provider.of<providerVariable>(context);
-
-    List<Widget> myFeeds = List<Widget>.empty(growable: true);
-    List<File> myFeedsImg = List<File>.empty(growable: true);
-
-    for (int i = 0; i < provar.myfeedcount; i++) {
-      LocalStorage feedImgDB =
-          LocalStorage(provar.myid + '/feed' + i.toString() + '/feedimg.png');
-
-      feedImgDB.get_filePath().then((value) {
-        myFeedsImg.add(value);
-
-        //myFeeds.add()
-      });
-    }
 
     return GridView.builder(
         padding: EdgeInsets.all(15),
@@ -113,9 +108,7 @@ class _MyPageState extends State<MyPage> {
           crossAxisSpacing: 15,
         ),
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            color: Colors.grey,
-          );
+          return myFeeds[index];
         });
   }
 
@@ -145,8 +138,26 @@ class _MyPageState extends State<MyPage> {
   Widget build(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
 
+    Future<List<Widget>> initGridview() async {
+      List<Widget> myFeeds = List<Widget>.empty(growable: true);
+
+      for (int i = 0; i < provar.myfeedcount; i++) {
+        LocalStorage feedImgDB =
+            LocalStorage(provar.myid + '/feed' + i.toString() + '/feedimg.png');
+
+        feedImgDB.get_filePath().then((value) {
+          myFeeds.add(Container(
+            child: Image.file(value),
+          ));
+        });
+      }
+
+      return myFeeds;
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
+      /*
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
@@ -168,12 +179,40 @@ class _MyPageState extends State<MyPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(children: [
-          _information(context),
-          _compilebutton(),
-          _tapview(context),
-        ]),
+      */
+      body: Row(
+        children: [
+          navigatorList(),
+          Expanded(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _information(context),
+                    SizedBox(height: 15),
+                    Text(
+                      provar.myintroduction,
+                      style: TextStyle(fontSize: 20, color: Colors.black),
+                    ),
+                    _compilebutton(),
+                    FutureBuilder(
+                      future: initGridview(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData == true) {
+                          return _tapview(context, snapshot.data!);
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

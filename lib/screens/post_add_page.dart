@@ -8,6 +8,7 @@ import 'package:image_picker_windows/image_picker_windows.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/screens/main_home.dart';
 import 'package:insta2/scripts.dart';
+import 'package:insta2/widgets/navigatorList.dart';
 import 'package:provider/provider.dart';
 
 class PostAddPage extends StatefulWidget {
@@ -167,6 +168,7 @@ class _MyWidgetState extends State<PostAddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      /*
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
@@ -188,13 +190,26 @@ class _MyWidgetState extends State<PostAddPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(children: [
-          _profileinfo(),
-          _addpicturebutton(context),
-          _postinfo(),
-          _addpostbutton(context),
-        ]),
+      */
+      body: Row(
+        children: [
+          navigatorList(),
+          Expanded(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _profileinfo(),
+                    _addpicturebutton(context),
+                    _postinfo(),
+                    _addpostbutton(context),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
