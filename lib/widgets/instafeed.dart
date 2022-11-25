@@ -63,6 +63,7 @@ class _instaFeedState extends State<instaFeed> {
 
     LocalStorage followDB = LocalStorage(provar.myid + '/follow.txt');
     LocalStorage followerDB = LocalStorage(widget.id + '/follower.txt');
+    LocalStorage memberDB = LocalStorage("members.txt");
 
     return Row(
       children: [
@@ -125,6 +126,31 @@ class _instaFeedState extends State<instaFeed> {
                         onPressed: () async {
                           await followDB.writeFile(widget.id);
                           await followerDB.writeFile(provar.myid);
+
+                          memberDB.readFileToList().then((value) {
+                            provar.myfollow += 1;
+
+                            value.replaceRange(
+                                value.indexOf('id: ' + provar.myid) + 4,
+                                value.indexOf('id: ' + provar.myid) + 5,
+                                ['follow: ' + provar.myfollow.toString()]);
+
+                            value.replaceRange(
+                                value.indexOf('id: ' + widget.id) + 5,
+                                value.indexOf('id: ' + widget.id) + 6, [
+                              'follower: ' +
+                                  (int.parse(value
+                                              .elementAt(value.indexOf(
+                                                      'id: ' + widget.id) +
+                                                  5)
+                                              .replaceAll(
+                                                  RegExp('follower: '), '')) +
+                                          1)
+                                      .toString()
+                            ]);
+
+                            memberDB.writeListToFile(value);
+                          });
 
                           setState(() {
                             widget.checkFollow = true;

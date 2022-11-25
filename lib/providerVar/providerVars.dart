@@ -9,6 +9,8 @@ class providerVariable extends ChangeNotifier {
   String mypassword = "";
   String myintroduction = "";
   int myfeedcount = 0;
+  int myfollow = 0;
+  int myfollower = 0;
 
   File myimage = File('');
   bool checkmyimage = false;
@@ -37,6 +39,12 @@ class providerVariable extends ChangeNotifier {
     myfeedcount = int.parse(list
         .elementAt(list.indexOf('id: ' + id) + 3)
         .replaceAll(RegExp('feedcount: '), ''));
+    myfollow = int.parse(list
+        .elementAt(list.indexOf('id: ' + id) + 4)
+        .replaceAll(RegExp('follow: '), ''));
+    myfollower = int.parse(list
+        .elementAt(list.indexOf('id: ' + id) + 5)
+        .replaceAll(RegExp('follower: '), ''));
 
     LocalStorage imgdb = LocalStorage(myid + '/profile.png');
     await imgdb.createDir(myid);
@@ -56,19 +64,10 @@ class providerVariable extends ChangeNotifier {
     }
   }
 
-  void updating2(File file, bool check) {
+  void updatingProfile(File file, bool check) {
     myimage = file;
     checkmyimage = check;
     notifyListeners();
-  }
-
-  void updating3(String name, String msg) {
-    myname = name;
-    myintroduction = msg;
-  }
-
-  void updating4(int count) {
-    myfeedcount = count;
   }
 
   void temp_updating(String name, String id, String password) {

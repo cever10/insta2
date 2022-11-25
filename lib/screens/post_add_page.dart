@@ -121,7 +121,7 @@ class _MyWidgetState extends State<PostAddPage> {
                 value.indexOf('id: ' + provar.myid) + 4,
                 ['feedcount: ' + (provar.myfeedcount + 1).toString()]);
             await memberDB.writeListToFile(value);
-            provar.updating4(provar.myfeedcount + 1);
+            provar.myfeedcount += 1;
 
             await feedDataDB.writeFile('contents: ' + contents.text + '\n');
             await feedDataDB.writeFile('favorite: 0\n');

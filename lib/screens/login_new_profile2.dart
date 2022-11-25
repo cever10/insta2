@@ -199,6 +199,8 @@ class _login_new_profile2State extends State<login_new_profile2> {
                         await memberDB.writeFile('feedcount: ' +
                             provar.temp_feedcount.toString() +
                             '\n');
+                        await memberDB.writeFile('follow: 0\n');
+                        await memberDB.writeFile('follower: 0\n');
                         await memberDB.writeFile('\n');
 
                         systemDB.readFileToList().then((value) {
