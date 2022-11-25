@@ -80,8 +80,8 @@ class _MyPageState extends State<MyPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _follower('게시글', provar.myfeedcount),
-                    _follower('팔로잉', 13),
-                    _follower('팔로워', 15),
+                    _follower('팔로잉', provar.myfollow),
+                    _follower('팔로워', provar.myfollower),
                   ],
                 ),
               ],

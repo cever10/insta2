@@ -21,6 +21,8 @@ class _login_pageState extends State<login_page> {
         await memberDB.writeFile('password: 1234\n');
         await memberDB.writeFile('introduction: \n');
         await memberDB.writeFile('feedcount: 0\n');
+        await memberDB.writeFile('follow: 0\n');
+        await memberDB.writeFile('follower: 0\n');
         await memberDB.writeFile('\n');
       }
     });

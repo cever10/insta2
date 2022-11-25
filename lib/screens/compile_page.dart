@@ -32,7 +32,7 @@ class _MyWidgetState extends State<CompilePage> {
     PickedFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       var selected = File(image.path);
-      provar.updating2(selected, true);
+      provar.updatingProfile(selected, true);
       test.createDir(provar.myid);
       test.writeImageFile(selected);
     }
@@ -204,7 +204,8 @@ class _MyWidgetState extends State<CompilePage> {
                               ['name: ' + name.text]);
                           memberDB.writeListToFile(value);
 
-                          provar.updating3(name.text, introduction.text);
+                          provar.myname = name.text;
+                          provar.myintroduction = introduction.text;
 
                           showWinToast('프로필이 저장되었습니다', context);
                         });

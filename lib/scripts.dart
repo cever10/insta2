@@ -221,7 +221,6 @@ class LocalStorage {
 
   Future<bool> checkFile() async {
     File file = await _localFile;
-    file = File(file.path + fileName);
     return file.exists();
   }
 
