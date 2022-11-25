@@ -69,7 +69,7 @@ class _MyPageState extends State<MyPage> {
                     50,
                   ),
                   child: Text(
-                    provar.myid,
+                    '@' + provar.myid,
                     style: TextStyle(
                       fontSize: 50,
                       color: Colors.black,
