@@ -24,49 +24,66 @@ class _searchState extends State<search_page> {
     });
   }
 
+  Widget _searchHistory() {
+    return ListView(
+      children: List.generate(
+          10,
+          (index) => ListTile(
+                leading: Image.asset(
+                  'images/normal_profile.png',
+                  width: 50,
+                  height: 50,
+                ),
+                title: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text("이전 검색기록 $index"),
+                ),
+              )).toList(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          Expanded(
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.all(200),
-                child: TextField(
-                  focusNode: focusNode,
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                  autofocus: true,
-                  controller: _filter,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.black12,
+          Center(
+            child: Padding(
+              padding: EdgeInsets.all(200),
+              child: TextField(
+                focusNode: focusNode,
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+                autofocus: true,
+                controller: _filter,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.black12,
+                  hintText: "검색어를 입력하세요.",
 
-                    //검색 아이콘
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.black54,
-                      size: 20,
-                    ),
-
-                    //검색에서 x 누르면 클리어
-                    suffixIcon: focusNode.hasFocus
-                        ? IconButton(
-                            icon: Icon(
-                              Icons.cancel,
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _filter.clear();
-                                _searchText = "";
-                              });
-                            },
-                          )
-                        : Container(),
+                  //검색 아이콘
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.black54,
+                    size: 20,
                   ),
+
+                  //검색에서 x 누르면 클리어
+                  suffixIcon: focusNode.hasFocus
+                      ? IconButton(
+                          icon: Icon(
+                            Icons.cancel,
+                            size: 20,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _filter.clear();
+                              _searchText = "";
+                            });
+                          },
+                        )
+                      : Container(),
                 ),
               ),
             ),
