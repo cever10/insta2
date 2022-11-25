@@ -2,12 +2,10 @@
 
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_windows/image_picker_windows.dart';
 import 'package:insta2/providerVar/providerVars.dart';
-import 'package:insta2/screens/my_page.dart';
 import 'package:insta2/scripts.dart';
 import 'package:insta2/widgets/navigatorList.dart';
 import 'package:provider/provider.dart';
@@ -78,6 +76,7 @@ class _MyWidgetState extends State<CompilePage> {
           padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.3,
               0, MediaQuery.of(context).size.width * 0.3, 40),
           child: TextField(
+            controller: name,
             decoration: InputDecoration(
               labelText: '이름 변경',
             ),
@@ -198,9 +197,14 @@ class _MyWidgetState extends State<CompilePage> {
                               value.indexOf('id: ' + provar.myid) + 2,
                               value.indexOf('id: ' + provar.myid) + 3,
                               ['introduction: ' + introduction.text]);
+
+                          value.replaceRange(
+                              value.indexOf('id: ' + provar.myid) - 1,
+                              value.indexOf('id: ' + provar.myid) + 0,
+                              ['name: ' + name.text]);
                           memberDB.writeListToFile(value);
 
-                          provar.updating3(introduction.text);
+                          provar.updating3(name.text, introduction.text);
 
                           showWinToast('프로필이 저장되었습니다', context);
                         });

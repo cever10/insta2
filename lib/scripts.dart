@@ -93,6 +93,7 @@ Future<List<Widget>> addInstaFeed(List<Widget> wlist, String myid) async {
   Directory tempdir = Directory('');
   bool tempcheckimg = false;
   bool checkFavoriteUser = false;
+  bool checkFollow = false;
   List<String> templist = new List<String>.empty(growable: true);
 
   templist = await memberDB.readFileToList();
@@ -152,6 +153,14 @@ Future<List<Widget>> addInstaFeed(List<Widget> wlist, String myid) async {
   templist = await feedfavoriteUserDB.readFileToList();
   checkFavoriteUser = templist.contains(myid);
 
+  LocalStorage followDB = LocalStorage(myid + '/follow.txt');
+
+  templist = await followDB.readFileToList();
+
+  if (templist.contains(tempid) == true) {
+    checkFollow = true;
+  }
+
   wlist.add(Padding(padding: EdgeInsets.all(50)));
   wlist.add(instaFeed(
       tempimg,
@@ -164,6 +173,7 @@ Future<List<Widget>> addInstaFeed(List<Widget> wlist, String myid) async {
       tempdata.toString(),
       checkFavoriteUser,
       tempcomments,
+      checkFollow,
       tempyear,
       tempmonth,
       tempday,
@@ -210,7 +220,8 @@ class LocalStorage {
   }
 
   Future<bool> checkFile() async {
-    final file = await _localFile;
+    File file = await _localFile;
+    file = File(file.path + fileName);
     return file.exists();
   }
 

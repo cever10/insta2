@@ -42,6 +42,18 @@ class providerVariable extends ChangeNotifier {
     await imgdb.createDir(myid);
     myimage = await imgdb.get_filePath();
     checkmyimage = await imgdb.checkFile();
+
+    LocalStorage followDB = LocalStorage(myid + '/follow.txt');
+
+    if (await followDB.checkFile() == false) {
+      await followDB.writeFile('');
+    }
+
+    LocalStorage followerDB = LocalStorage(myid + '/follower.txt');
+
+    if (await followerDB.checkFile() == false) {
+      await followerDB.writeFile('');
+    }
   }
 
   void updating2(File file, bool check) {
@@ -50,7 +62,8 @@ class providerVariable extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updating3(String msg) {
+  void updating3(String name, String msg) {
+    myname = name;
     myintroduction = msg;
   }
 

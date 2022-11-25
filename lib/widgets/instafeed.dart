@@ -16,6 +16,7 @@ class instaFeed extends StatefulWidget {
   final String feednumber;
   bool checkFavoriteUser;
   String comments;
+  bool checkFollow;
 
   final String year;
   final String month;
@@ -35,6 +36,7 @@ class instaFeed extends StatefulWidget {
     this.feednumber,
     this.checkFavoriteUser,
     this.comments,
+    this.checkFollow,
     this.year,
     this.month,
     this.day,
@@ -58,6 +60,9 @@ class _instaFeedState extends State<instaFeed> {
 
     LocalStorage feedfavoriteUserDB = LocalStorage(
         widget.id + '/feed' + widget.feednumber + '/favoriteUsers.txt');
+
+    LocalStorage followDB = LocalStorage(provar.myid + '/follow.txt');
+    LocalStorage followerDB = LocalStorage(widget.id + '/follower.txt');
 
     return Row(
       children: [
@@ -108,22 +113,31 @@ class _instaFeedState extends State<instaFeed> {
                         fontSize: 14,
                       ),
                     ),
-                    Text(
-                      '  •',
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        '팔로우',
+                    if (widget.id != provar.myid && widget.checkFollow == false)
+                      Text(
+                        '  •',
                         style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.blue,
+                          fontSize: 14,
                         ),
                       ),
-                    ),
+                    if (widget.id != provar.myid && widget.checkFollow == false)
+                      TextButton(
+                        onPressed: () async {
+                          await followDB.writeFile(widget.id);
+                          await followerDB.writeFile(provar.myid);
+
+                          setState(() {
+                            widget.checkFollow = true;
+                          });
+                        },
+                        child: Text(
+                          '팔로우',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),

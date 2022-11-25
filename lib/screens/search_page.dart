@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:insta2/widgets/navigatorList.dart';
-import 'package:provider/provider.dart';
 
 class search_page extends StatefulWidget {
   const search_page({super.key});
@@ -27,12 +26,14 @@ class _searchState extends State<search_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Row(
         children: [
-          Expanded(
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.all(200),
+          navigatorList(),
+          Column(
+            children: [
+              Container(
+                width: 800,
+                height: 50,
                 child: TextField(
                   focusNode: focusNode,
                   style: TextStyle(
@@ -69,7 +70,7 @@ class _searchState extends State<search_page> {
                   ),
                 ),
               ),
-            ),
+            ],
           ),
         ],
       ),
