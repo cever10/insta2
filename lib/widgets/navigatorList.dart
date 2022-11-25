@@ -23,6 +23,13 @@ class navigatorList extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 100, 0),
+                  /*
+                  child: Image.asset(
+                    'images/Instagram.png',
+                    width: 1743 * 0.08,
+                    height: 664 * 0.08,
+                  ),
+                  */
                   child: Text(
                     'Instagram',
                     style: TextStyle(

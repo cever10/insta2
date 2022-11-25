@@ -141,7 +141,7 @@ class _MyWidgetState extends State<CompilePage> {
       ),
       style: ElevatedButton.styleFrom(
         primary: Colors.grey,
-        minimumSize: Size(MediaQuery.of(context).size.width * 0.98, 48),
+        minimumSize: Size(335, 47),
         onSurface: Colors.white,
       ),
     );

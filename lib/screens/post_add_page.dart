@@ -88,7 +88,7 @@ class _MyWidgetState extends State<PostAddPage> {
       ),
       style: ElevatedButton.styleFrom(
         primary: Colors.grey,
-        minimumSize: Size(MediaQuery.of(context).size.width * 0.98, 48),
+        minimumSize: Size(550, 47),
         onSurface: Colors.white,
       ),
     );
@@ -158,7 +158,7 @@ class _MyWidgetState extends State<PostAddPage> {
       ),
       style: ElevatedButton.styleFrom(
         primary: Colors.grey,
-        minimumSize: Size(MediaQuery.of(context).size.width * 0.98, 48),
+        minimumSize: Size(550, 47),
         onSurface: Colors.white,
       ),
     );

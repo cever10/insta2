@@ -288,6 +288,7 @@ class _instaFeedState extends State<instaFeed> {
                                 fontSize: 14,
                               ),
                             ),
+                            /*
                             TextSpan(
                               text: '태그',
                               style: TextStyle(
@@ -296,6 +297,7 @@ class _instaFeedState extends State<instaFeed> {
                                 color: Colors.blueGrey,
                               ),
                             ),
+                            */
                           ],
                         ),
                       ),
@@ -315,16 +317,110 @@ class _instaFeedState extends State<instaFeed> {
                   ),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(5),
-                child: Text(
-                  widget.year + '년 ' + widget.month + '월 ' + widget.day + '일 ',
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: Colors.grey,
+              if (widget.year == DateTime.now().year.toString() &&
+                  widget.month == DateTime.now().month.toString() &&
+                  widget.day == DateTime.now().day.toString() &&
+                  widget.hour == DateTime.now().hour.toString() &&
+                  widget.minute == DateTime.now().minute.toString() &&
+                  widget.second != DateTime.now().second.toString()) ...[
+                Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    '방금 전',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
-              ),
+              ] else if (widget.year == DateTime.now().year.toString() &&
+                  widget.month == DateTime.now().month.toString() &&
+                  widget.day == DateTime.now().day.toString() &&
+                  widget.hour == DateTime.now().hour.toString() &&
+                  widget.minute != DateTime.now().minute.toString() &&
+                  widget.second != DateTime.now().second.toString()) ...[
+                Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    (DateTime.now().minute - int.parse(widget.minute))
+                            .toString() +
+                        '분 전',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ] else if (widget.year == DateTime.now().year.toString() &&
+                  widget.month == DateTime.now().month.toString() &&
+                  widget.day == DateTime.now().day.toString() &&
+                  widget.hour != DateTime.now().hour.toString() &&
+                  widget.minute != DateTime.now().minute.toString() &&
+                  widget.second != DateTime.now().second.toString()) ...[
+                Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    (DateTime.now().hour - int.parse(widget.hour)).toString() +
+                        '시간 전',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ] else if (widget.year == DateTime.now().year.toString() &&
+                  widget.month == DateTime.now().month.toString() &&
+                  widget.day != DateTime.now().day.toString() &&
+                  widget.hour != DateTime.now().hour.toString() &&
+                  widget.minute != DateTime.now().minute.toString() &&
+                  widget.second != DateTime.now().second.toString()) ...[
+                Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    (DateTime.now().day - int.parse(widget.day)).toString() +
+                        '일 전',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ] else if (widget.year == DateTime.now().year.toString() &&
+                  widget.month != DateTime.now().month.toString() &&
+                  widget.day != DateTime.now().day.toString() &&
+                  widget.hour != DateTime.now().hour.toString() &&
+                  widget.minute != DateTime.now().minute.toString() &&
+                  widget.second != DateTime.now().second.toString()) ...[
+                Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    (DateTime.now().month - int.parse(widget.month))
+                            .toString() +
+                        '달 전',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ] else if (widget.year != DateTime.now().year.toString() &&
+                  widget.month != DateTime.now().month.toString() &&
+                  widget.day != DateTime.now().day.toString() &&
+                  widget.hour != DateTime.now().hour.toString() &&
+                  widget.minute != DateTime.now().minute.toString() &&
+                  widget.second != DateTime.now().second.toString()) ...[
+                Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    (DateTime.now().year - int.parse(widget.year)).toString() +
+                        '년 전',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ],
               Container(
                 height: 1,
                 color: Colors.grey,
