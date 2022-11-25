@@ -48,16 +48,17 @@ class _searchState extends State<search_page> {
         children: [
           navigatorList(),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 width: 800,
                 height: 50,
                 child: TextField(
-                  focusNode: focusNode,
+                  //focusNode: focusNode,
                   style: TextStyle(
                     fontSize: 15,
                   ),
-                  autofocus: true,
+                  //autofocus: true,
                   controller: _filter,
                   decoration: InputDecoration(
                     filled: true,
@@ -72,6 +73,7 @@ class _searchState extends State<search_page> {
                     ),
 
                     //검색에서 x 누르면 클리어
+                    /*
                     suffixIcon: focusNode.hasFocus
                         ? IconButton(
                             icon: Icon(
@@ -86,6 +88,7 @@ class _searchState extends State<search_page> {
                             },
                           )
                         : Container(),
+                        */
                   ),
                 ),
               ),
