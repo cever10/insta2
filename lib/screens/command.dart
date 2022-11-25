@@ -37,7 +37,7 @@ class _CommandState extends State<Command> {
                   children: [
                     Text(
                       "좋아요: " + h_count.toString() + "개",
-                      style: TextStyle(fontSize: 15, color: Colors.grey),
+                      style: TextStyle(fontSize: 10, color: Colors.grey),
                     ),
                     IconButton(
                       icon: Icon(Icons.favorite_border),
