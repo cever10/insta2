@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:insta2/screens/login_page.dart';
 import 'package:insta2/screens/main_home.dart';
 import 'package:insta2/screens/my_page.dart';
@@ -24,8 +25,8 @@ class navigatorList extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 20, 100, 0),
                   /*
-                  child: Image.asset(
-                    'images/Instagram.png',
+                  child: SvgPicture.asset(
+                    'images/Instagram.svg',
                     width: 1743 * 0.08,
                     height: 664 * 0.08,
                   ),
