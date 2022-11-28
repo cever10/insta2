@@ -112,23 +112,25 @@ class _MyPageState extends State<MyPage> {
   }
 
   Widget _compilebutton() {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.of(context).pop();
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (builder) => CompilePage()));
-      },
-      child: Text(
-        '프로필 편집',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 16,
+    return Center(
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (builder) => CompilePage()));
+        },
+        child: Text(
+          '프로필 편집',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+          ),
         ),
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: Colors.grey,
-        minimumSize: Size(MediaQuery.of(context).size.width * 0.98, 48),
-        onSurface: Colors.white,
+        style: ElevatedButton.styleFrom(
+          primary: Colors.grey,
+          minimumSize: Size(MediaQuery.of(context).size.width * 0.83, 48),
+          onSurface: Colors.white,
+        ),
       ),
     );
   }
