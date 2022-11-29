@@ -56,58 +56,68 @@ class _searchState extends State<search_page> {
       body: Row(
         children: [
           navigatorList(),
-          Column(children: [
-            //검색창
-            Container(
-              width: 800,
-              height: 50,
-              child: TextField(
-                focusNode: focusNode,
-                style: TextStyle(
-                  fontSize: 15,
-                ),
-                autofocus: true,
-                controller: _filter,
-                decoration: InputDecoration(
-                  labelText: '검색',
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(3)),
-                    borderSide: BorderSide(color: Colors.grey),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(3)),
-                    borderSide: BorderSide(color: Colors.grey),
-                  ),
-
-                  //검색 아이콘
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.black54,
-                    size: 20,
-                  ),
-
-                  //검색에서 x 누르면 클리어
-                  suffixIcon: focusNode.hasFocus
-                      ? IconButton(
-                          icon: Icon(
-                            Icons.cancel,
-                            size: 20,
-                            color: Colors.grey,
+          SingleChildScrollView(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 300),
+                child: Container(
+                  width: MediaQuery.of(context).size.width - 260,
+                  child: Column(children: [
+                    //검색창
+                    Container(
+                      width: 800,
+                      height: 50,
+                      child: TextField(
+                        focusNode: focusNode,
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                        autofocus: true,
+                        controller: _filter,
+                        decoration: InputDecoration(
+                          labelText: '검색',
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(3)),
+                            borderSide: BorderSide(color: Colors.grey),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _filter.clear();
-                              focusNode.unfocus();
-                              _searchText = "";
-                            });
-                          },
-                        )
-                      : Container(),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(3)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+
+                          //검색 아이콘
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Colors.black54,
+                            size: 20,
+                          ),
+
+                          //검색에서 x 누르면 클리어
+                          suffixIcon: focusNode.hasFocus
+                              ? IconButton(
+                                  icon: Icon(
+                                    Icons.cancel,
+                                    size: 20,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _filter.clear();
+                                      focusNode.unfocus();
+                                      _searchText = "";
+                                    });
+                                  },
+                                )
+                              : Container(),
+                        ),
+                      ),
+                    ),
+                    focusNode.hasFocus ? _search_history() : Container()
+                  ]),
                 ),
               ),
             ),
-            focusNode.hasFocus ? _search_history() : Container()
-          ]),
+          ),
         ],
       ),
     );
