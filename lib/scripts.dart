@@ -258,3 +258,62 @@ class LocalStorage {
     return await file.readAsLines();
   }
 }
+
+Future<List<dynamic>> load_Memberdata(String id) async {
+  List<dynamic> UserDataList = List<dynamic>.empty(growable: true);
+
+  LocalStorage memberDB = LocalStorage("members.txt");
+  List<String> list = await memberDB.readFileToList();
+
+  String Username = list
+      .elementAt(list.indexOf('id: ' + id) - 1)
+      .replaceAll(RegExp('name: '), '');
+  String Userid = list
+      .elementAt(list.indexOf('id: ' + id) + 0)
+      .replaceAll(RegExp('id: '), '');
+  String Userpassword = list
+      .elementAt(list.indexOf('id: ' + id) + 1)
+      .replaceAll(RegExp('password: '), '');
+  String Userintroduction = list
+      .elementAt(list.indexOf('id: ' + id) + 2)
+      .replaceAll(RegExp('introduction: '), '');
+  int Userfeedcount = int.parse(list
+      .elementAt(list.indexOf('id: ' + id) + 3)
+      .replaceAll(RegExp('feedcount: '), ''));
+  int Userfollow = int.parse(list
+      .elementAt(list.indexOf('id: ' + id) + 4)
+      .replaceAll(RegExp('follow: '), ''));
+  int Userfollower = int.parse(list
+      .elementAt(list.indexOf('id: ' + id) + 5)
+      .replaceAll(RegExp('follower: '), ''));
+
+  UserDataList.add(Username);
+  UserDataList.add(Userid);
+  UserDataList.add(Userpassword);
+  UserDataList.add(Userintroduction);
+  UserDataList.add(Userfeedcount);
+  UserDataList.add(Userfollow);
+  UserDataList.add(Userfollower);
+
+  LocalStorage profiledb = LocalStorage(id + '/profile.png');
+  await profiledb.createDir(id);
+  File Userimage = await profiledb.get_filePath();
+  bool checkUserimage = await profiledb.checkFile();
+
+  UserDataList.add(Userimage);
+  UserDataList.add(checkUserimage);
+
+  LocalStorage followDB = LocalStorage(id + '/follow.txt');
+
+  if (await followDB.checkFile() == false) {
+    await followDB.writeFile('');
+  }
+
+  LocalStorage followerDB = LocalStorage(id + '/follower.txt');
+
+  if (await followerDB.checkFile() == false) {
+    await followerDB.writeFile('');
+  }
+
+  return UserDataList;
+}

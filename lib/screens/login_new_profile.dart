@@ -119,7 +119,10 @@ class _login_new_profileState extends State<login_new_profile> {
                     memberDB.readFileToList().then((value) {
                       if (value.contains('id: ' + id.text.toString()) ==
                           false) {
-                        provar.temp_updating(name.text, id.text, password.text);
+                        provar.temp_name = name.text;
+                        provar.temp_id = id.text;
+                        provar.temp_password = password.text;
+
                         Navigator.of(context).pop();
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (builder) => login_new_profile2()));

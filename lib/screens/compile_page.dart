@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_windows/image_picker_windows.dart';
 import 'package:insta2/providerVar/providerVars.dart';
+import 'package:insta2/screens/my_page.dart';
 import 'package:insta2/scripts.dart';
 import 'package:insta2/widgets/navigatorList.dart';
 import 'package:provider/provider.dart';
@@ -26,15 +27,15 @@ class _MyWidgetState extends State<CompilePage> {
         Provider.of<providerVariable>(context, listen: false);
 
     // 프로필 저장 기능
-    LocalStorage test = LocalStorage(provar.myid + '/profile.png');
+    LocalStorage imgdb = LocalStorage(provar.myid + '/profile.png');
 
     final ImagePickerWindows _picker = ImagePickerWindows();
     PickedFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       var selected = File(image.path);
       provar.updatingProfile(selected, true);
-      test.createDir(provar.myid);
-      test.writeImageFile(selected);
+      imgdb.createDir(provar.myid);
+      imgdb.writeImageFile(selected);
     }
     // 프로필 저장 기능
   }
@@ -151,6 +152,9 @@ class _MyWidgetState extends State<CompilePage> {
   Widget build(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
 
+    name.text = provar.myname;
+    introduction.text = provar.myintroduction;
+
     return Scaffold(
       backgroundColor: Colors.white,
       /*
@@ -208,6 +212,10 @@ class _MyWidgetState extends State<CompilePage> {
                           provar.myintroduction = introduction.text;
 
                           showWinToast('프로필이 저장되었습니다', context);
+
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (builder) => MyPage()));
                         });
                       },
                       child: Text(

@@ -69,10 +69,4 @@ class providerVariable extends ChangeNotifier {
     checkmyimage = check;
     notifyListeners();
   }
-
-  void temp_updating(String name, String id, String password) {
-    temp_name = name;
-    temp_id = id;
-    temp_password = password;
-  }
 }

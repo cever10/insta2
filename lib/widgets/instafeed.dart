@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
+import 'package:insta2/screens/anotheruser_page.dart';
+import 'package:insta2/screens/my_page.dart';
 import 'package:insta2/scripts.dart';
 import 'package:provider/provider.dart';
 
@@ -84,7 +86,18 @@ class _instaFeedState extends State<instaFeed> {
                 child: Row(
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (widget.id == provar.myid) {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (builder) => MyPage()));
+                        } else {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (builder) =>
+                                  AnotherUserPage(widget.id)));
+                        }
+                      },
                       child: Stack(
                         children: [
                           if (widget.checkimage == true)
