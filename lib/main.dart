@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Insta 2.0',
-      home: login_page(),
+      home: Command(),
     );
   }
 }
