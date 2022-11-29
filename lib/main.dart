@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
-import 'package:insta2/screens/command.dart';
+import 'package:insta2/screens/comment.dart';
 import 'package:insta2/screens/login_page.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Insta 2.0',
-      home: Command(),
+      home: Comment(),
     );
   }
 }

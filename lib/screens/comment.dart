@@ -7,7 +7,7 @@ class Command extends StatefulWidget {
   @override
   State<Command> createState() => _CommandState();
 }
-TextEditingController mycomment = TextEditingController();
+TextEditingController mycommend = TextEditingController();
 
 class _CommandState extends State<Command> {
   int h_color = 0, h_count = 0;
@@ -30,7 +30,7 @@ class _CommandState extends State<Command> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextField(
-
+                controller: mycommend
               ),
               Container(
                 child: Row(
