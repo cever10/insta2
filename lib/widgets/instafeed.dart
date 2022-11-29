@@ -68,8 +68,8 @@ class _instaFeedState extends State<instaFeed> {
     LocalStorage memberDB = LocalStorage("members.txt");
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(padding: EdgeInsets.all(100)),
         Container(
           width: 460,
           decoration: BoxDecoration(
