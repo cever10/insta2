@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:insta2/screens/main_home.dart';
 
-class Command extends StatefulWidget {
-  const Command({super.key});
+class Comment extends StatefulWidget {
+  const Comment({super.key});
 
   @override
-  State<Command> createState() => _CommandState();
+  State<Comment> createState() => _CommentState();
 }
-TextEditingController mycommend = TextEditingController();
+TextEditingController mycomment = TextEditingController();
 
-class _CommandState extends State<Command> {
+class _CommentState extends State<Comment> {
   int h_color = 0, h_count = 0;
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,8 @@ class _CommandState extends State<Command> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextField(
-                controller: mycommend
+                controller: mycomment,
+                
               ),
               Container(
                 child: Row(
