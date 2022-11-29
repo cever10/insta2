@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insta2/screens/main_home.dart';
+import 'package:insta2/scripts.dart';
+import 'package:insta2/lib/widgets/instafeed.dart';
 
 class Command extends StatefulWidget {
   const Command({super.key});
@@ -7,6 +9,8 @@ class Command extends StatefulWidget {
   @override
   State<Command> createState() => _CommandState();
 }
+
+TextEditingController mycomment = TextEditingController();
 
 class _CommandState extends State<Command> {
   int h_color = 0, h_count = 0;
@@ -28,6 +32,47 @@ class _CommandState extends State<Command> {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              TextField(
+                controller: mycomment,
+                decoration: InputDecoration(
+                  hintText: '댓글 달기...',
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(3)),
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(3)),
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
+                textInputAction: TextInputAction.go,
+                onSubmitted: (value) async {
+                  LocalStorage feedCommentDB = LocalStorage(widget.id +
+                      '/feed' +
+                      widget.feednumber +
+                      '/comments.txt');
+
+                  await feedCommentDB
+                      .writeFile(provar.myid + ' ' + mycomment.text + '\n');
+
+                  LocalStorage feedDataDB = LocalStorage(
+                      widget.id + '/feed' + widget.feednumber + '/data.txt');
+
+                  feedDataDB.readFileToList().then((value) async {
+                    value.replaceRange(2, 3, [
+                      'comments: ' + (int.parse(widget.comments) + 1).toString()
+                    ]);
+                    await feedDataDB.writeListToFile(value);
+
+                    setState(() {
+                      widget.comments =
+                          (int.parse(widget.comments) + 1).toString();
+
+                      mycomment.text = '';
+                    });
+                  });
+                },
+              ),
               Container(
                 child: Row(
                   children: [
