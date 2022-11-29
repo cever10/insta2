@@ -93,7 +93,7 @@ class _CommentState extends State<Comment> {
           );
         },
         separatorBuilder: (BuildContext context, int index) {
-          return Column();
+          return Column(); //여기에는 생긴 리스트 칸마다 추가 가능함.
         },
         itemCount: c_count,
       ),
