@@ -30,7 +30,7 @@ class _main_homeState extends State<main_home> {
               visible: checkNumBiggerWidth(260, context),
               child: navigatorList()),
           Visibility(
-            visible: checkNumBiggerWidth(360 + 100 + 460, context),
+            visible: checkNumBiggerWidth(260 + 460, context),
             child: Expanded(
               child: Container(
                 height: MediaQuery.of(context).size.height,
