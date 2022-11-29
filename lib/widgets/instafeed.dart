@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/screens/anotheruser_page.dart';
+import 'package:insta2/screens/comment.dart';
 import 'package:insta2/screens/my_page.dart';
 import 'package:insta2/scripts.dart';
 import 'package:provider/provider.dart';
@@ -260,7 +261,13 @@ class _instaFeedState extends State<instaFeed> {
                         ),
                       ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => Comment(),
+                          ),
+                        );
+                      },
                       icon: Icon(Icons.chat_bubble_outline),
                     ),
                     IconButton(
@@ -320,7 +327,13 @@ class _instaFeedState extends State<instaFeed> {
               ),
               Container(
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => Comment(),
+                      ),
+                    );
+                  },
                   child: Text(
                     '댓글 ' + widget.comments + '개 모두 보기',
                     style: TextStyle(

@@ -7,13 +7,21 @@ class Comment extends StatefulWidget {
   @override
   State<Comment> createState() => _CommentState();
 }
+
 TextEditingController mycomment = TextEditingController();
 
 class _CommentState extends State<Comment> {
-  int h_color = 0, h_count = 0;
+  int h_color = 0, h_count = 0, c_count = 100;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "댓글",
+          style: TextStyle(fontSize: 30, color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
@@ -29,10 +37,6 @@ class _CommentState extends State<Comment> {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextField(
-                controller: mycomment,
-                
-              ),
               Container(
                 child: Row(
                   children: [
@@ -81,17 +85,17 @@ class _CommentState extends State<Comment> {
                           );
                         }
                       },
-                    )
+                    ),
                   ],
                 ),
               ),
             ],
-          ); //change ,=>;
+          );
         },
         separatorBuilder: (BuildContext context, int index) {
           return Column();
         },
-        itemCount: 100,
+        itemCount: c_count,
       ),
     );
   }
