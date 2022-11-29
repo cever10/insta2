@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insta2/screens/main_home.dart';
 
 class Command extends StatefulWidget {
   const Command({super.key});
@@ -12,6 +13,16 @@ class _CommandState extends State<Command> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => main_home(),
+            ),
+          );
+        },
+        child: Icon(Icons.arrow_back_ios_sharp),
+      ),
       body: ListView.separated(
         itemBuilder: (BuildContext context, int index) {
           return Row(
@@ -70,7 +81,7 @@ class _CommandState extends State<Command> {
                 ),
               ),
             ],
-          );
+          ); //change ,=>;
         },
         separatorBuilder: (BuildContext context, int index) {
           return Column();

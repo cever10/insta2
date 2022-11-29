@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
+import 'package:insta2/screens/command.dart';
 import 'package:insta2/screens/login_page.dart';
 import 'package:provider/provider.dart';
 
