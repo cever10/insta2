@@ -21,7 +21,8 @@ class _CommentState extends State<Comment> {
           "댓글",
           style: TextStyle(fontSize: 30, color: Colors.black),
         ),
-        backgroundColor: Colors.grey[400],
+        backgroundColor: Colors.white,
+        leading: BackButton(color: Colors.black),
       ),
       /*
       floatingActionButton: FloatingActionButton(

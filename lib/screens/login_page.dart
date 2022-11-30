@@ -54,23 +54,28 @@ class _login_pageState extends State<login_page> {
                         MediaQuery.of(context).size.height * 0.5 - 800 / 2) +
                     209,
                 left: MediaQuery.of(context).size.width * 0.5 + 70,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (builder) => login_gogo()));
-                  },
-                  child: Text(
-                    '로그인',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
+                child: Container(
+                  width: 335,
+                  height: 47,
+                  color: Colors.black12,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (builder) => login_gogo()));
+                    },
+                    child: Text(
+                      '로그인',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.grey,
-                    minimumSize: Size(335, 47),
-                    onSurface: Colors.white,
+                    // style: ElevatedButton.styleFrom(
+                    //   primary: Colors.grey,
+                    //   minimumSize: Size(335, 47),
+                    //   onSurface: Colors.white,
+                    // ),
                   ),
                 ),
               ),
@@ -79,23 +84,28 @@ class _login_pageState extends State<login_page> {
                         MediaQuery.of(context).size.height * 0.5 - 800 / 2) +
                     269,
                 left: MediaQuery.of(context).size.width * 0.5 + 70,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (builder) => login_new_profile()));
-                  },
-                  child: Text(
-                    '회원가입',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
+                child: Container(
+                  width: 335,
+                  height: 47,
+                  color: Colors.black12,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (builder) => login_new_profile()));
+                    },
+                    child: Text(
+                      '회원가입',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.grey,
-                    minimumSize: Size(335, 47),
-                    onSurface: Colors.white,
+                    // style: ElevatedButton.styleFrom(
+                    //   primary: Colors.grey,
+                    //   minimumSize: Size(335, 47),
+                    //   onSurface: Colors.white,
+                    // ),
                   ),
                 ),
               ),
