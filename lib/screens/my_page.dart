@@ -185,30 +185,33 @@ class _MyPageState extends State<MyPage> {
         children: [
           navigatorList(),
           Expanded(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _information(context),
-                    SizedBox(height: 15),
-                    Text(
-                      provar.myintroduction,
-                      style: TextStyle(fontSize: 20, color: Colors.black),
-                    ),
-                    _compilebutton(),
-                    FutureBuilder(
-                      future: initGridview(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData == true) {
-                          return _tapview(context, snapshot.data!);
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                  ],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 200, right: 200),
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _information(context),
+                      SizedBox(height: 15),
+                      Text(
+                        provar.myintroduction,
+                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      ),
+                      _compilebutton(),
+                      FutureBuilder(
+                        future: initGridview(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData == true) {
+                            return _tapview(context, snapshot.data!);
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
