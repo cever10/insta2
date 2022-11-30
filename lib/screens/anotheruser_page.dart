@@ -25,119 +25,129 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
       children: [
         if (checkFollow == false)
           Center(
-            child: ElevatedButton(
-              onPressed: () async {
-                LocalStorage memberDB = LocalStorage('members.txt');
-                LocalStorage followDB =
-                    LocalStorage(provar.myid + '/follow.txt');
-                LocalStorage followerDB =
-                    LocalStorage(widget.Userid + '/follower.txt');
+            child: Container(
+              width: 1250,
+              height: 47,
+              color: Colors.black12,
+              child: TextButton(
+                onPressed: () async {
+                  LocalStorage memberDB = LocalStorage('members.txt');
+                  LocalStorage followDB =
+                      LocalStorage(provar.myid + '/follow.txt');
+                  LocalStorage followerDB =
+                      LocalStorage(widget.Userid + '/follower.txt');
 
-                List<String> templist = List<String>.empty(growable: true);
+                  List<String> templist = List<String>.empty(growable: true);
 
-                await followDB.writeFile(widget.Userid + '\n');
-                await followerDB.writeFile(provar.myid + '\n');
+                  await followDB.writeFile(widget.Userid + '\n');
+                  await followerDB.writeFile(provar.myid + '\n');
 
-                templist = await memberDB.readFileToList();
-                provar.myfollow += 1;
+                  templist = await memberDB.readFileToList();
+                  provar.myfollow += 1;
 
-                templist.replaceRange(
-                    templist.indexOf('id: ' + provar.myid) + 4,
-                    templist.indexOf('id: ' + provar.myid) + 5,
-                    ['follow: ' + provar.myfollow.toString()]);
+                  templist.replaceRange(
+                      templist.indexOf('id: ' + provar.myid) + 4,
+                      templist.indexOf('id: ' + provar.myid) + 5,
+                      ['follow: ' + provar.myfollow.toString()]);
 
-                templist.replaceRange(
-                    templist.indexOf('id: ' + widget.Userid) + 5,
-                    templist.indexOf('id: ' + widget.Userid) + 6, [
-                  'follower: ' +
-                      (int.parse(templist
-                                  .elementAt(
-                                      templist.indexOf('id: ' + widget.Userid) +
-                                          5)
-                                  .replaceAll(RegExp('follower: '), '')) +
-                              1)
-                          .toString()
-                ]);
+                  templist.replaceRange(
+                      templist.indexOf('id: ' + widget.Userid) + 5,
+                      templist.indexOf('id: ' + widget.Userid) + 6, [
+                    'follower: ' +
+                        (int.parse(templist
+                                    .elementAt(templist
+                                            .indexOf('id: ' + widget.Userid) +
+                                        5)
+                                    .replaceAll(RegExp('follower: '), '')) +
+                                1)
+                            .toString()
+                  ]);
 
-                await memberDB.writeListToFile(templist);
+                  await memberDB.writeListToFile(templist);
 
-                setState(() {
-                  checkFollow = true;
-                });
-              },
-              child: Text(
-                '팔로우',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
+                  setState(() {
+                    checkFollow = true;
+                  });
+                },
+                child: Text(
+                  '팔로우',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.grey,
-                minimumSize: Size(MediaQuery.of(context).size.width * 0.83, 48),
-                onSurface: Colors.white,
+                // style: ElevatedButton.styleFrom(
+                //   primary: Colors.grey,
+                //   minimumSize: Size(MediaQuery.of(context).size.width * 0.83, 48),
+                //   onSurface: Colors.white,
+                // ),
               ),
             ),
           ),
         if (checkFollow == true)
           Center(
-            child: ElevatedButton(
-              onPressed: () async {
-                LocalStorage memberDB = LocalStorage('members.txt');
-                LocalStorage followDB =
-                    LocalStorage(provar.myid + '/follow.txt');
-                LocalStorage followerDB =
-                    LocalStorage(widget.Userid + '/follower.txt');
+            child: Container(
+              width: 1250,
+              height: 47,
+              color: Colors.black12,
+              child: TextButton(
+                onPressed: () async {
+                  LocalStorage memberDB = LocalStorage('members.txt');
+                  LocalStorage followDB =
+                      LocalStorage(provar.myid + '/follow.txt');
+                  LocalStorage followerDB =
+                      LocalStorage(widget.Userid + '/follower.txt');
 
-                List<String> templist = List<String>.empty(growable: true);
+                  List<String> templist = List<String>.empty(growable: true);
 
-                templist = await memberDB.readFileToList();
+                  templist = await memberDB.readFileToList();
 
-                provar.myfollow -= 1;
+                  provar.myfollow -= 1;
 
-                templist.replaceRange(
-                    templist.indexOf('id: ' + provar.myid) + 4,
-                    templist.indexOf('id: ' + provar.myid) + 5,
-                    ['follow: ' + provar.myfollow.toString()]);
+                  templist.replaceRange(
+                      templist.indexOf('id: ' + provar.myid) + 4,
+                      templist.indexOf('id: ' + provar.myid) + 5,
+                      ['follow: ' + provar.myfollow.toString()]);
 
-                templist.replaceRange(
-                    templist.indexOf('id: ' + widget.Userid) + 5,
-                    templist.indexOf('id: ' + widget.Userid) + 6, [
-                  'follower: ' +
-                      (int.parse(templist
-                                  .elementAt(
-                                      templist.indexOf('id: ' + widget.Userid) +
-                                          5)
-                                  .replaceAll(RegExp('follower: '), '')) -
-                              1)
-                          .toString()
-                ]);
+                  templist.replaceRange(
+                      templist.indexOf('id: ' + widget.Userid) + 5,
+                      templist.indexOf('id: ' + widget.Userid) + 6, [
+                    'follower: ' +
+                        (int.parse(templist
+                                    .elementAt(templist
+                                            .indexOf('id: ' + widget.Userid) +
+                                        5)
+                                    .replaceAll(RegExp('follower: '), '')) -
+                                1)
+                            .toString()
+                  ]);
 
-                await memberDB.writeListToFile(templist);
+                  await memberDB.writeListToFile(templist);
 
-                templist = await followDB.readFileToList();
-                templist.remove(widget.Userid);
-                await followDB.writeListToFile(templist);
+                  templist = await followDB.readFileToList();
+                  templist.remove(widget.Userid);
+                  await followDB.writeListToFile(templist);
 
-                templist = await followerDB.readFileToList();
-                templist.remove(provar.myid);
-                await followerDB.writeListToFile(templist);
+                  templist = await followerDB.readFileToList();
+                  templist.remove(provar.myid);
+                  await followerDB.writeListToFile(templist);
 
-                setState(() {
-                  checkFollow = false;
-                });
-              },
-              child: Text(
-                '팔로잉',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
+                  setState(() {
+                    checkFollow = false;
+                  });
+                },
+                child: Text(
+                  '팔로잉',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.grey,
-                minimumSize: Size(MediaQuery.of(context).size.width * 0.83, 48),
-                onSurface: Colors.white,
+                // style: ElevatedButton.styleFrom(
+                //   primary: Colors.grey,
+                //   minimumSize: Size(MediaQuery.of(context).size.width * 0.83, 48),
+                //   onSurface: Colors.white,
+                // ),
               ),
             ),
           ),
@@ -299,38 +309,41 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
         children: [
           navigatorList(),
           Expanded(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FutureBuilder(
-                      future: initUserDB(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData == true) {
-                          return Column(
-                            children: [
-                              _information(context),
-                              _followbutton(context, snapshot.data!),
-                            ],
-                          );
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                    FutureBuilder(
-                      future: initGridview(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData == true) {
-                          return _tapview(context, snapshot.data!);
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                  ],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 200, right: 200),
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      FutureBuilder(
+                        future: initUserDB(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData == true) {
+                            return Column(
+                              children: [
+                                _information(context),
+                                _followbutton(context, snapshot.data!),
+                              ],
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                      FutureBuilder(
+                        future: initGridview(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData == true) {
+                            return _tapview(context, snapshot.data!);
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
