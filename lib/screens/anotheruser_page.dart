@@ -16,6 +16,135 @@ class AnotherUserPage extends StatefulWidget {
 class _AnotherUserPageState extends State<AnotherUserPage> {
   List<dynamic> UserDataList = List<dynamic>.empty(growable: true);
 
+  bool checkFollow = false;
+
+  Widget _followbutton(BuildContext context, bool checkFollow) {
+    providerVariable provar = Provider.of<providerVariable>(context);
+
+    return Column(
+      children: [
+        if (checkFollow == false)
+          Center(
+            child: ElevatedButton(
+              onPressed: () async {
+                LocalStorage memberDB = LocalStorage('members.txt');
+                LocalStorage followDB =
+                    LocalStorage(provar.myid + '/follow.txt');
+                LocalStorage followerDB =
+                    LocalStorage(widget.Userid + '/follower.txt');
+
+                List<String> templist = List<String>.empty(growable: true);
+
+                await followDB.writeFile(widget.Userid + '\n');
+                await followerDB.writeFile(provar.myid + '\n');
+
+                templist = await memberDB.readFileToList();
+                provar.myfollow += 1;
+
+                templist.replaceRange(
+                    templist.indexOf('id: ' + provar.myid) + 4,
+                    templist.indexOf('id: ' + provar.myid) + 5,
+                    ['follow: ' + provar.myfollow.toString()]);
+
+                templist.replaceRange(
+                    templist.indexOf('id: ' + widget.Userid) + 5,
+                    templist.indexOf('id: ' + widget.Userid) + 6, [
+                  'follower: ' +
+                      (int.parse(templist
+                                  .elementAt(
+                                      templist.indexOf('id: ' + widget.Userid) +
+                                          5)
+                                  .replaceAll(RegExp('follower: '), '')) +
+                              1)
+                          .toString()
+                ]);
+
+                await memberDB.writeListToFile(templist);
+
+                setState(() {
+                  checkFollow = true;
+                });
+              },
+              child: Text(
+                '팔로우',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.grey,
+                minimumSize: Size(MediaQuery.of(context).size.width * 0.83, 48),
+                onSurface: Colors.white,
+              ),
+            ),
+          ),
+        if (checkFollow == true)
+          Center(
+            child: ElevatedButton(
+              onPressed: () async {
+                LocalStorage memberDB = LocalStorage('members.txt');
+                LocalStorage followDB =
+                    LocalStorage(provar.myid + '/follow.txt');
+                LocalStorage followerDB =
+                    LocalStorage(widget.Userid + '/follower.txt');
+
+                List<String> templist = List<String>.empty(growable: true);
+
+                templist = await memberDB.readFileToList();
+
+                provar.myfollow -= 1;
+
+                templist.replaceRange(
+                    templist.indexOf('id: ' + provar.myid) + 4,
+                    templist.indexOf('id: ' + provar.myid) + 5,
+                    ['follow: ' + provar.myfollow.toString()]);
+
+                templist.replaceRange(
+                    templist.indexOf('id: ' + widget.Userid) + 5,
+                    templist.indexOf('id: ' + widget.Userid) + 6, [
+                  'follower: ' +
+                      (int.parse(templist
+                                  .elementAt(
+                                      templist.indexOf('id: ' + widget.Userid) +
+                                          5)
+                                  .replaceAll(RegExp('follower: '), '')) -
+                              1)
+                          .toString()
+                ]);
+
+                await memberDB.writeListToFile(templist);
+
+                templist = await followDB.readFileToList();
+                templist.remove(widget.Userid);
+                await followDB.writeListToFile(templist);
+
+                templist = await followerDB.readFileToList();
+                templist.remove(provar.myid);
+                await followerDB.writeListToFile(templist);
+
+                setState(() {
+                  checkFollow = false;
+                });
+              },
+              child: Text(
+                '팔로잉',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.grey,
+                minimumSize: Size(MediaQuery.of(context).size.width * 0.83, 48),
+                onSurface: Colors.white,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
   Widget _follower(String title, int value) {
     return Column(
       children: [
@@ -149,7 +278,19 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
 
     Future<bool> initUserDB() async {
       UserDataList = await load_Memberdata(widget.Userid);
-      return true;
+
+      LocalStorage followDB = LocalStorage(provar.myid + '/follow.txt');
+
+      List<String> templist = List<String>.empty(growable: true);
+
+      bool checkFollow = false;
+
+      templist = await followDB.readFileToList();
+      if (templist.contains(widget.Userid) == true) {
+        checkFollow = true;
+      }
+
+      return checkFollow;
     }
 
     return Scaffold(
@@ -168,7 +309,12 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
                       future: initUserDB(),
                       builder: (context, snapshot) {
                         if (snapshot.hasData == true) {
-                          return _information(context);
+                          return Column(
+                            children: [
+                              _information(context),
+                              _followbutton(context, snapshot.data!),
+                            ],
+                          );
                         } else {
                           return Container();
                         }

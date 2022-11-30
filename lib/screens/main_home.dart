@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/scripts.dart';
+import 'package:insta2/widgets/favoriteList.dart';
 import 'package:insta2/widgets/navigatorList.dart';
 import 'package:provider/provider.dart';
 
@@ -24,35 +25,40 @@ class _main_homeState extends State<main_home> {
     }
 
     return Scaffold(
-      body: Row(
+      body: Stack(
         children: [
-          Visibility(
-              visible: checkNumBiggerWidth(260, context),
-              child: navigatorList()),
-          Visibility(
-            visible: checkNumBiggerWidth(260 + 460, context),
-            child: Expanded(
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                child: FutureBuilder(
-                    future: initInstaFeed(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData == true) {
-                        return ListView.builder(
-                          itemBuilder: (context, index) {
-                            if (MainScrolView.length == index + 2) {
-                              addInstaFeed(MainScrolView, provar.myid);
-                            }
-
-                            return MainScrolView[index];
-                          },
-                        );
-                      } else {
-                        return Container();
-                      }
-                    }),
+          Row(
+            children: [
+              Visibility(
+                visible: checkNumBiggerWidth(260, context),
+                child: navigatorList(),
               ),
-            ),
+              Visibility(
+                visible: checkNumBiggerWidth(260 + 460, context),
+                child: Expanded(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: FutureBuilder(
+                        future: initInstaFeed(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData == true) {
+                            return ListView.builder(
+                              itemBuilder: (context, index) {
+                                if (MainScrolView.length == index + 2) {
+                                  addInstaFeed(MainScrolView, provar.myid);
+                                }
+
+                                return MainScrolView[index];
+                              },
+                            );
+                          } else {
+                            return Container();
+                          }
+                        }),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

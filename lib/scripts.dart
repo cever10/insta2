@@ -10,7 +10,7 @@ void showWinToast(String msg, context) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       margin: EdgeInsets.fromLTRB(
-        MediaQuery.of(context).size.width - 300,
+        MediaQuery.of(context).size.width * 0.80,
         0,
         MediaQuery.of(context).size.width * 0.03,
         30,
@@ -47,6 +47,14 @@ double checkPositive(double num) {
 
 bool checkNumBiggerWidth(double num, context) {
   if (MediaQuery.of(context).size.width > num) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool checkNumBiggerHeight(double num, context) {
+  if (MediaQuery.of(context).size.height > num) {
     return true;
   } else {
     return false;
