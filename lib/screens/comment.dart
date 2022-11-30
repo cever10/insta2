@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:insta2/screens/main_home.dart';
 
-class Command extends StatefulWidget {
-  const Command({super.key});
+class Comment extends StatefulWidget {
+  const Comment({super.key});
 
   @override
-  State<Command> createState() => _CommandState();
+  State<Comment> createState() => _CommentState();
 }
 
-class _CommandState extends State<Command> {
-  int h_color = 0, h_count = 0;
+TextEditingController mycomment = TextEditingController();
+
+class _CommentState extends State<Comment> {
+  int h_color = 0, h_count = 0, c_count = 100;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "댓글",
+          style: TextStyle(fontSize: 30, color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => main_home(),
+            ),
+          );
+        },
+        child: Icon(Icons.arrow_back_ios_sharp),
+      ),
       body: ListView.separated(
         itemBuilder: (BuildContext context, int index) {
           return Row(
@@ -65,7 +85,7 @@ class _CommandState extends State<Command> {
                           );
                         }
                       },
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -73,9 +93,9 @@ class _CommandState extends State<Command> {
           );
         },
         separatorBuilder: (BuildContext context, int index) {
-          return Column();
+          return Column(); //여기에는 생긴 리스트 칸마다 추가 가능함.
         },
-        itemCount: 100,
+        itemCount: c_count,
       ),
     );
   }
