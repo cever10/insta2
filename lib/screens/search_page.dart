@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:insta2/widgets/navigatorList.dart';
-import 'package:provider/provider.dart';
 
 class search_page extends StatefulWidget {
   const search_page({super.key});

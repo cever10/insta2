@@ -6,6 +6,7 @@ import 'package:insta2/screens/anotheruser_page.dart';
 import 'package:insta2/screens/comment.dart';
 import 'package:insta2/screens/my_page.dart';
 import 'package:insta2/scripts.dart';
+import 'package:insta2/widgets/favoriteList.dart';
 import 'package:provider/provider.dart';
 
 class instaFeed extends StatefulWidget {
@@ -138,8 +139,8 @@ class _instaFeedState extends State<instaFeed> {
                     if (widget.id != provar.myid && widget.checkFollow == false)
                       TextButton(
                         onPressed: () async {
-                          await followDB.writeFile(widget.id);
-                          await followerDB.writeFile(provar.myid);
+                          await followDB.writeFile(widget.id + '\n');
+                          await followerDB.writeFile(provar.myid + '\n');
 
                           memberDB.readFileToList().then((value) {
                             provar.myfollow += 1;
@@ -278,12 +279,17 @@ class _instaFeedState extends State<instaFeed> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(5),
-                child: Text(
-                  '좋아요 ' + widget.favorite + '개',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                child: TextButton(
+                  onPressed: () {
+                    provar.updatingCurrentFeedUser(widget.id);
+                  },
+                  child: Text(
+                    '좋아요 ' + widget.favorite + '개',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
