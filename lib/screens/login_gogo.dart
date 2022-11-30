@@ -89,55 +89,55 @@ class _login_gogoState extends State<login_gogo> {
                 ),
               ),
               Padding(padding: EdgeInsets.all(20)),
-              ElevatedButton(
-                onPressed: () {
-                  memberDB.readFileToList().then((value) {
-                    if (value.contains('id: ' + id.text.toString()) == true &&
-                        value.elementAt(
-                                value.indexOf('id: ' + id.text.toString()) +
-                                    1) ==
-                            'password: ' + password.text.toString()) {
-                      provar.load_mydata(value, id.text);
-                      showWinToast('회원정보 일치O', context);
-                      Navigator.of(context).pop();
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (builder) => main_home()));
-                    } else {
-                      showWinToast('회원정보 일치X', context);
-                    }
-                  });
-                },
-                child: Text(
-                  '로그인',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
+              Container(
+                width: 335,
+                height: 47,
+                color: Colors.black12,
+                child: TextButton(
+                  onPressed: () {
+                    memberDB.readFileToList().then((value) {
+                      if (value.contains('id: ' + id.text.toString()) == true &&
+                          value.elementAt(
+                                  value.indexOf('id: ' + id.text.toString()) +
+                                      1) ==
+                              'password: ' + password.text.toString()) {
+                        provar.load_mydata(value, id.text);
+                        showWinToast('회원정보 일치O', context);
+                        Navigator.of(context).pop();
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (builder) => main_home()));
+                      } else {
+                        showWinToast('회원정보 일치X', context);
+                      }
+                    });
+                  },
+                  child: Text(
+                    '로그인',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.grey,
-                  minimumSize: Size(335, 47),
-                  onSurface: Colors.white,
                 ),
               ),
               Padding(padding: EdgeInsets.all(20)),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (builder) => login_page()));
-                },
-                child: Text(
-                  '뒤로가기',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
+              Container(
+                width: 335,
+                height: 47,
+                color: Colors.black12,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (builder) => login_page()));
+                  },
+                  child: Text(
+                    '뒤로가기',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.grey,
-                  minimumSize: Size(335, 47),
-                  onSurface: Colors.white,
                 ),
               ),
               Padding(padding: EdgeInsets.all(50)),
