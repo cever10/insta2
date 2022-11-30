@@ -37,9 +37,12 @@ class _searchState extends State<search_page> {
             height: 50,
             width: 800,
             color: Colors.black12,
-            child: Text(
-              "검색기록 $i",
-              style: TextStyle(color: Colors.black),
+            child: TextButton(
+              onPressed: () {},
+              child: Text(
+                "검색기록 $i",
+                style: TextStyle(color: Colors.black),
+              ),
             ),
           ),
         ],
