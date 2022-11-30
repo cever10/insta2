@@ -158,33 +158,36 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
         children: [
           navigatorList(),
           Expanded(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FutureBuilder(
-                      future: initUserDB(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData == true) {
-                          return _information(context);
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                    FutureBuilder(
-                      future: initGridview(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData == true) {
-                          return _tapview(context, snapshot.data!);
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                  ],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 200, right: 200),
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      FutureBuilder(
+                        future: initUserDB(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData == true) {
+                            return _information(context);
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                      FutureBuilder(
+                        future: initGridview(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData == true) {
+                            return _tapview(context, snapshot.data!);
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
