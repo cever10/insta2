@@ -6,7 +6,6 @@ import 'package:insta2/screens/anotheruser_page.dart';
 import 'package:insta2/screens/comment.dart';
 import 'package:insta2/screens/my_page.dart';
 import 'package:insta2/scripts.dart';
-import 'package:insta2/widgets/favoriteList.dart';
 import 'package:provider/provider.dart';
 
 class instaFeed extends StatefulWidget {
@@ -271,17 +270,20 @@ class _instaFeedState extends State<instaFeed> {
                       },
                       icon: Icon(Icons.chat_bubble_outline),
                     ),
+                    /*
                     IconButton(
                       onPressed: () {},
                       icon: Icon(Icons.note_outlined),
                     ),
+                    */
                   ],
                 ),
               ),
               Container(
                 child: TextButton(
                   onPressed: () {
-                    provar.updatingCurrentFeedUser(widget.id);
+                    provar.updatingCurrentFeedUser(
+                        widget.id, widget.feednumber);
                   },
                   child: Text(
                     '좋아요 ' + widget.favorite + '개',

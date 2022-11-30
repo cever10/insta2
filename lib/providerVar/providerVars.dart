@@ -24,6 +24,7 @@ class providerVariable extends ChangeNotifier {
   int temp_feedcount = 0;
 
   String current_feed_user = '';
+  String current_feed_number = '';
 
   void load_mydata(List<String> list, String id) async {
     myname = list
@@ -72,8 +73,9 @@ class providerVariable extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updatingCurrentFeedUser(String value) {
+  void updatingCurrentFeedUser(String value, String value2) {
     current_feed_user = value;
+    current_feed_number = value2;
     notifyListeners();
   }
 }
