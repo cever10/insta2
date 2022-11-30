@@ -21,8 +21,8 @@ class _CommentState extends State<Comment> {
           "댓글",
           style: TextStyle(fontSize: 30, color: Colors.black),
         ),
-        backgroundColor: Colors.white,
-      ),
+        backgroundColor: Colors.grey[400],
+      ),/*
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
@@ -32,10 +32,11 @@ class _CommentState extends State<Comment> {
           );
         },
         child: Icon(Icons.arrow_back_ios_sharp),
-      ),
+      ),*/
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
               child: Row(
@@ -46,7 +47,7 @@ class _CommentState extends State<Comment> {
                     height: 30,
                   ),
                   Text(
-                    instaFeed().comments.toString(),
+                    "ID + comment",
                     style: TextStyle(fontSize: 20, color: Colors.black),
                   ),
                 ],
