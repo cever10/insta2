@@ -23,6 +23,8 @@ class providerVariable extends ChangeNotifier {
   String temp_introduction = "";
   int temp_feedcount = 0;
 
+  String current_feed_user = '';
+
   void load_mydata(List<String> list, String id) async {
     myname = list
         .elementAt(list.indexOf('id: ' + id) - 1)
