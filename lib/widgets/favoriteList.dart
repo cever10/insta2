@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/scripts.dart';
+import 'package:provider/provider.dart';
 
 class favoriteList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    providerVariable provar = Provider.of<providerVariable>(context);
+
     return Stack(
       children: [
         Opacity(
@@ -57,7 +61,9 @@ class favoriteList extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              provar.updatingCurrentFeedUser('');
+                            },
                             icon: Icon(Icons.cancel_outlined),
                           ),
                         ],

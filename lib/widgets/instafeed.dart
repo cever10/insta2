@@ -281,7 +281,7 @@ class _instaFeedState extends State<instaFeed> {
               Container(
                 child: TextButton(
                   onPressed: () {
-                    provar.current_feed_user = widget.id;
+                    provar.updatingCurrentFeedUser(widget.id);
                   },
                   child: Text(
                     '좋아요 ' + widget.favorite + '개',
