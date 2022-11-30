@@ -71,4 +71,9 @@ class providerVariable extends ChangeNotifier {
     checkmyimage = check;
     notifyListeners();
   }
+
+  void updatingCurrentFeedUser(String value) {
+    current_feed_user = value;
+    notifyListeners();
+  }
 }

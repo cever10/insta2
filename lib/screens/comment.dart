@@ -46,7 +46,8 @@ class _CommentState extends State<Comment> {
                     height: 30,
                   ),
                   Text(
-                    instaFeed().comments.toString(),
+                    //instaFeed().comments.toString(),
+                    '1',
                     style: TextStyle(fontSize: 20, color: Colors.black),
                   ),
                 ],

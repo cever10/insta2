@@ -60,6 +60,7 @@ class _main_homeState extends State<main_home> {
               ),
             ],
           ),
+          if (provar.current_feed_user != '') favoriteList(),
         ],
       ),
     );
