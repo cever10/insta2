@@ -15,7 +15,7 @@ class navigatorList extends StatelessWidget {
         SingleChildScrollView(
           child: Container(
             height:
-                630 + checkPositive(MediaQuery.of(context).size.height - 630),
+                550 + checkPositive(MediaQuery.of(context).size.height - 550),
             decoration: BoxDecoration(
               color: Colors.white,
             ),
@@ -82,6 +82,7 @@ class navigatorList extends StatelessWidget {
                     ),
                   ),
                 ),
+                /*
                 Padding(
                   padding: const EdgeInsets.all(30),
                   child: TextButton(
@@ -104,6 +105,7 @@ class navigatorList extends StatelessWidget {
                     ),
                   ),
                 ),
+                */
                 Padding(
                   padding: const EdgeInsets.all(30),
                   child: TextButton(
