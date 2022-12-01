@@ -104,7 +104,12 @@ class _CommentState extends State<Comment> {
                         ],
                       ),
                       Text(
-                        "ID + comment",
+                        "ID",
+                        style: TextStyle(fontSize: 25, color: Colors.black),
+                      ),
+                      Padding(padding: EdgeInsets.all(15)),
+                      Text(
+                        "comment",
                         style: TextStyle(fontSize: 25, color: Colors.black),
                       ),
                     ],
