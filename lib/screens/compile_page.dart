@@ -129,21 +129,21 @@ class _MyWidgetState extends State<CompilePage> {
   }
 
   Widget _editbutton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        _pickImage(context);
-      },
-      child: Text(
-        '프로필 편집',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 16,
+    return Container(
+      width: 550,
+      height: 47,
+      color: Colors.black12,
+      child: TextButton(
+        onPressed: () {
+          _pickImage(context);
+        },
+        child: Text(
+          '프로필 편집',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+          ),
         ),
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: Colors.grey,
-        minimumSize: Size(335, 47),
-        onSurface: Colors.white,
       ),
     );
   }
@@ -194,45 +194,45 @@ class _MyWidgetState extends State<CompilePage> {
                     _nameinfo(),
                     //_IDinfo(),
                     _produceinfo(),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (name.text != '') {
-                          memberDB.readFileToList().then((value) {
-                            value.replaceRange(
-                                value.indexOf('id: ' + provar.myid) + 2,
-                                value.indexOf('id: ' + provar.myid) + 3,
-                                ['introduction: ' + introduction.text]);
+                    Container(
+                      width: 550,
+                      height: 47,
+                      color: Colors.black12,
+                      child: TextButton(
+                        onPressed: () {
+                          if (name.text != '') {
+                            memberDB.readFileToList().then((value) {
+                              value.replaceRange(
+                                  value.indexOf('id: ' + provar.myid) + 2,
+                                  value.indexOf('id: ' + provar.myid) + 3,
+                                  ['introduction: ' + introduction.text]);
 
-                            value.replaceRange(
-                                value.indexOf('id: ' + provar.myid) - 1,
-                                value.indexOf('id: ' + provar.myid) + 0,
-                                ['name: ' + name.text]);
-                            memberDB.writeListToFile(value);
+                              value.replaceRange(
+                                  value.indexOf('id: ' + provar.myid) - 1,
+                                  value.indexOf('id: ' + provar.myid) + 0,
+                                  ['name: ' + name.text]);
+                              memberDB.writeListToFile(value);
 
-                            provar.myname = name.text;
-                            provar.myintroduction = introduction.text;
+                              provar.myname = name.text;
+                              provar.myintroduction = introduction.text;
 
-                            showWinToast('프로필이 저장되었습니다', context);
+                              showWinToast('프로필이 저장되었습니다', context);
 
-                            Navigator.of(context).pop();
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (builder) => MyPage()));
-                          });
-                        } else {
-                          showWinToast('이름을 채워주세요', context);
-                        }
-                      },
-                      child: Text(
-                        '저장',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
+                              Navigator.of(context).pop();
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (builder) => MyPage()));
+                            });
+                          } else {
+                            showWinToast('이름을 채워주세요', context);
+                          }
+                        },
+                        child: Text(
+                          '저장',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey,
-                        minimumSize: Size(335, 47),
-                        onSurface: Colors.white,
                       ),
                     ),
                     Padding(padding: EdgeInsets.all(50))
