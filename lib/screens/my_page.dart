@@ -176,7 +176,10 @@ class _MyPageState extends State<MyPage> {
 
         feedImgDB.get_filePath().then((value) {
           myFeeds.add(Container(
-            child: Image.file(value),
+            child: TextButton(
+              onPressed: () {},
+              child: Image.file(value),
+            ),
           ));
         });
       }
