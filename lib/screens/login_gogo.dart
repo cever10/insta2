@@ -54,6 +54,7 @@ class _login_gogoState extends State<login_gogo> {
                   controller: id,
                   decoration: InputDecoration(
                     labelText: '아이디',
+                    labelStyle: TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(3)),
                       borderSide: BorderSide(color: Colors.grey),
@@ -78,6 +79,7 @@ class _login_gogoState extends State<login_gogo> {
                   controller: password,
                   decoration: InputDecoration(
                     labelText: '비밀번호',
+                    labelStyle: TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(3)),
                       borderSide: BorderSide(color: Colors.grey),

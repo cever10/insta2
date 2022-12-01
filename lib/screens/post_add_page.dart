@@ -68,6 +68,7 @@ class _MyWidgetState extends State<PostAddPage> {
             controller: contents,
             decoration: InputDecoration(
               labelText: '내용을 입력하세요.',
+              labelStyle: TextStyle(color: Colors.black),
             ),
           ),
         ),

@@ -77,6 +77,7 @@ class _searchState extends State<search_page> {
                     controller: _filter,
                     decoration: InputDecoration(
                       labelText: '검색',
+                      labelStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(3)),
                         borderSide: BorderSide(color: Colors.grey),
