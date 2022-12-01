@@ -188,43 +188,50 @@ class _MyPageState extends State<MyPage> {
       */
       body: Row(
         children: [
-          navigatorList(),
-          Expanded(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.1,
-                    right: MediaQuery.of(context).size.width * 0.1,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _information(context),
-                      SizedBox(height: 15),
-                      Row(
-                        children: [
-                          Padding(padding: EdgeInsets.all(10)),
-                          Text(
-                            provar.myintroduction,
-                            style: TextStyle(fontSize: 20, color: Colors.black),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 30),
-                      _compilebutton(),
-                      FutureBuilder(
-                        future: initGridview(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData == true) {
-                            return _tapview(context, snapshot.data!);
-                          } else {
-                            return Container();
-                          }
-                        },
-                      ),
-                    ],
+          Visibility(
+            visible: checkNumBiggerWidth(243, context),
+            child: navigatorList(),
+          ),
+          Visibility(
+            visible: checkNumBiggerWidth(243 + 610, context),
+            child: Expanded(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.1,
+                      right: MediaQuery.of(context).size.width * 0.1,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _information(context),
+                        SizedBox(height: 15),
+                        Row(
+                          children: [
+                            Padding(padding: EdgeInsets.all(10)),
+                            Text(
+                              provar.myintroduction,
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 30),
+                        _compilebutton(),
+                        FutureBuilder(
+                          future: initGridview(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData == true) {
+                              return _tapview(context, snapshot.data!);
+                            } else {
+                              return Container();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -313,45 +313,51 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
       backgroundColor: Colors.white,
       body: Row(
         children: [
-          navigatorList(),
-          Expanded(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.1,
-                    right: MediaQuery.of(context).size.width * 0.1,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FutureBuilder(
-                        future: initUserDB(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData == true) {
-                            return Column(
-                              children: [
-                                _information(context),
-                                _followbutton(context, snapshot.data!),
-                              ],
-                            );
-                          } else {
-                            return Container();
-                          }
-                        },
-                      ),
-                      FutureBuilder(
-                        future: initGridview(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData == true) {
-                            return _tapview(context, snapshot.data!);
-                          } else {
-                            return Container();
-                          }
-                        },
-                      ),
-                    ],
+          Visibility(
+            visible: checkNumBiggerWidth(243, context),
+            child: navigatorList(),
+          ),
+          Visibility(
+            visible: checkNumBiggerWidth(243 + 610, context),
+            child: Expanded(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.1,
+                      right: MediaQuery.of(context).size.width * 0.1,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FutureBuilder(
+                          future: initUserDB(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData == true) {
+                              return Column(
+                                children: [
+                                  _information(context),
+                                  _followbutton(context, snapshot.data!),
+                                ],
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
+                        ),
+                        FutureBuilder(
+                          future: initGridview(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData == true) {
+                              return _tapview(context, snapshot.data!);
+                            } else {
+                              return Container();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
