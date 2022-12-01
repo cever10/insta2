@@ -43,26 +43,31 @@ class _MyWidgetState extends State<CompilePage> {
   Widget _profileinfo(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
 
-    return Stack(
-      children: [
-        if (provar.checkmyimage == true)
-          Image.file(
-            provar.myimage,
-            width: 400,
-            height: 400,
-          ),
-        if (provar.checkmyimage == false)
+    return TextButton(
+      onPressed: () {
+        _pickImage(context);
+      },
+      child: Stack(
+        children: [
+          if (provar.checkmyimage == true)
+            Image.file(
+              provar.myimage,
+              width: 400,
+              height: 400,
+            ),
+          if (provar.checkmyimage == false)
+            Image.asset(
+              'images/normal_profile.png',
+              width: 400,
+              height: 400,
+            ),
           Image.asset(
-            'images/normal_profile.png',
+            'images/frame.png',
             width: 400,
             height: 400,
           ),
-        Image.asset(
-          'images/frame.png',
-          width: 400,
-          height: 400,
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -131,6 +136,7 @@ class _MyWidgetState extends State<CompilePage> {
     );
   }
 
+  /*
   Widget _editbutton(BuildContext context) {
     return Container(
       width: 550,
@@ -150,7 +156,7 @@ class _MyWidgetState extends State<CompilePage> {
       ),
     );
   }
-
+  */
   @override
   Widget build(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
@@ -193,7 +199,7 @@ class _MyWidgetState extends State<CompilePage> {
                 child: Column(
                   children: [
                     _profileinfo(context),
-                    _editbutton(context),
+                    //_editbutton(context),
                     _nameinfo(),
                     //_IDinfo(),
                     _produceinfo(),
