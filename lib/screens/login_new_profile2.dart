@@ -183,76 +183,77 @@ class _login_new_profile2State extends State<login_new_profile2> {
                 ],
               ),
               Padding(padding: EdgeInsets.all(30)),
-              ElevatedButton(
-                onPressed: () async {
-                  if (checkboxvar1 == true) {
-                    if (checkboxvar2 == true) {
-                      if (checkboxvar3 == true) {
-                        await memberDB
-                            .writeFile('name: ' + provar.temp_name + '\n');
-                        await memberDB
-                            .writeFile('id: ' + provar.temp_id + '\n');
-                        await memberDB.writeFile(
-                            'password: ' + provar.temp_password + '\n');
-                        await memberDB.writeFile(
-                            'introduction: ' + provar.temp_introduction + '\n');
-                        await memberDB.writeFile('feedcount: ' +
-                            provar.temp_feedcount.toString() +
-                            '\n');
-                        await memberDB.writeFile('follow: 0\n');
-                        await memberDB.writeFile('follower: 0\n');
-                        await memberDB.writeFile('\n');
+              Container(
+                width: 335,
+                height: 47,
+                color: Colors.black12,
+                child: TextButton(
+                  onPressed: () async {
+                    if (checkboxvar1 == true) {
+                      if (checkboxvar2 == true) {
+                        if (checkboxvar3 == true) {
+                          await memberDB
+                              .writeFile('name: ' + provar.temp_name + '\n');
+                          await memberDB
+                              .writeFile('id: ' + provar.temp_id + '\n');
+                          await memberDB.writeFile(
+                              'password: ' + provar.temp_password + '\n');
+                          await memberDB.writeFile('introduction: ' +
+                              provar.temp_introduction +
+                              '\n');
+                          await memberDB.writeFile('feedcount: ' +
+                              provar.temp_feedcount.toString() +
+                              '\n');
+                          await memberDB.writeFile('follow: 0\n');
+                          await memberDB.writeFile('follower: 0\n');
+                          await memberDB.writeFile('\n');
 
-                        systemDB.readFileToList().then((value) {
-                          temp = int.parse(value
-                              .elementAt(0)
-                              .replaceAll(RegExp('membercount: '), ''));
-                          value.replaceRange(
-                              0, 1, ['membercount: ' + (temp + 1).toString()]);
-                          systemDB.writeListToFile(value);
-                        });
+                          systemDB.readFileToList().then((value) {
+                            temp = int.parse(value
+                                .elementAt(0)
+                                .replaceAll(RegExp('membercount: '), ''));
+                            value.replaceRange(0, 1,
+                                ['membercount: ' + (temp + 1).toString()]);
+                            systemDB.writeListToFile(value);
+                          });
 
-                        showWinToast('아이디 생성 성공', context);
-                        Navigator.of(context).pop();
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (builder) => login_page()));
+                          showWinToast('아이디 생성 성공', context);
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (builder) => login_page()));
+                        }
                       }
+                    } else {
+                      showWinToast('약관에 동의해주세요', context);
                     }
-                  } else {
-                    showWinToast('약관에 동의해주세요', context);
-                  }
-                },
-                child: Text(
-                  '다음',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
+                  },
+                  child: Text(
+                    '다음',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.grey,
-                  minimumSize: Size(335, 47),
-                  onSurface: Colors.white,
                 ),
               ),
               Padding(padding: EdgeInsets.all(20)),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (builder) => login_new_profile()));
-                },
-                child: Text(
-                  '뒤로가기',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
+              Container(
+                width: 335,
+                height: 47,
+                color: Colors.black12,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (builder) => login_new_profile()));
+                  },
+                  child: Text(
+                    '뒤로가기',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.grey,
-                  minimumSize: Size(335, 47),
-                  onSurface: Colors.white,
                 ),
               ),
               Padding(padding: EdgeInsets.all(50)),
