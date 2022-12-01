@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:insta2/screens/main_home.dart';
-import 'package:insta2/widgets/instafeed.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:provider/provider.dart';
 
 double font_size = 25;
 
 class Comment extends StatefulWidget {
-  const Comment({super.key});
-
   @override
   State<Comment> createState() => _CommentState();
 }

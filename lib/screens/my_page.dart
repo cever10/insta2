@@ -39,25 +39,25 @@ class _MyPageState extends State<MyPage> {
             if (provar.checkmyimage == true)
               Image.file(
                 provar.myimage,
-                width: 400,
-                height: 400,
+                width: MediaQuery.of(context).size.width * 0.2,
+                height: MediaQuery.of(context).size.width * 0.2,
               ),
             if (provar.checkmyimage == false)
               Image.asset(
                 'images/normal_profile.png',
-                width: 400,
-                height: 400,
+                width: MediaQuery.of(context).size.width * 0.2,
+                height: MediaQuery.of(context).size.width * 0.2,
               ),
             Image.asset(
               'images/frame.png',
-              width: 400,
-              height: 400,
+              width: MediaQuery.of(context).size.width * 0.2,
+              height: MediaQuery.of(context).size.width * 0.2,
             ),
           ],
         ),
         Expanded(
           child: Container(
-            height: 400,
+            //height: 400,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -194,16 +194,25 @@ class _MyPageState extends State<MyPage> {
               height: MediaQuery.of(context).size.height,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 200, right: 200),
+                  padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.1,
+                    right: MediaQuery.of(context).size.width * 0.1,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _information(context),
                       SizedBox(height: 15),
-                      Text(
-                        provar.myintroduction,
-                        style: TextStyle(fontSize: 20, color: Colors.black),
+                      Row(
+                        children: [
+                          Padding(padding: EdgeInsets.all(10)),
+                          Text(
+                            provar.myintroduction,
+                            style: TextStyle(fontSize: 20, color: Colors.black),
+                          ),
+                        ],
                       ),
+                      SizedBox(height: 30),
                       _compilebutton(),
                       FutureBuilder(
                         future: initGridview(),

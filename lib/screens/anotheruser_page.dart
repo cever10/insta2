@@ -184,25 +184,25 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
                 if (UserDataList[8] == true)
                   Image.file(
                     UserDataList[7],
-                    width: 400,
-                    height: 400,
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.width * 0.2,
                   ),
                 if (UserDataList[8] == false)
                   Image.asset(
                     'images/normal_profile.png',
-                    width: 400,
-                    height: 400,
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.width * 0.2,
                   ),
                 Image.asset(
                   'images/frame.png',
-                  width: 400,
-                  height: 400,
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  height: MediaQuery.of(context).size.width * 0.2,
                 ),
               ],
             ),
             Expanded(
               child: Container(
-                height: 400,
+                //height: 400,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -236,10 +236,16 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
           ],
         ),
         SizedBox(height: 15),
-        Text(
-          UserDataList[3],
-          style: TextStyle(fontSize: 20, color: Colors.black),
+        Row(
+          children: [
+            Padding(padding: EdgeInsets.all(10)),
+            Text(
+              UserDataList[3],
+              style: TextStyle(fontSize: 20, color: Colors.black),
+            ),
+          ],
         ),
+        SizedBox(height: 30),
       ],
     );
   }
@@ -313,7 +319,10 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
               height: MediaQuery.of(context).size.height,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 200, right: 200),
+                  padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.1,
+                    right: MediaQuery.of(context).size.width * 0.1,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
