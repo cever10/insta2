@@ -64,6 +64,7 @@ class _MyWidgetState extends State<PostAddPage> {
           padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.3,
               0, MediaQuery.of(context).size.width * 0.3, 40),
           child: TextField(
+            cursorColor: Colors.black,
             controller: contents,
             decoration: InputDecoration(
               labelText: '내용을 입력하세요.',

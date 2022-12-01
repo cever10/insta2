@@ -50,6 +50,7 @@ class _login_gogoState extends State<login_gogo> {
                         MediaQuery.of(context).size.width * 0.5 - 200),
                     40),
                 child: TextField(
+                  cursorColor: Colors.black,
                   controller: id,
                   decoration: InputDecoration(
                     labelText: '아이디',
@@ -73,6 +74,7 @@ class _login_gogoState extends State<login_gogo> {
                         MediaQuery.of(context).size.width * 0.5 - 200),
                     40),
                 child: TextField(
+                  cursorColor: Colors.black,
                   controller: password,
                   decoration: InputDecoration(
                     labelText: '비밀번호',

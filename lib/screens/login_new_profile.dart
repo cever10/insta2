@@ -51,6 +51,7 @@ class _login_new_profileState extends State<login_new_profile> {
                         MediaQuery.of(context).size.width * 0.5 - 200),
                     40),
                 child: TextField(
+                  cursorColor: Colors.black,
                   controller: name,
                   decoration: InputDecoration(
                     labelText: '성명',
@@ -74,6 +75,7 @@ class _login_new_profileState extends State<login_new_profile> {
                         MediaQuery.of(context).size.width * 0.5 - 200),
                     40),
                 child: TextField(
+                  cursorColor: Colors.black,
                   controller: id,
                   decoration: InputDecoration(
                     labelText: '아이디',
@@ -97,6 +99,7 @@ class _login_new_profileState extends State<login_new_profile> {
                         MediaQuery.of(context).size.width * 0.5 - 200),
                     40),
                 child: TextField(
+                  cursorColor: Colors.black,
                   controller: password,
                   decoration: InputDecoration(
                     labelText: '비밀번호',
