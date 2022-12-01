@@ -78,9 +78,9 @@ class _MyWidgetState extends State<CompilePage> {
           padding: EdgeInsets.all(10),
           child: Text('이름 변경', style: TextStyle(fontSize: 12)),
         ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.3,
-              0, MediaQuery.of(context).size.width * 0.3, 40),
+        Container(
+          width: 350,
+          height: 50,
           child: TextField(
             controller: name,
             decoration: InputDecoration(
@@ -92,6 +92,7 @@ class _MyWidgetState extends State<CompilePage> {
     );
   }
 
+  /*
   Widget _IDinfo() {
     return Column(
       children: [
@@ -111,7 +112,7 @@ class _MyWidgetState extends State<CompilePage> {
       ],
     );
   }
-
+  */
   Widget _produceinfo() {
     return Column(
       children: [
@@ -119,9 +120,9 @@ class _MyWidgetState extends State<CompilePage> {
           padding: EdgeInsets.all(10),
           child: Text('한줄소개 변경', style: TextStyle(fontSize: 12)),
         ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.3,
-              0, MediaQuery.of(context).size.width * 0.3, 40),
+        Container(
+          width: 350,
+          height: 50,
           child: TextField(
             controller: introduction,
             decoration: InputDecoration(
@@ -188,61 +189,68 @@ class _MyWidgetState extends State<CompilePage> {
       */
       body: Row(
         children: [
-          navigatorList(),
-          Expanded(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    _profileinfo(context),
-                    //_editbutton(context),
-                    _nameinfo(),
-                    //_IDinfo(),
-                    _produceinfo(),
-                    Container(
-                      width: 550,
-                      height: 47,
-                      color: Colors.black12,
-                      child: TextButton(
-                        onPressed: () {
-                          if (name.text != '') {
-                            memberDB.readFileToList().then((value) {
-                              value.replaceRange(
-                                  value.indexOf('id: ' + provar.myid) + 2,
-                                  value.indexOf('id: ' + provar.myid) + 3,
-                                  ['introduction: ' + introduction.text]);
+          Visibility(
+            visible: checkNumBiggerWidth(243, context),
+            child: navigatorList(),
+          ),
+          Visibility(
+            visible: checkNumBiggerWidth(243 + 400, context),
+            child: Expanded(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _profileinfo(context),
+                      //_editbutton(context),
+                      _nameinfo(),
+                      //_IDinfo(),
+                      _produceinfo(),
+                      Padding(padding: EdgeInsets.all(20)),
+                      Container(
+                        width: 350,
+                        height: 47,
+                        color: Colors.black12,
+                        child: TextButton(
+                          onPressed: () {
+                            if (name.text != '') {
+                              memberDB.readFileToList().then((value) {
+                                value.replaceRange(
+                                    value.indexOf('id: ' + provar.myid) + 2,
+                                    value.indexOf('id: ' + provar.myid) + 3,
+                                    ['introduction: ' + introduction.text]);
 
-                              value.replaceRange(
-                                  value.indexOf('id: ' + provar.myid) - 1,
-                                  value.indexOf('id: ' + provar.myid) + 0,
-                                  ['name: ' + name.text]);
-                              memberDB.writeListToFile(value);
+                                value.replaceRange(
+                                    value.indexOf('id: ' + provar.myid) - 1,
+                                    value.indexOf('id: ' + provar.myid) + 0,
+                                    ['name: ' + name.text]);
+                                memberDB.writeListToFile(value);
 
-                              provar.myname = name.text;
-                              provar.myintroduction = introduction.text;
+                                provar.myname = name.text;
+                                provar.myintroduction = introduction.text;
 
-                              showWinToast('프로필이 저장되었습니다', context);
+                                showWinToast('프로필이 저장되었습니다', context);
 
-                              Navigator.of(context).pop();
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (builder) => MyPage()));
-                            });
-                          } else {
-                            showWinToast('이름을 채워주세요', context);
-                          }
-                        },
-                        child: Text(
-                          '저장',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
+                                Navigator.of(context).pop();
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (builder) => MyPage()));
+                              });
+                            } else {
+                              showWinToast('이름을 채워주세요', context);
+                            }
+                          },
+                          child: Text(
+                            '저장',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(padding: EdgeInsets.all(50))
-                  ],
+                      Padding(padding: EdgeInsets.all(50))
+                    ],
+                  ),
                 ),
               ),
             ),
