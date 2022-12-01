@@ -41,118 +41,140 @@ class _CommentState extends State<Comment> {
         child: Icon(Icons.arrow_back_ios_sharp),
       ),*/
 
-      body: Column(
+      body: Row(
         children: [
-          Row(
+          //Column을 활용해서 여백 추가하기
+          Container(
+            height: 10,
+            width: 1500,
+            color: Colors.white,
+          ),
+          Column(
             children: [
-              Stack(
+              Row(
                 children: [
-                  if (provar.checkmyimage == true)
-                    Image.file(
-                      provar.myimage,
-                      width: 40,
-                      height: 40,
-                    ),
-                  if (provar.checkmyimage == false)
-                    Image.asset(
-                      'images/normal_profile.png',
-                      width: 40,
-                      height: 40,
-                    ),
-                  Image.asset(
-                    'images/frame.png',
-                    width: 40,
-                    height: 40,
+                  Stack(
+                    children: [
+                      if (provar.checkmyimage == true)
+                        Image.file(
+                          provar.myimage,
+                          width: 40,
+                          height: 40,
+                        ),
+                      if (provar.checkmyimage == false)
+                        Image.asset(
+                          'images/normal_profile.png',
+                          width: 40,
+                          height: 40,
+                        ),
+                      Image.asset(
+                        'images/frame.png',
+                        width: 40,
+                        height: 40,
+                      ),
+                    ],
+                  ),
+                  Text(
+                    "ID",
+                    style: TextStyle(fontSize: font_size, color: Colors.black),
                   ),
                 ],
               ),
-              Text(
-                "ID",
-                style: TextStyle(fontSize: font_size, color: Colors.black),
+              Row(
+                children: [
+                  Text("게시글내용\n집가고 싶다", style: TextStyle(fontSize: font_size)),
+                ],
               ),
-            ],
-          ),
-          Row(
-            children: [
-              Text("게시글내용\n", style: TextStyle(fontSize: font_size)),
-            ],
-          ),
-          //줄 추가//길고 얇은 사각형 추가(가로: 길게, 세로: 개얇게)
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  child: Row(
-                    children: [
-                      Stack(
+              Container(
+                height: 1,
+                width: 150000,
+                color: Colors.grey,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Row(
+
+                  children: [
+                    Container(
+                      child: Row(
+                        //mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          if (provar.checkmyimage == true)
-                            Image.file(
-                              provar.myimage,
-                              width: 40,
-                              height: 40,
-                            ),
-                          if (provar.checkmyimage == false)
-                            Image.asset(
-                              'images/normal_profile.png',
-                              width: 40,
-                              height: 40,
-                            ),
-                          Image.asset(
-                            'images/frame.png',
-                            width: 40,
-                            height: 40,
+                          Stack(
+                            children: [
+                              if (provar.checkmyimage == true)
+                                Image.file(
+                                  provar.myimage,
+                                  width: 40,
+                                  height: 40,
+                                ),
+                              if (provar.checkmyimage == false)
+                                Image.asset(
+                                  'images/normal_profile.png',
+                                  width: 40,
+                                  height: 40,
+                                ),
+                              Image.asset(
+                                'images/frame.png',
+                                width: 40,
+                                height: 40,
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "ID + comment",
+                            style: TextStyle(fontSize: 25, color: Colors.black),
                           ),
                         ],
                       ),
-                      Text(
-                        "ID + comment",
-                        style: TextStyle(fontSize: 25, color: Colors.black),
+                    ),
+                    Container(
+                      child: Row(
+                        //mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "좋아요: " + h_count.toString() + "개",
+                            style: TextStyle(fontSize: 15, color: Colors.grey),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.favorite_border),
+                            onPressed: () {
+                              h_color += 1;
+                              if (h_color % 2 == 1) {
+                                onTap:
+                                () {
+                                  icon:
+                                  Icon(Icons.favorite_outlined,
+                                      color: Colors.red);
+                                };
+                                setState(() {
+                                  h_count += 1;
+                                });
+                              } else {
+                                onTap:
+                                () {
+                                  icon:
+                                  Icon(Icons.favorite_border);
+                                };
+                                setState(
+                                  () {
+                                    h_count -= 1;
+                                  },
+                                );
+                              }
+                            },
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Container(
-                  child: Row(
-                    children: [
-                      Text(
-                        "좋아요: " + h_count.toString() + "개",
-                        style: TextStyle(fontSize: 15, color: Colors.grey),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.favorite_border),
-                        onPressed: () {
-                          h_color += 1;
-                          if (h_color % 2 == 1) {
-                            onTap:
-                            () {
-                              icon:
-                              Icon(Icons.favorite_outlined, color: Colors.red);
-                            };
-                            setState(() {
-                              h_count += 1;
-                            });
-                          } else {
-                            onTap:
-                            () {
-                              icon:
-                              Icon(Icons.favorite_border);
-                            };
-                            setState(
-                              () {
-                                h_count -= 1;
-                              },
-                            );
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
+          ),
+          Container(
+            height: 10,
+            width: 1500,
+            color: Colors.white,
           ),
         ],
       ),
