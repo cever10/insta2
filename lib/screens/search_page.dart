@@ -67,8 +67,10 @@ class _searchState extends State<search_page> {
                   width: 800,
                   height: 50,
                   child: TextField(
+                    cursorColor: Colors.black,
                     focusNode: focusNode,
                     style: TextStyle(
+                      color: Colors.black54,
                       fontSize: 15,
                     ),
                     autofocus: true,
