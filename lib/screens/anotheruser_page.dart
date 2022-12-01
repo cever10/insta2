@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/scripts.dart';
+import 'package:insta2/widgets/followerList.dart';
+import 'package:insta2/widgets/followingList.dart';
 import 'package:insta2/widgets/navigatorList.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +19,8 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
   List<dynamic> UserDataList = List<dynamic>.empty(growable: true);
 
   bool checkFollow = false;
+
+  int checkState = 0;
 
   Widget _followbutton(BuildContext context, bool checkFollow) {
     providerVariable provar = Provider.of<providerVariable>(context);
@@ -184,25 +188,25 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
                 if (UserDataList[8] == true)
                   Image.file(
                     UserDataList[7],
-                    width: 400,
-                    height: 400,
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.width * 0.2,
                   ),
                 if (UserDataList[8] == false)
                   Image.asset(
                     'images/normal_profile.png',
-                    width: 400,
-                    height: 400,
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.width * 0.2,
                   ),
                 Image.asset(
                   'images/frame.png',
-                  width: 400,
-                  height: 400,
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  height: MediaQuery.of(context).size.width * 0.2,
                 ),
               ],
             ),
             Expanded(
               child: Container(
-                height: 400,
+                //height: 400,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -224,9 +228,28 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _follower('게시글', UserDataList[4]),
-                        _follower('팔로잉', UserDataList[5]),
-                        _follower('팔로워', UserDataList[6]),
+                        TextButton(
+                          onPressed: () {},
+                          child: _follower('게시글', UserDataList[4]),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            provar.updatingCurrentProfileUser(widget.Userid);
+                            setState(() {
+                              checkState = 1;
+                            });
+                          },
+                          child: _follower('팔로잉', UserDataList[5]),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            provar.updatingCurrentProfileUser(widget.Userid);
+                            setState(() {
+                              checkState = 2;
+                            });
+                          },
+                          child: _follower('팔로워', UserDataList[6]),
+                        ),
                       ],
                     ),
                   ],
@@ -236,10 +259,16 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
           ],
         ),
         SizedBox(height: 15),
-        Text(
-          UserDataList[3],
-          style: TextStyle(fontSize: 20, color: Colors.black),
+        Row(
+          children: [
+            Padding(padding: EdgeInsets.all(10)),
+            Text(
+              UserDataList[3],
+              style: TextStyle(fontSize: 20, color: Colors.black),
+            ),
+          ],
         ),
+        SizedBox(height: 30),
       ],
     );
   }
@@ -305,49 +334,66 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Row(
+      body: Stack(
         children: [
-          navigatorList(),
-          Expanded(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 200, right: 200),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FutureBuilder(
-                        future: initUserDB(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData == true) {
-                            return Column(
-                              children: [
-                                _information(context),
-                                _followbutton(context, snapshot.data!),
-                              ],
-                            );
-                          } else {
-                            return Container();
-                          }
-                        },
+          Row(
+            children: [
+              Visibility(
+                visible: checkNumBiggerWidth(243, context),
+                child: navigatorList(),
+              ),
+              Visibility(
+                visible: checkNumBiggerWidth(243 + 610, context),
+                child: Expanded(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.1,
+                          right: MediaQuery.of(context).size.width * 0.1,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            FutureBuilder(
+                              future: initUserDB(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData == true) {
+                                  return Column(
+                                    children: [
+                                      _information(context),
+                                      _followbutton(context, snapshot.data!),
+                                    ],
+                                  );
+                                } else {
+                                  return Container();
+                                }
+                              },
+                            ),
+                            FutureBuilder(
+                              future: initGridview(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData == true) {
+                                  return _tapview(context, snapshot.data!);
+                                } else {
+                                  return Container();
+                                }
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                      FutureBuilder(
-                        future: initGridview(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData == true) {
-                            return _tapview(context, snapshot.data!);
-                          } else {
-                            return Container();
-                          }
-                        },
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
+          if (provar.current_profile_user != '' && checkState == 1)
+            followingList(),
+          if (provar.current_profile_user != '' && checkState == 2)
+            followerList(),
         ],
       ),
     );
