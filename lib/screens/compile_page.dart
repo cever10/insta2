@@ -90,7 +90,7 @@ class _MyWidgetState extends State<CompilePage> {
                 enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.black26)),
                 focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black26))),
+                    borderSide: BorderSide(color: Colors.black54))),
           ),
         ),
       ],
@@ -138,7 +138,7 @@ class _MyWidgetState extends State<CompilePage> {
                 enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.black26)),
                 focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black26))),
+                    borderSide: BorderSide(color: Colors.black54))),
           ),
         ),
       ],

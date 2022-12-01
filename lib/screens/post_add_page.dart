@@ -77,7 +77,7 @@ class _MyWidgetState extends State<PostAddPage> {
                 enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.black26)),
                 focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black26))),
+                    borderSide: BorderSide(color: Colors.black54))),
           ),
         ),
       ],
