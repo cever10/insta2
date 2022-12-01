@@ -51,9 +51,11 @@ class _login_new_profileState extends State<login_new_profile> {
                         MediaQuery.of(context).size.width * 0.5 - 200),
                     40),
                 child: TextField(
+                  cursorColor: Colors.black,
                   controller: name,
                   decoration: InputDecoration(
                     labelText: '성명',
+                    labelStyle: TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(3)),
                       borderSide: BorderSide(color: Colors.grey),
@@ -74,9 +76,11 @@ class _login_new_profileState extends State<login_new_profile> {
                         MediaQuery.of(context).size.width * 0.5 - 200),
                     40),
                 child: TextField(
+                  cursorColor: Colors.black,
                   controller: id,
                   decoration: InputDecoration(
                     labelText: '아이디',
+                    labelStyle: TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(3)),
                       borderSide: BorderSide(color: Colors.grey),
@@ -97,9 +101,11 @@ class _login_new_profileState extends State<login_new_profile> {
                         MediaQuery.of(context).size.width * 0.5 - 200),
                     40),
                 child: TextField(
+                  cursorColor: Colors.black,
                   controller: password,
                   decoration: InputDecoration(
                     labelText: '비밀번호',
+                    labelStyle: TextStyle(color: Colors.black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(3)),
                       borderSide: BorderSide(color: Colors.grey),

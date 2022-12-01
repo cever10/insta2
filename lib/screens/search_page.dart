@@ -67,14 +67,17 @@ class _searchState extends State<search_page> {
                   width: 800,
                   height: 50,
                   child: TextField(
+                    cursorColor: Colors.black,
                     focusNode: focusNode,
                     style: TextStyle(
+                      color: Colors.black54,
                       fontSize: 15,
                     ),
                     autofocus: true,
                     controller: _filter,
                     decoration: InputDecoration(
                       labelText: '검색',
+                      labelStyle: TextStyle(color: Colors.black),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(3)),
                         borderSide: BorderSide(color: Colors.grey),

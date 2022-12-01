@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:insta2/screens/main_home.dart';
-import 'package:insta2/widgets/instafeed.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:provider/provider.dart';
 
 double font_size = 25;
 
 class Comment extends StatefulWidget {
-  const Comment({super.key});
-
   @override
   State<Comment> createState() => _CommentState();
 }
@@ -43,14 +39,16 @@ class _CommentState extends State<Comment> {
 
       body: Row(
         children: [
-          //Column을 활용해서 여백 추가하기
+          /*
           Container(
             height: 10,
             width: 1500,
             color: Colors.white,
           ),
+          */
           Column(
             children: [
+              //게시글의 사진+id+게시글 내용
               Row(
                 children: [
                   Stack(
@@ -85,20 +83,22 @@ class _CommentState extends State<Comment> {
                   Text("게시글내용\n집가고 싶다", style: TextStyle(fontSize: font_size)),
                 ],
               ),
+              //게시글/댓글 구분선 추가
               Container(
                 height: 1,
                 width: 150000,
                 color: Colors.grey,
               ),
+              //댓글
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Row(
-
                   children: [
                     Container(
                       child: Row(
                         //mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          //댓글 프로필 이미지를 Stack으로 구현
                           Stack(
                             children: [
                               if (provar.checkmyimage == true)
@@ -120,8 +120,14 @@ class _CommentState extends State<Comment> {
                               ),
                             ],
                           ),
+                          //댓글 프로필 아이디와 실제 댓글 구현/중간에 padding추가
                           Text(
-                            "ID + comment",
+                            "ID",
+                            style: TextStyle(fontSize: 25, color: Colors.black),
+                          ),
+                          Padding(padding: EdgeInsets.all(15)),
+                          Text(
+                            "comment",
                             style: TextStyle(fontSize: 25, color: Colors.black),
                           ),
                         ],
@@ -131,10 +137,12 @@ class _CommentState extends State<Comment> {
                       child: Row(
                         //mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          //댓글 좋아요 갯수 Text로 구현
                           Text(
                             "좋아요: " + h_count.toString() + "개",
                             style: TextStyle(fontSize: 15, color: Colors.grey),
                           ),
+                          //♡(빈 하트) IconButton 구현 시도, onPress() 시 변환 아직 불가
                           IconButton(
                             icon: Icon(Icons.favorite_border),
                             onPressed: () {
@@ -171,11 +179,13 @@ class _CommentState extends State<Comment> {
               ),
             ],
           ),
+          /*
           Container(
             height: 10,
             width: 1500,
             color: Colors.white,
           ),
+          */
         ],
       ),
     );

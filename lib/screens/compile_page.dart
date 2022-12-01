@@ -43,26 +43,31 @@ class _MyWidgetState extends State<CompilePage> {
   Widget _profileinfo(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
 
-    return Stack(
-      children: [
-        if (provar.checkmyimage == true)
-          Image.file(
-            provar.myimage,
-            width: 400,
-            height: 400,
-          ),
-        if (provar.checkmyimage == false)
+    return TextButton(
+      onPressed: () {
+        _pickImage(context);
+      },
+      child: Stack(
+        children: [
+          if (provar.checkmyimage == true)
+            Image.file(
+              provar.myimage,
+              width: 400,
+              height: 400,
+            ),
+          if (provar.checkmyimage == false)
+            Image.asset(
+              'images/normal_profile.png',
+              width: 400,
+              height: 400,
+            ),
           Image.asset(
-            'images/normal_profile.png',
+            'images/frame.png',
             width: 400,
             height: 400,
           ),
-        Image.asset(
-          'images/frame.png',
-          width: 400,
-          height: 400,
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -80,6 +85,7 @@ class _MyWidgetState extends State<CompilePage> {
             controller: name,
             decoration: InputDecoration(
               labelText: '이름 변경',
+              labelStyle: TextStyle(color: Colors.black),
             ),
           ),
         ),
@@ -100,6 +106,7 @@ class _MyWidgetState extends State<CompilePage> {
           child: TextField(
             decoration: InputDecoration(
               labelText: 'ID 입력',
+              labelStyle: TextStyle(color: Colors.black),
             ),
           ),
         ),
@@ -121,6 +128,7 @@ class _MyWidgetState extends State<CompilePage> {
             controller: introduction,
             decoration: InputDecoration(
               labelText: '한줄소개 입력',
+              labelStyle: TextStyle(color: Colors.black),
             ),
           ),
         ),
@@ -128,26 +136,27 @@ class _MyWidgetState extends State<CompilePage> {
     );
   }
 
+  /*
   Widget _editbutton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        _pickImage(context);
-      },
-      child: Text(
-        '프로필 편집',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 16,
+    return Container(
+      width: 550,
+      height: 47,
+      color: Colors.black12,
+      child: TextButton(
+        onPressed: () {
+          _pickImage(context);
+        },
+        child: Text(
+          '프로필 편집',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+          ),
         ),
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: Colors.grey,
-        minimumSize: Size(335, 47),
-        onSurface: Colors.white,
       ),
     );
   }
-
+  */
   @override
   Widget build(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
@@ -190,49 +199,49 @@ class _MyWidgetState extends State<CompilePage> {
                 child: Column(
                   children: [
                     _profileinfo(context),
-                    _editbutton(context),
+                    //_editbutton(context),
                     _nameinfo(),
                     //_IDinfo(),
                     _produceinfo(),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (name.text != '') {
-                          memberDB.readFileToList().then((value) {
-                            value.replaceRange(
-                                value.indexOf('id: ' + provar.myid) + 2,
-                                value.indexOf('id: ' + provar.myid) + 3,
-                                ['introduction: ' + introduction.text]);
+                    Container(
+                      width: 550,
+                      height: 47,
+                      color: Colors.black12,
+                      child: TextButton(
+                        onPressed: () {
+                          if (name.text != '') {
+                            memberDB.readFileToList().then((value) {
+                              value.replaceRange(
+                                  value.indexOf('id: ' + provar.myid) + 2,
+                                  value.indexOf('id: ' + provar.myid) + 3,
+                                  ['introduction: ' + introduction.text]);
 
-                            value.replaceRange(
-                                value.indexOf('id: ' + provar.myid) - 1,
-                                value.indexOf('id: ' + provar.myid) + 0,
-                                ['name: ' + name.text]);
-                            memberDB.writeListToFile(value);
+                              value.replaceRange(
+                                  value.indexOf('id: ' + provar.myid) - 1,
+                                  value.indexOf('id: ' + provar.myid) + 0,
+                                  ['name: ' + name.text]);
+                              memberDB.writeListToFile(value);
 
-                            provar.myname = name.text;
-                            provar.myintroduction = introduction.text;
+                              provar.myname = name.text;
+                              provar.myintroduction = introduction.text;
 
-                            showWinToast('프로필이 저장되었습니다', context);
+                              showWinToast('프로필이 저장되었습니다', context);
 
-                            Navigator.of(context).pop();
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (builder) => MyPage()));
-                          });
-                        } else {
-                          showWinToast('이름을 채워주세요', context);
-                        }
-                      },
-                      child: Text(
-                        '저장',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
+                              Navigator.of(context).pop();
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (builder) => MyPage()));
+                            });
+                          } else {
+                            showWinToast('이름을 채워주세요', context);
+                          }
+                        },
+                        child: Text(
+                          '저장',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey,
-                        minimumSize: Size(335, 47),
-                        onSurface: Colors.white,
                       ),
                     ),
                     Padding(padding: EdgeInsets.all(50))

@@ -4,25 +4,23 @@ import 'package:insta2/screens/anotheruser_page.dart';
 import 'package:insta2/scripts.dart';
 import 'package:provider/provider.dart';
 
-class favoriteList extends StatelessWidget {
+class followerList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
 
-    List<String> favList = List<String>.empty(growable: true);
+    List<String> fallowerList = List<String>.empty(growable: true);
 
     List<List<dynamic>> UserDataList =
         List<List<dynamic>>.empty(growable: true);
 
     Future<bool> favoriteList() async {
-      LocalStorage feedfavoriteUserDB = LocalStorage(provar.current_feed_user +
-          '/feed' +
-          provar.current_feed_number +
-          '/favoriteUsers.txt');
-      favList = await feedfavoriteUserDB.readFileToList();
+      LocalStorage followUserDB =
+          LocalStorage(provar.current_profile_user + '/follower.txt');
+      fallowerList = await followUserDB.readFileToList();
 
-      for (int i = 0; i < favList.length; i++) {
-        UserDataList.add(await load_Memberdata(favList[i]));
+      for (int i = 0; i < fallowerList.length; i++) {
+        UserDataList.add(await load_Memberdata(fallowerList[i]));
       }
 
       return true;
@@ -72,7 +70,7 @@ class favoriteList extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    '좋아요',
+                                    '팔로워',
                                     style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
@@ -88,7 +86,7 @@ class favoriteList extends StatelessWidget {
                                   ),
                                   IconButton(
                                     onPressed: () {
-                                      provar.updatingCurrentFeedUser('', '');
+                                      provar.updatingCurrentProfileUser('');
                                     },
                                     icon: Icon(Icons.cancel_outlined),
                                   ),
@@ -116,8 +114,8 @@ class favoriteList extends StatelessWidget {
                                         children: [
                                           TextButton(
                                             onPressed: () {
-                                              provar.updatingCurrentFeedUser(
-                                                  '', '');
+                                              provar.updatingCurrentProfileUser(
+                                                  '');
                                               Navigator.of(context).pop();
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
