@@ -82,11 +82,15 @@ class _MyWidgetState extends State<CompilePage> {
           width: 350,
           height: 50,
           child: TextField(
+            cursorColor: Colors.black,
             controller: name,
             decoration: InputDecoration(
-              labelText: '이름 변경',
-              labelStyle: TextStyle(color: Colors.black),
-            ),
+                labelText: '이름 변경',
+                labelStyle: TextStyle(color: Colors.black),
+                enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black26)),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black26))),
           ),
         ),
       ],
@@ -126,11 +130,15 @@ class _MyWidgetState extends State<CompilePage> {
           width: 350,
           height: 50,
           child: TextField(
+            cursorColor: Colors.black,
             controller: introduction,
             decoration: InputDecoration(
-              labelText: '한줄소개 입력',
-              labelStyle: TextStyle(color: Colors.black),
-            ),
+                labelText: '한줄소개 입력',
+                labelStyle: TextStyle(color: Colors.black),
+                enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black26)),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black26))),
           ),
         ),
       ],
