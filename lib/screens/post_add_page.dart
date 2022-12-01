@@ -72,15 +72,8 @@ class _MyWidgetState extends State<PostAddPage> {
             cursorColor: Colors.black,
             controller: contents,
             decoration: InputDecoration(
-              labelText: '내용을 입력하세요',
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(3)),
-                borderSide: BorderSide(color: Colors.grey),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(3)),
-                borderSide: BorderSide(color: Colors.grey),
-              ),
+              labelText: '내용을 입력하세요.',
+              labelStyle: TextStyle(color: Colors.black),
             ),
           ),
         ),

@@ -85,6 +85,7 @@ class _MyWidgetState extends State<CompilePage> {
             controller: name,
             decoration: InputDecoration(
               labelText: '이름 변경',
+              labelStyle: TextStyle(color: Colors.black),
             ),
           ),
         ),
@@ -106,6 +107,7 @@ class _MyWidgetState extends State<CompilePage> {
           child: TextField(
             decoration: InputDecoration(
               labelText: 'ID 입력',
+              labelStyle: TextStyle(color: Colors.black),
             ),
           ),
         ),
@@ -127,6 +129,7 @@ class _MyWidgetState extends State<CompilePage> {
             controller: introduction,
             decoration: InputDecoration(
               labelText: '한줄소개 입력',
+              labelStyle: TextStyle(color: Colors.black),
             ),
           ),
         ),
