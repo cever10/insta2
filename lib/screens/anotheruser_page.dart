@@ -309,11 +309,11 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
         children: [
           navigatorList(),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 200, right: 200),
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                child: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 200, right: 200),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

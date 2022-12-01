@@ -43,125 +43,128 @@ class favoriteList extends StatelessWidget {
                 ),
               ),
               Visibility(
-                visible: checkNumBiggerHeight(450, context),
-                child: Center(
-                  child: Container(
-                    width: 450,
-                    height: 450,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      color: Colors.white,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(3),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(
-                                    180,
-                                    0,
-                                    0,
-                                    0,
-                                  ),
-                                ),
-                                Text(
-                                  '좋아요',
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(
-                                    145,
-                                    0,
-                                    0,
-                                    0,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    provar.updatingCurrentFeedUser('', '');
-                                  },
-                                  icon: Icon(Icons.cancel_outlined),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 1,
-                          color: Colors.grey,
-                        ),
-                        Container(
-                          width: 450,
-                          height: 400,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                for (int i = 0;
-                                    i < UserDataList.length;
-                                    i++) ...[
-                                  Container(
-                                    padding: EdgeInsets.all(10),
-                                    child: Row(
-                                      children: [
-                                        TextButton(
-                                          onPressed: () {
-                                            provar.updatingCurrentFeedUser(
-                                                '', '');
-                                            Navigator.of(context).pop();
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (builder) =>
-                                                        AnotherUserPage(
-                                                            UserDataList[i]
-                                                                [1])));
-                                          },
-                                          child: Stack(
-                                            children: [
-                                              if (UserDataList[i][8] == true)
-                                                Image.file(
-                                                  UserDataList[i][7],
-                                                  width: 50,
-                                                  height: 50,
-                                                ),
-                                              if (UserDataList[i][8] == false)
-                                                Image.asset(
-                                                  'images/normal_profile.png',
-                                                  width: 50,
-                                                  height: 50,
-                                                ),
-                                              Image.asset(
-                                                'images/frame.png',
-                                                width: 50,
-                                                height: 50,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(padding: EdgeInsets.all(5)),
-                                        Text(
-                                          UserDataList[i][1],
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ],
+                visible: checkNumBiggerWidth(450, context),
+                child: Visibility(
+                  visible: checkNumBiggerHeight(450, context),
+                  child: Center(
+                    child: Container(
+                      width: 450,
+                      height: 450,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(3),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                      180,
+                                      0,
+                                      0,
+                                      0,
                                     ),
                                   ),
+                                  Text(
+                                    '좋아요',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                      145,
+                                      0,
+                                      0,
+                                      0,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      provar.updatingCurrentFeedUser('', '');
+                                    },
+                                    icon: Icon(Icons.cancel_outlined),
+                                  ),
                                 ],
-                              ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          Container(
+                            height: 1,
+                            color: Colors.grey,
+                          ),
+                          Container(
+                            width: 450,
+                            height: 400,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  for (int i = 0;
+                                      i < UserDataList.length;
+                                      i++) ...[
+                                    Container(
+                                      padding: EdgeInsets.all(10),
+                                      child: Row(
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {
+                                              provar.updatingCurrentFeedUser(
+                                                  '', '');
+                                              Navigator.of(context).pop();
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (builder) =>
+                                                          AnotherUserPage(
+                                                              UserDataList[i]
+                                                                  [1])));
+                                            },
+                                            child: Stack(
+                                              children: [
+                                                if (UserDataList[i][8] == true)
+                                                  Image.file(
+                                                    UserDataList[i][7],
+                                                    width: 50,
+                                                    height: 50,
+                                                  ),
+                                                if (UserDataList[i][8] == false)
+                                                  Image.asset(
+                                                    'images/normal_profile.png',
+                                                    width: 50,
+                                                    height: 50,
+                                                  ),
+                                                Image.asset(
+                                                  'images/frame.png',
+                                                  width: 50,
+                                                  height: 50,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(padding: EdgeInsets.all(5)),
+                                          Text(
+                                            UserDataList[i][1],
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

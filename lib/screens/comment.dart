@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:insta2/screens/main_home.dart';
-import 'package:insta2/widgets/instafeed.dart';
 
 class Comment extends StatefulWidget {
   const Comment({super.key});
