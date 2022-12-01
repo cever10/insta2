@@ -218,7 +218,7 @@ class _MyPageState extends State<MyPage> {
                 child: navigatorList(),
               ),
               Visibility(
-                visible: checkNumBiggerWidth(243 + 610, context),
+                visible: checkNumBiggerWidth(243 + 690, context),
                 child: Expanded(
                   child: Container(
                     height: MediaQuery.of(context).size.height,
