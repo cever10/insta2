@@ -128,6 +128,23 @@ class _instaFeedState extends State<instaFeed> {
                         fontSize: 14,
                       ),
                     ),
+                    if (provar.current_profile_user != '' &&
+                        widget.id != provar.myid &&
+                        widget.checkFollow == true)
+                      Padding(padding: EdgeInsets.only(left: 280)),
+                    if (provar.current_profile_user != '' &&
+                        widget.id != provar.myid &&
+                        widget.checkFollow == true)
+                      IconButton(
+                        onPressed: () {
+                          provar.updatingCurrentProfileUser('');
+                        },
+                        icon: Icon(
+                          Icons.cancel_outlined,
+                          size: 30,
+                          color: Colors.black38,
+                        ),
+                      ),
                     if (widget.id != provar.myid && widget.checkFollow == false)
                       Text(
                         '  •',
@@ -176,6 +193,38 @@ class _instaFeedState extends State<instaFeed> {
                             fontSize: 16,
                             color: Colors.blue,
                           ),
+                        ),
+                      ),
+                    if (provar.current_profile_user != '' &&
+                        widget.id != provar.myid &&
+                        widget.checkFollow == false)
+                      Padding(padding: EdgeInsets.only(left: 210)),
+                    if (provar.current_profile_user != '' &&
+                        widget.id != provar.myid &&
+                        widget.checkFollow == false)
+                      IconButton(
+                        onPressed: () {
+                          provar.updatingCurrentProfileUser('');
+                        },
+                        icon: Icon(
+                          Icons.cancel_outlined,
+                          size: 30,
+                          color: Colors.black38,
+                        ),
+                      ),
+                    if (provar.current_profile_user != '' &&
+                        widget.id == provar.myid)
+                      Padding(padding: EdgeInsets.only(left: 280)),
+                    if (provar.current_profile_user != '' &&
+                        widget.id == provar.myid)
+                      IconButton(
+                        onPressed: () {
+                          provar.updatingCurrentProfileUser('');
+                        },
+                        icon: Icon(
+                          Icons.cancel_outlined,
+                          size: 30,
+                          color: Colors.black38,
                         ),
                       ),
                   ],

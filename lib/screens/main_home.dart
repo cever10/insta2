@@ -44,11 +44,14 @@ class _main_homeState extends State<main_home> {
                           if (snapshot.hasData == true) {
                             return ListView.builder(
                               itemBuilder: (context, index) {
-                                if (MainScrolView.length == index + 2) {
-                                  addInstaFeed(MainScrolView, provar.myid);
+                                if (MainScrolView.length == index) {
+                                  addInstaFeed(MainScrolView, provar.myid)
+                                      .then((value) {
+                                    return MainScrolView[index];
+                                  });
+                                } else {
+                                  return MainScrolView[index];
                                 }
-
-                                return MainScrolView[index];
                               },
                             );
                           } else {
