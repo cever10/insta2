@@ -16,7 +16,6 @@ TextEditingController mycomment = TextEditingController();
 
 class _CommentState extends State<Comment> {
   int h_color = 0, h_count = 0;
-  int mycomment_count = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,6 @@ class _CommentState extends State<Comment> {
           Visibility(
             visible: checkNumBiggerWidth(243 + 690, context),
             child: Expanded(
-
               child: Container(
                 height: MediaQuery.of(context).size.height,
                 child: SingleChildScrollView(
@@ -91,8 +89,8 @@ class _CommentState extends State<Comment> {
                                     ),
                                   ],
                                 ),
+                                //
                                 Padding(padding: EdgeInsets.all(8)),
-
                                 Text(
                                   "ID",
                                   style: TextStyle(
@@ -100,13 +98,12 @@ class _CommentState extends State<Comment> {
                                 ),
                               ],
                             ),
-
+                            //
                             Row(
                               children: [
                                 Text("게시글내용\n집가고 싶다",
                                     style: TextStyle(fontSize: font_size)),
                               ],
-
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
@@ -251,40 +248,13 @@ class _CommentState extends State<Comment> {
                                   ],
                                 ],
                               ),
-
                             ),
-                            //게시글/댓글 구분선 추가 보류
-                            
-                        // Container(
-                        //   height: 1,
-                        //   width: 1920,
-                        //   color: Colors.grey,
-                        // ),
-
-                              ],                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 1000,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            labelText: "댓글입력",
-                            hintText: "<Enter>입력 시 댓글 추가",
-                          ),
-                          controller: mycomment,
-                          onChanged: (mycomment_count) {
-                            if (mycomment == '\n') {
-                              mycomment_count += 1 as String;
-                            }
-                          },
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ],
+                ),
               ),
             ),
           ),
