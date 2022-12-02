@@ -58,6 +58,7 @@ class _CommentState extends State<Comment> {
                       left: MediaQuery.of(context).size.width * 0.1,
                       right: MediaQuery.of(context).size.width * 0.1,
                     ),
+                    //
                     child: Column(
                       children: [
                         //게시글의 사진+id+게시글 내용
@@ -84,6 +85,8 @@ class _CommentState extends State<Comment> {
                                 ),
                               ],
                             ),
+                            //
+                            Padding(padding: EdgeInsets.all(8)),
                             Text(
                               "ID",
                               style: TextStyle(
@@ -91,11 +94,22 @@ class _CommentState extends State<Comment> {
                             ),
                           ],
                         ),
+                        //
                         Row(
                           children: [
                             Text("게시글내용\n집가고 싶다",
                                 style: TextStyle(fontSize: font_size)),
                           ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 10,
+                          ),
+                          child: Container(
+                            width: 1300,
+                            height: 2,
+                            color: Colors.black38,
+                          ),
                         ),
                         //게시글/댓글 구분선 추가 보류
                         /*
@@ -122,49 +136,54 @@ class _CommentState extends State<Comment> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Container(
-                                          child: Row(
-                                            children: [
-                                              //댓글 프로필 이미지를 Stack으로 구현
-                                              Stack(
-                                                children: [
-                                                  if (provar.checkmyimage ==
-                                                      true)
-                                                    Image.file(
-                                                      provar.myimage,
-                                                      width: 40,
-                                                      height: 40,
-                                                    ),
-                                                  if (provar.checkmyimage ==
-                                                      false)
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 5, bottom: 5),
+                                          child: Container(
+                                            child: Row(
+                                              children: [
+                                                //댓글 프로필 이미지를 Stack으로 구현
+                                                Stack(
+                                                  children: [
+                                                    if (provar.checkmyimage ==
+                                                        true)
+                                                      Image.file(
+                                                        provar.myimage,
+                                                        width: 40,
+                                                        height: 40,
+                                                      ),
+                                                    if (provar.checkmyimage ==
+                                                        false)
+                                                      Image.asset(
+                                                        'images/normal_profile.png',
+                                                        width: 40,
+                                                        height: 40,
+                                                      ),
                                                     Image.asset(
-                                                      'images/normal_profile.png',
+                                                      'images/frame.png',
                                                       width: 40,
                                                       height: 40,
                                                     ),
-                                                  Image.asset(
-                                                    'images/frame.png',
-                                                    width: 40,
-                                                    height: 40,
-                                                  ),
-                                                ],
-                                              ),
-                                              //댓글 프로필 아이디와 실제 댓글 구현/중간에 padding추가
-                                              Text(
-                                                "ID",
-                                                style: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Colors.black),
-                                              ),
-                                              Padding(
-                                                  padding: EdgeInsets.all(15)),
-                                              Text(
-                                                "comment",
-                                                style: TextStyle(
-                                                    fontSize: 25,
-                                                    color: Colors.black),
-                                              ),
-                                            ],
+                                                  ],
+                                                ),
+                                                //댓글 프로필 아이디와 실제 댓글 구현/중간에 padding추가
+                                                Text(
+                                                  "ID",
+                                                  style: TextStyle(
+                                                      fontSize: 25,
+                                                      color: Colors.black),
+                                                ),
+                                                Padding(
+                                                    padding:
+                                                        EdgeInsets.all(15)),
+                                                Text(
+                                                  "comment",
+                                                  style: TextStyle(
+                                                      fontSize: 25,
+                                                      color: Colors.black),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                         Container(
