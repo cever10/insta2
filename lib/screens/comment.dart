@@ -41,7 +41,8 @@ class _CommentState extends State<Comment> {
             ),
           );
         },
-        child: Icon(Icons.arrow_back_ios_sharp),
+        child: Icon(Icons.arrow_back_ios_sharp,color: Colors.white),
+        backgroundColor: Colors.black38,
       ),
 
       body: Row(
