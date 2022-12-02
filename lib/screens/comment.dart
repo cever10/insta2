@@ -21,14 +21,14 @@ class _CommentState extends State<Comment> {
   Widget build(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
     return Scaffold(
-      /*appBar: AppBar(
+      appBar: AppBar(
         title: Text(
           "댓글",
           style: TextStyle(fontSize: 30, color: Colors.black),
         ),
         backgroundColor: Colors.white,
         leading: BackButton(color: Colors.black),
-      ),*/
+      ),
       /*
       floatingActionButton: FloatingActionButton(
         onPressed: () {
