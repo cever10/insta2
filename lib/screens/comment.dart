@@ -16,6 +16,8 @@ TextEditingController mycomment = TextEditingController();
 
 class _CommentState extends State<Comment> {
   int h_color = 0, h_count = 0;
+  TextEditingController mycomment = TextEditingController();
+  int mycomment_count = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -98,13 +100,14 @@ class _CommentState extends State<Comment> {
                                 ),
                               ],
                             ),
-                            //
+
                             Row(
                               children: [
                                 Text("게시글내용\n집가고 싶다",
                                     style: TextStyle(fontSize: font_size)),
                               ],
                             ),
+                            //게시글이랑 댓글 구분선
                             Padding(
                               padding: const EdgeInsets.only(
                                 top: 10,
@@ -114,6 +117,28 @@ class _CommentState extends State<Comment> {
                                 height: 2,
                                 color: Colors.black38,
                               ),
+                            ),
+
+                            //댓글 추가 코드
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 1000,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      labelText: "댓글입력",
+                                      hintText: "<Enter>입력 시 댓글 추가",
+                                    ),
+                                    controller: mycomment,
+                                    onChanged: (mycomment_count) {
+                                      if (mycomment == '\n') {
+                                        mycomment_count += 1 as String;
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                             //게시글/댓글 구분선 추가 보류
                             /*
