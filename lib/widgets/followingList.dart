@@ -147,11 +147,22 @@ class followingList extends StatelessWidget {
                                             ),
                                           ),
                                           Padding(padding: EdgeInsets.all(5)),
-                                          Text(
-                                            UserDataList[i][1],
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                            ),
+                                          Column(
+                                            children: [
+                                              Text(
+                                                UserDataList[i][1],
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              Text(
+                                                UserDataList[i][0],
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),

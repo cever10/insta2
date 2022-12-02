@@ -1,6 +1,7 @@
 //검색 페이지 ( search_page.dart )
 
 import 'package:flutter/material.dart';
+import 'package:insta2/screens/anotheruser_page.dart';
 import 'package:insta2/scripts.dart';
 import 'package:insta2/widgets/navigatorList.dart';
 
@@ -16,6 +17,8 @@ class _searchState extends State<search_page> {
   FocusNode focusNode = FocusNode();
   String _searchText = "";
 
+  List<String> currentAccrodings = List<String>.empty(growable: true);
+
   _searchState() {
     _filter.addListener(() {
       setState(() {
@@ -24,10 +27,26 @@ class _searchState extends State<search_page> {
     });
   }
 
-  Widget _search_history() {
+  Widget _search_history(List<String> memList) {
+    int maxSearchCount = 0;
+
+    currentAccrodings.clear();
+
+    for (var str in memList) {
+      if (str.contains(_filter.text) == true) {
+        currentAccrodings.add(str);
+      }
+    }
+
+    maxSearchCount = currentAccrodings.length;
+
+    if (maxSearchCount > 10) {
+      maxSearchCount = 10;
+    }
+
     return Column(
       children: [
-        for (int i = 0; i < 10; i++) ...[
+        for (int i = 0; i < maxSearchCount; i++) ...[
           Container(
             height: 3,
             width: 800,
@@ -38,9 +57,14 @@ class _searchState extends State<search_page> {
             width: 800,
             color: Colors.black12,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (builder) =>
+                        AnotherUserPage(currentAccrodings[i])));
+              },
               child: Text(
-                "검색기록 $i",
+                currentAccrodings[i],
                 style: TextStyle(color: Colors.black),
               ),
             ),
@@ -52,9 +76,9 @@ class _searchState extends State<search_page> {
 
   @override
   Widget build(BuildContext context) {
-    Future<bool> initUserId() async {
+    Future<List<String>> initUserId() async {
       List<String> memberIdList = await load_membersId();
-      return true;
+      return memberIdList;
     }
 
     return Scaffold(
@@ -130,14 +154,29 @@ class _searchState extends State<search_page> {
                                     )
                                   : Container(),
                             ),
+                            textInputAction: TextInputAction.go,
+                            onSubmitted: (value) async {
+                              List<String> memberIdList =
+                                  await load_membersId();
+
+                              if (memberIdList.contains(_filter.text) == true) {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (builder) =>
+                                        AnotherUserPage(_filter.text)));
+                              } else {
+                                showWinToast('아이디 일치X', context);
+                              }
+                            },
                           ),
                         ),
+
                         if (_filter.text != '') ...[
                           FutureBuilder(
                             future: initUserId(),
                             builder: (context, snapshot) {
                               if (snapshot.hasData == true) {
-                                return _search_history();
+                                return _search_history(snapshot.data!);
                               } else {
                                 return Container();
                               }
@@ -146,6 +185,7 @@ class _searchState extends State<search_page> {
                         ] else ...[
                           Container()
                         ],
+
                         //focusNode.hasFocus ? _search_history() : Container()
                       ]),
                     ),
