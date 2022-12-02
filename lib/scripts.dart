@@ -325,3 +325,18 @@ Future<List<dynamic>> load_Memberdata(String id) async {
 
   return UserDataList;
 }
+
+Future<List<String>> load_membersId() async {
+  LocalStorage memberDB = LocalStorage("members.txt");
+  List<String> memberIdList = List<String>.empty(growable: true);
+  List<String> templist = await memberDB.readFileToList();
+
+  templist = await memberDB.readFileToList();
+  for (String str in templist) {
+    if (str.contains('id: ') == true) {
+      memberIdList.add(str.replaceAll('id: ', ''));
+    }
+  }
+
+  return memberIdList;
+}

@@ -52,6 +52,11 @@ class _searchState extends State<search_page> {
 
   @override
   Widget build(BuildContext context) {
+    Future<bool> initUserId() async {
+      List<String> memberIdList = await load_membersId();
+      return true;
+    }
+
     return Scaffold(
       body: Row(
         children: [
@@ -128,7 +133,16 @@ class _searchState extends State<search_page> {
                           ),
                         ),
                         if (_filter.text != '') ...[
-                          _search_history()
+                          FutureBuilder(
+                            future: initUserId(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData == true) {
+                                return _search_history();
+                              } else {
+                                return Container();
+                              }
+                            },
+                          )
                         ] else ...[
                           Container()
                         ],
