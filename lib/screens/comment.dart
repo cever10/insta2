@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:provider/provider.dart';
 import 'package:insta2/scripts.dart';
-import 'package:insta2/screens/compile_page.dart';
-import 'package:insta2/scripts.dart';
-import 'package:insta2/widgets/followerList.dart';
-import 'package:insta2/widgets/followingList.dart';
 import 'package:insta2/widgets/navigatorList.dart';
-import 'package:provider/provider.dart';
 
 double font_size = 25;
 double whiteSize = 150;
