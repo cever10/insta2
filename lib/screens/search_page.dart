@@ -57,7 +57,12 @@ class _searchState extends State<search_page> {
             width: 800,
             color: Colors.black12,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (builder) =>
+                        AnotherUserPage(currentAccrodings[i])));
+              },
               child: Text(
                 currentAccrodings[i],
                 style: TextStyle(color: Colors.black),
