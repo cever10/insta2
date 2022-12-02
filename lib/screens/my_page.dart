@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/screens/compile_page.dart';
 import 'package:insta2/scripts.dart';
+import 'package:insta2/widgets/floatingInstaFeed.dart';
 import 'package:insta2/widgets/followerList.dart';
 import 'package:insta2/widgets/followingList.dart';
 import 'package:insta2/widgets/navigatorList.dart';
@@ -16,6 +17,7 @@ class MyPage extends StatefulWidget {
 
 class _MyPageState extends State<MyPage> {
   int checkState = 0;
+  int current_feed_count = 0;
 
   Widget _follower(String title, int value) {
     return Column(
@@ -177,7 +179,14 @@ class _MyPageState extends State<MyPage> {
         feedImgDB.get_filePath().then((value) {
           myFeeds.add(Container(
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                provar.updatingCurrentProfileUser(provar.myid);
+
+                setState(() {
+                  checkState = 3;
+                  current_feed_count = i;
+                });
+              },
               child: Image.file(value),
             ),
           ));
@@ -271,6 +280,8 @@ class _MyPageState extends State<MyPage> {
             followingList(),
           if (provar.current_profile_user != '' && checkState == 2)
             followerList(),
+          if (provar.current_profile_user != '' && checkState == 3)
+            floatingInstaFeed(current_feed_count, provar.myid),
         ],
       ),
     );

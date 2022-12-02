@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/scripts.dart';
+import 'package:insta2/widgets/floatingInstaFeed.dart';
 import 'package:insta2/widgets/followerList.dart';
 import 'package:insta2/widgets/followingList.dart';
 import 'package:insta2/widgets/navigatorList.dart';
@@ -21,6 +22,7 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
   bool checkFollow = false;
 
   int checkState = 0;
+  int current_feed_count = 0;
 
   Widget _followbutton(BuildContext context, bool checkFollow) {
     providerVariable provar = Provider.of<providerVariable>(context);
@@ -297,7 +299,7 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
     providerVariable provar = Provider.of<providerVariable>(context);
 
     Future<List<Widget>> initGridview() async {
-      List<Widget> UserFeeds = List<Widget>.empty(growable: true);
+      List<Widget> myFeeds = List<Widget>.empty(growable: true);
 
       UserDataList = await load_Memberdata(widget.Userid);
 
@@ -306,13 +308,23 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
             widget.Userid + '/feed' + i.toString() + '/feedimg.png');
 
         feedImgDB.get_filePath().then((value) {
-          UserFeeds.add(Container(
-            child: Image.file(value),
+          myFeeds.add(Container(
+            child: TextButton(
+              onPressed: () {
+                provar.updatingCurrentProfileUser(widget.Userid);
+
+                setState(() {
+                  checkState = 3;
+                  current_feed_count = i;
+                });
+              },
+              child: Image.file(value),
+            ),
           ));
         });
       }
 
-      return UserFeeds;
+      return myFeeds;
     }
 
     Future<bool> initUserDB() async {
@@ -394,6 +406,8 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
             followingList(),
           if (provar.current_profile_user != '' && checkState == 2)
             followerList(),
+          if (provar.current_profile_user != '' && checkState == 3)
+            floatingInstaFeed(current_feed_count, widget.Userid),
         ],
       ),
     );
