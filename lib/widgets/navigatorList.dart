@@ -15,29 +15,19 @@ class navigatorList extends StatelessWidget {
         SingleChildScrollView(
           child: Container(
             height:
-                620 + checkPositive(MediaQuery.of(context).size.height - 620),
+                550 + checkPositive(MediaQuery.of(context).size.height - 550),
             decoration: BoxDecoration(
               color: Colors.white,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 100, 0),
-                  /*
-                  child: Image.asset(
-                    'images/Instagram.png',
-                    width: 1743 * 0.08,
-                    height: 664 * 0.08,
-                  ),
-                  */
-
-                  child: Text(
-                    'Instagram',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: "Pacifico",
-                    ),
+                Padding(padding: EdgeInsets.all(10)),
+                Container(
+                  width: 240,
+                  height: 80,
+                  child: SvgPicture.asset(
+                    'images/Instagram.svg',
                   ),
                 ),
                 Padding(
@@ -92,6 +82,7 @@ class navigatorList extends StatelessWidget {
                     ),
                   ),
                 ),
+                /*
                 Padding(
                   padding: const EdgeInsets.all(30),
                   child: TextButton(
@@ -114,6 +105,7 @@ class navigatorList extends StatelessWidget {
                     ),
                   ),
                 ),
+                */
                 Padding(
                   padding: const EdgeInsets.all(30),
                   child: TextButton(

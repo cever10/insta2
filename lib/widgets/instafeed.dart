@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
+import 'package:insta2/screens/anotheruser_page.dart';
+import 'package:insta2/screens/comment.dart';
+import 'package:insta2/screens/my_page.dart';
 import 'package:insta2/scripts.dart';
 import 'package:provider/provider.dart';
 
@@ -66,8 +69,8 @@ class _instaFeedState extends State<instaFeed> {
     LocalStorage memberDB = LocalStorage("members.txt");
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(padding: EdgeInsets.all(100)),
         Container(
           width: 460,
           decoration: BoxDecoration(
@@ -84,7 +87,18 @@ class _instaFeedState extends State<instaFeed> {
                 child: Row(
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (widget.id == provar.myid) {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (builder) => MyPage()));
+                        } else {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (builder) =>
+                                  AnotherUserPage(widget.id)));
+                        }
+                      },
                       child: Stack(
                         children: [
                           if (widget.checkimage == true)
@@ -114,6 +128,23 @@ class _instaFeedState extends State<instaFeed> {
                         fontSize: 14,
                       ),
                     ),
+                    if (provar.current_profile_user != '' &&
+                        widget.id != provar.myid &&
+                        widget.checkFollow == true)
+                      Padding(padding: EdgeInsets.only(left: 280)),
+                    if (provar.current_profile_user != '' &&
+                        widget.id != provar.myid &&
+                        widget.checkFollow == true)
+                      IconButton(
+                        onPressed: () {
+                          provar.updatingCurrentProfileUser('');
+                        },
+                        icon: Icon(
+                          Icons.cancel_outlined,
+                          size: 30,
+                          color: Colors.black38,
+                        ),
+                      ),
                     if (widget.id != provar.myid && widget.checkFollow == false)
                       Text(
                         '  •',
@@ -124,8 +155,8 @@ class _instaFeedState extends State<instaFeed> {
                     if (widget.id != provar.myid && widget.checkFollow == false)
                       TextButton(
                         onPressed: () async {
-                          await followDB.writeFile(widget.id);
-                          await followerDB.writeFile(provar.myid);
+                          await followDB.writeFile(widget.id + '\n');
+                          await followerDB.writeFile(provar.myid + '\n');
 
                           memberDB.readFileToList().then((value) {
                             provar.myfollow += 1;
@@ -162,6 +193,38 @@ class _instaFeedState extends State<instaFeed> {
                             fontSize: 16,
                             color: Colors.blue,
                           ),
+                        ),
+                      ),
+                    if (provar.current_profile_user != '' &&
+                        widget.id != provar.myid &&
+                        widget.checkFollow == false)
+                      Padding(padding: EdgeInsets.only(left: 210)),
+                    if (provar.current_profile_user != '' &&
+                        widget.id != provar.myid &&
+                        widget.checkFollow == false)
+                      IconButton(
+                        onPressed: () {
+                          provar.updatingCurrentProfileUser('');
+                        },
+                        icon: Icon(
+                          Icons.cancel_outlined,
+                          size: 30,
+                          color: Colors.black38,
+                        ),
+                      ),
+                    if (provar.current_profile_user != '' &&
+                        widget.id == provar.myid)
+                      Padding(padding: EdgeInsets.only(left: 280)),
+                    if (provar.current_profile_user != '' &&
+                        widget.id == provar.myid)
+                      IconButton(
+                        onPressed: () {
+                          provar.updatingCurrentProfileUser('');
+                        },
+                        icon: Icon(
+                          Icons.cancel_outlined,
+                          size: 30,
+                          color: Colors.black38,
                         ),
                       ),
                   ],
@@ -247,23 +310,37 @@ class _instaFeedState extends State<instaFeed> {
                         ),
                       ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => Comment(),
+                          ),
+                        );
+                      },
                       icon: Icon(Icons.chat_bubble_outline),
                     ),
+                    /*
                     IconButton(
                       onPressed: () {},
                       icon: Icon(Icons.note_outlined),
                     ),
+                    */
                   ],
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(5),
-                child: Text(
-                  '좋아요 ' + widget.favorite + '개',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                child: TextButton(
+                  onPressed: () {
+                    provar.updatingCurrentFeedUser(
+                        widget.id, widget.feednumber);
+                  },
+                  child: Text(
+                    '좋아요 ' + widget.favorite + '개',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
@@ -307,7 +384,13 @@ class _instaFeedState extends State<instaFeed> {
               ),
               Container(
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => Comment(),
+                      ),
+                    );
+                  },
                   child: Text(
                     '댓글 ' + widget.comments + '개 모두 보기',
                     style: TextStyle(

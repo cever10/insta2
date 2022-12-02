@@ -23,6 +23,10 @@ class providerVariable extends ChangeNotifier {
   String temp_introduction = "";
   int temp_feedcount = 0;
 
+  String current_feed_user = '';
+  String current_feed_number = '';
+  String current_profile_user = '';
+
   void load_mydata(List<String> list, String id) async {
     myname = list
         .elementAt(list.indexOf('id: ' + id) - 1)
@@ -70,9 +74,14 @@ class providerVariable extends ChangeNotifier {
     notifyListeners();
   }
 
-  void temp_updating(String name, String id, String password) {
-    temp_name = name;
-    temp_id = id;
-    temp_password = password;
+  void updatingCurrentFeedUser(String value, String value2) {
+    current_feed_user = value;
+    current_feed_number = value2;
+    notifyListeners();
+  }
+
+  void updatingCurrentProfileUser(String value) {
+    current_profile_user = value;
+    notifyListeners();
   }
 }

@@ -12,8 +12,6 @@ import 'package:insta2/widgets/navigatorList.dart';
 import 'package:provider/provider.dart';
 
 class PostAddPage extends StatefulWidget {
-  const PostAddPage({super.key});
-
   @override
   State<PostAddPage> createState() => _MyWidgetState();
 }
@@ -35,21 +33,26 @@ class _MyWidgetState extends State<PostAddPage> {
   }
 
   Widget _profileinfo() {
-    return Stack(
-      children: [
-        if (_pickedImage.path == '')
-          Image.asset(
-            'images/post_picture.png',
-            width: 400,
-            height: 400,
-          ),
-        if (_pickedImage.path != '')
-          Image.file(
-            _pickedImage,
-            width: 400,
-            height: 400,
-          ),
-      ],
+    return TextButton(
+      onPressed: () {
+        _pickImage();
+      },
+      child: Stack(
+        children: [
+          if (_pickedImage.path == '')
+            Image.asset(
+              'images/post_picture.png',
+              width: 400,
+              height: 400,
+            ),
+          if (_pickedImage.path != '')
+            Image.file(
+              _pickedImage,
+              width: 400,
+              height: 400,
+            ),
+        ],
+      ),
     );
   }
 
@@ -58,15 +61,26 @@ class _MyWidgetState extends State<PostAddPage> {
       children: [
         Padding(
           padding: EdgeInsets.all(10),
-          child: Text('내용', style: TextStyle(fontSize: 12)),
         ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.3,
-              0, MediaQuery.of(context).size.width * 0.3, 40),
+        Container(
+          width: 450,
+          //height: 300,
           child: TextField(
+            minLines: 8,
+            maxLines: 8,
+            cursorColor: Colors.black,
             controller: contents,
             decoration: InputDecoration(
               labelText: '내용을 입력하세요.',
+              labelStyle: TextStyle(color: Colors.black),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(3)),
+                borderSide: BorderSide(color: Colors.black26),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(3)),
+                borderSide: BorderSide(color: Colors.black26),
+              ),
             ),
           ),
         ),
@@ -74,26 +88,27 @@ class _MyWidgetState extends State<PostAddPage> {
     );
   }
 
+  /*
   Widget _addpicturebutton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        _pickImage();
-      },
-      child: Text(
-        '사진 업로드',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 16,
+    return Container(
+      width: 550,
+      height: 47,
+      color: Colors.black12,
+      child: TextButton(
+        onPressed: () {
+          _pickImage();
+        },
+        child: Text(
+          '사진 업로드',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+          ),
         ),
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: Colors.grey,
-        minimumSize: Size(550, 47),
-        onSurface: Colors.white,
       ),
     );
   }
-
+  */
   Widget _addpostbutton(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
 
@@ -107,59 +122,59 @@ class _MyWidgetState extends State<PostAddPage> {
         provar.myfeedcount.toString() +
         '/favoriteUsers.txt');
 
-    return ElevatedButton(
-      onPressed: () {
-        if (_pickedImage.path != '') {
-          memberDB.readFileToList().then((value) async {
-            await feedImgDB.createDir(provar.myid);
-            await feedImgDB.createDir2(
-                provar.myid + '/feed' + provar.myfeedcount.toString());
-            await feedImgDB.writeImageFile(_pickedImage);
+    return Container(
+      width: 450,
+      height: 47,
+      color: Colors.black12,
+      child: TextButton(
+        onPressed: () {
+          if (_pickedImage.path != '') {
+            memberDB.readFileToList().then((value) async {
+              await feedImgDB.createDir(provar.myid);
+              await feedImgDB.createDir2(
+                  provar.myid + '/feed' + provar.myfeedcount.toString());
+              await feedImgDB.writeImageFile(_pickedImage);
 
-            value.replaceRange(
-                value.indexOf('id: ' + provar.myid) + 3,
-                value.indexOf('id: ' + provar.myid) + 4,
-                ['feedcount: ' + (provar.myfeedcount + 1).toString()]);
-            await memberDB.writeListToFile(value);
-            provar.myfeedcount += 1;
+              value.replaceRange(
+                  value.indexOf('id: ' + provar.myid) + 3,
+                  value.indexOf('id: ' + provar.myid) + 4,
+                  ['feedcount: ' + (provar.myfeedcount + 1).toString()]);
+              await memberDB.writeListToFile(value);
+              provar.myfeedcount += 1;
 
-            await feedDataDB.writeFile('contents: ' + contents.text + '\n');
-            await feedDataDB.writeFile('favorite: 0\n');
-            await feedDataDB.writeFile('comments: 0\n');
-            await feedDataDB
-                .writeFile('year: ' + DateTime.now().year.toString() + '\n');
-            await feedDataDB
-                .writeFile('month: ' + DateTime.now().month.toString() + '\n');
-            await feedDataDB
-                .writeFile('day: ' + DateTime.now().day.toString() + '\n');
-            await feedDataDB
-                .writeFile('hour: ' + DateTime.now().hour.toString() + '\n');
-            await feedDataDB.writeFile(
-                'minute: ' + DateTime.now().minute.toString() + '\n');
-            await feedDataDB.writeFile(
-                'second: ' + DateTime.now().second.toString() + '\n');
+              await feedDataDB.writeFile('contents: ' + contents.text + '\n');
+              await feedDataDB.writeFile('favorite: 0\n');
+              await feedDataDB.writeFile('comments: 0\n');
+              await feedDataDB
+                  .writeFile('year: ' + DateTime.now().year.toString() + '\n');
+              await feedDataDB.writeFile(
+                  'month: ' + DateTime.now().month.toString() + '\n');
+              await feedDataDB
+                  .writeFile('day: ' + DateTime.now().day.toString() + '\n');
+              await feedDataDB
+                  .writeFile('hour: ' + DateTime.now().hour.toString() + '\n');
+              await feedDataDB.writeFile(
+                  'minute: ' + DateTime.now().minute.toString() + '\n');
+              await feedDataDB.writeFile(
+                  'second: ' + DateTime.now().second.toString() + '\n');
 
-            await feedfavoriteUserDB.writeFile('');
+              await feedfavoriteUserDB.writeFile('');
 
-            Navigator.of(context).pop();
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (builder) => main_home()));
-          });
-        } else {
-          showWinToast('이미지를 넣어주세요', context);
-        }
-      },
-      child: Text(
-        '게시글 업로드',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 16,
+              Navigator.of(context).pop();
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (builder) => main_home()));
+            });
+          } else {
+            showWinToast('이미지를 넣어주세요', context);
+          }
+        },
+        child: Text(
+          '게시글 업로드',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+          ),
         ),
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: Colors.grey,
-        minimumSize: Size(550, 47),
-        onSurface: Colors.white,
       ),
     );
   }
@@ -168,43 +183,28 @@ class _MyWidgetState extends State<PostAddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      /*
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(
-          '게시글 업로드',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 50, 0),
-            child: IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (builder) => main_home()));
-              },
-              icon: Icon(Icons.arrow_back),
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
-      */
       body: Row(
         children: [
-          navigatorList(),
-          Expanded(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    _profileinfo(),
-                    _addpicturebutton(context),
-                    _postinfo(),
-                    _addpostbutton(context),
-                  ],
+          Visibility(
+            visible: checkNumBiggerWidth(243, context),
+            child: navigatorList(),
+          ),
+          Visibility(
+            visible: checkNumBiggerWidth(243 + 450, context),
+            child: Expanded(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _profileinfo(),
+                      //_addpicturebutton(context),
+                      _postinfo(),
+                      Padding(padding: EdgeInsets.all(30)),
+                      _addpostbutton(context),
+                      Padding(padding: EdgeInsets.all(30)),
+                    ],
+                  ),
                 ),
               ),
             ),

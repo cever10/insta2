@@ -2,15 +2,17 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/widgets/instafeed.dart';
 import 'package:path_provider_windows/path_provider_windows.dart';
+import 'package:provider/provider.dart';
 
 void showWinToast(String msg, context) {
   ScaffoldMessenger.of(context).removeCurrentSnackBar();
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       margin: EdgeInsets.fromLTRB(
-        MediaQuery.of(context).size.width - 300,
+        MediaQuery.of(context).size.width * 0.80,
         0,
         MediaQuery.of(context).size.width * 0.03,
         30,
@@ -47,6 +49,14 @@ double checkPositive(double num) {
 
 bool checkNumBiggerWidth(double num, context) {
   if (MediaQuery.of(context).size.width > num) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool checkNumBiggerHeight(double num, context) {
+  if (MediaQuery.of(context).size.height > num) {
     return true;
   } else {
     return false;
@@ -257,4 +267,78 @@ class LocalStorage {
     List<String> list = List<String>.empty(growable: true);
     return await file.readAsLines();
   }
+}
+
+Future<List<dynamic>> load_Memberdata(String id) async {
+  List<dynamic> UserDataList = List<dynamic>.empty(growable: true);
+
+  LocalStorage memberDB = LocalStorage("members.txt");
+  List<String> list = await memberDB.readFileToList();
+
+  String Username = list
+      .elementAt(list.indexOf('id: ' + id) - 1)
+      .replaceAll(RegExp('name: '), '');
+  String Userid = list
+      .elementAt(list.indexOf('id: ' + id) + 0)
+      .replaceAll(RegExp('id: '), '');
+  String Userpassword = list
+      .elementAt(list.indexOf('id: ' + id) + 1)
+      .replaceAll(RegExp('password: '), '');
+  String Userintroduction = list
+      .elementAt(list.indexOf('id: ' + id) + 2)
+      .replaceAll(RegExp('introduction: '), '');
+  int Userfeedcount = int.parse(list
+      .elementAt(list.indexOf('id: ' + id) + 3)
+      .replaceAll(RegExp('feedcount: '), ''));
+  int Userfollow = int.parse(list
+      .elementAt(list.indexOf('id: ' + id) + 4)
+      .replaceAll(RegExp('follow: '), ''));
+  int Userfollower = int.parse(list
+      .elementAt(list.indexOf('id: ' + id) + 5)
+      .replaceAll(RegExp('follower: '), ''));
+
+  UserDataList.add(Username);
+  UserDataList.add(Userid);
+  UserDataList.add(Userpassword);
+  UserDataList.add(Userintroduction);
+  UserDataList.add(Userfeedcount);
+  UserDataList.add(Userfollow);
+  UserDataList.add(Userfollower);
+
+  LocalStorage profiledb = LocalStorage(id + '/profile.png');
+  await profiledb.createDir(id);
+  File Userimage = await profiledb.get_filePath();
+  bool checkUserimage = await profiledb.checkFile();
+
+  UserDataList.add(Userimage);
+  UserDataList.add(checkUserimage);
+
+  LocalStorage followDB = LocalStorage(id + '/follow.txt');
+
+  if (await followDB.checkFile() == false) {
+    await followDB.writeFile('');
+  }
+
+  LocalStorage followerDB = LocalStorage(id + '/follower.txt');
+
+  if (await followerDB.checkFile() == false) {
+    await followerDB.writeFile('');
+  }
+
+  return UserDataList;
+}
+
+Future<List<String>> load_membersId() async {
+  LocalStorage memberDB = LocalStorage("members.txt");
+  List<String> memberIdList = List<String>.empty(growable: true);
+  List<String> templist = await memberDB.readFileToList();
+
+  templist = await memberDB.readFileToList();
+  for (String str in templist) {
+    if (str.contains('id: ') == true) {
+      memberIdList.add(str.replaceAll('id: ', ''));
+    }
+  }
+
+  return memberIdList;
 }

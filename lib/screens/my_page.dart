@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/screens/compile_page.dart';
 import 'package:insta2/scripts.dart';
+import 'package:insta2/widgets/floatingInstaFeed.dart';
+import 'package:insta2/widgets/followerList.dart';
+import 'package:insta2/widgets/followingList.dart';
 import 'package:insta2/widgets/navigatorList.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +16,9 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
+  int checkState = 0;
+  int current_feed_count = 0;
+
   Widget _follower(String title, int value) {
     return Column(
       children: [
@@ -39,25 +45,25 @@ class _MyPageState extends State<MyPage> {
             if (provar.checkmyimage == true)
               Image.file(
                 provar.myimage,
-                width: 400,
-                height: 400,
+                width: MediaQuery.of(context).size.width * 0.2,
+                height: MediaQuery.of(context).size.width * 0.2,
               ),
             if (provar.checkmyimage == false)
               Image.asset(
                 'images/normal_profile.png',
-                width: 400,
-                height: 400,
+                width: MediaQuery.of(context).size.width * 0.2,
+                height: MediaQuery.of(context).size.width * 0.2,
               ),
             Image.asset(
               'images/frame.png',
-              width: 400,
-              height: 400,
+              width: MediaQuery.of(context).size.width * 0.2,
+              height: MediaQuery.of(context).size.width * 0.2,
             ),
           ],
         ),
         Expanded(
           child: Container(
-            height: 400,
+            //height: 400,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -79,9 +85,28 @@ class _MyPageState extends State<MyPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _follower('게시글', provar.myfeedcount),
-                    _follower('팔로잉', provar.myfollow),
-                    _follower('팔로워', provar.myfollower),
+                    TextButton(
+                      onPressed: () {},
+                      child: _follower('게시글', provar.myfeedcount),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        provar.updatingCurrentProfileUser(provar.myid);
+                        setState(() {
+                          checkState = 1;
+                        });
+                      },
+                      child: _follower('팔로잉', provar.myfollow),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        provar.updatingCurrentProfileUser(provar.myid);
+                        setState(() {
+                          checkState = 2;
+                        });
+                      },
+                      child: _follower('팔로워', provar.myfollower),
+                    ),
                   ],
                 ),
               ],
@@ -113,23 +138,28 @@ class _MyPageState extends State<MyPage> {
 
   Widget _compilebutton() {
     return Center(
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (builder) => CompilePage()));
-        },
-        child: Text(
-          '프로필 편집',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 16,
+      child: Container(
+        width: 1250,
+        height: 47,
+        color: Colors.black12,
+        child: TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (builder) => CompilePage()));
+          },
+          child: Text(
+            '프로필 편집',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+            ),
           ),
-        ),
-        style: ElevatedButton.styleFrom(
-          primary: Colors.grey,
-          minimumSize: Size(MediaQuery.of(context).size.width * 0.83, 48),
-          onSurface: Colors.white,
+          // style: ElevatedButton.styleFrom(
+          //   primary: Colors.grey,
+          //   minimumSize: Size(MediaQuery.of(context).size.width * 0.83, 48),
+          //   onSurface: Colors.white,
+          // ),
         ),
       ),
     );
@@ -148,7 +178,17 @@ class _MyPageState extends State<MyPage> {
 
         feedImgDB.get_filePath().then((value) {
           myFeeds.add(Container(
-            child: Image.file(value),
+            child: TextButton(
+              onPressed: () {
+                provar.updatingCurrentProfileUser(provar.myid);
+
+                setState(() {
+                  checkState = 3;
+                  current_feed_count = i;
+                });
+              },
+              child: Image.file(value),
+            ),
           ));
         });
       }
@@ -181,38 +221,67 @@ class _MyPageState extends State<MyPage> {
         ],
       ),
       */
-      body: Row(
+      body: Stack(
         children: [
-          navigatorList(),
-          Expanded(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _information(context),
-                    SizedBox(height: 15),
-                    Text(
-                      provar.myintroduction,
-                      style: TextStyle(fontSize: 20, color: Colors.black),
+          Row(
+            children: [
+              Visibility(
+                visible: checkNumBiggerWidth(243, context),
+                child: navigatorList(),
+              ),
+              Visibility(
+                visible: checkNumBiggerWidth(243 + 690, context),
+                child: Expanded(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.1,
+                          right: MediaQuery.of(context).size.width * 0.1,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _information(context),
+                            SizedBox(height: 15),
+                            Row(
+                              children: [
+                                Padding(padding: EdgeInsets.all(10)),
+                                Text(
+                                  provar.myintroduction,
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.black),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 30),
+                            _compilebutton(),
+                            FutureBuilder(
+                              future: initGridview(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData == true) {
+                                  return _tapview(context, snapshot.data!);
+                                } else {
+                                  return Container();
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    _compilebutton(),
-                    FutureBuilder(
-                      future: initGridview(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData == true) {
-                          return _tapview(context, snapshot.data!);
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
+          if (provar.current_profile_user != '' && checkState == 1)
+            followingList(),
+          if (provar.current_profile_user != '' && checkState == 2)
+            followerList(),
+          if (provar.current_profile_user != '' && checkState == 3)
+            floatingInstaFeed(current_feed_count, provar.myid),
         ],
       ),
     );
