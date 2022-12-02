@@ -86,7 +86,7 @@ class _searchState extends State<search_page> {
                             cursorColor: Colors.black,
                             focusNode: focusNode,
                             style: TextStyle(
-                              color: Colors.black54,
+                              color: Colors.black,
                               fontSize: 15,
                             ),
                             autofocus: true,
