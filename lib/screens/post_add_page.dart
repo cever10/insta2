@@ -61,7 +61,6 @@ class _MyWidgetState extends State<PostAddPage> {
       children: [
         Padding(
           padding: EdgeInsets.all(10),
-          child: Text('내용', style: TextStyle(fontSize: 12)),
         ),
         Container(
           width: 450,

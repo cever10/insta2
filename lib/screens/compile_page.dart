@@ -76,8 +76,9 @@ class _MyWidgetState extends State<CompilePage> {
       children: [
         Padding(
           padding: EdgeInsets.all(10),
-          child: Text('이름 변경', style: TextStyle(fontSize: 12)),
+          child: Text('사진 변경', style: TextStyle(fontSize: 15)),
         ),
+        Padding(padding: EdgeInsets.all(15)),
         Container(
           width: 350,
           height: 50,
@@ -124,7 +125,6 @@ class _MyWidgetState extends State<CompilePage> {
       children: [
         Padding(
           padding: EdgeInsets.all(10),
-          child: Text('한줄소개 변경', style: TextStyle(fontSize: 12)),
         ),
         Container(
           width: 350,
@@ -216,6 +216,7 @@ class _MyWidgetState extends State<CompilePage> {
                       //_editbutton(context),
                       _nameinfo(),
                       //_IDinfo(),
+                      Padding(padding: EdgeInsets.all(20)),
                       _produceinfo(),
                       Padding(padding: EdgeInsets.all(20)),
                       Container(
