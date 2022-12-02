@@ -23,15 +23,15 @@ class _CommentState extends State<Comment> {
   Widget build(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "댓글",
-          style: TextStyle(fontSize: 30, color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        leading: BackButton(color: Colors.black),
-      ),
-      /*
+      // appBar: AppBar(
+      //   title: Text(
+      //     "댓글",
+      //     style: TextStyle(fontSize: 30, color: Colors.black),
+      //   ),
+      //   backgroundColor: Colors.white,
+      //   leading: BackButton(color: Colors.black),
+      // ),
+      
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
@@ -41,7 +41,7 @@ class _CommentState extends State<Comment> {
           );
         },
         child: Icon(Icons.arrow_back_ios_sharp),
-      ),*/
+      ),
 
       body: Row(
         children: [
