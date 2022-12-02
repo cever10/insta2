@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:insta2/screens/login_page.dart';
 import 'package:insta2/screens/main_home.dart';
 import 'package:insta2/screens/my_page.dart';
@@ -30,6 +31,7 @@ class navigatorList extends StatelessWidget {
                     height: 664 * 0.08,
                   ),
                   */
+
                   child: Text(
                     'Instagram',
                     style: TextStyle(
