@@ -2,10 +2,8 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/widgets/instafeed.dart';
 import 'package:path_provider_windows/path_provider_windows.dart';
-import 'package:provider/provider.dart';
 
 void showWinToast(String msg, context) {
   ScaffoldMessenger.of(context).removeCurrentSnackBar();

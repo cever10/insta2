@@ -155,7 +155,7 @@ class _login_new_profileState extends State<login_new_profile> {
                   ),
                 ),
               ),
-              Padding(padding: EdgeInsets.all(10)),
+              Padding(padding: EdgeInsets.all(20)),
               Container(
                 width: 335,
                 height: 47,
