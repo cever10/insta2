@@ -106,7 +106,9 @@ class _CommentState extends State<Comment> {
                             Row(
                               children: [
                                 Text("게시글내용\n집가고 싶다",
-                                    style: TextStyle(fontSize: font_size)),
+                                    style: TextStyle(
+                                        fontSize: font_size,
+                                        color: Colors.black)),
                               ],
                             ),
                             //게시글이랑 댓글 구분선
