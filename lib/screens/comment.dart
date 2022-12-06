@@ -362,7 +362,9 @@ class _CommentState extends State<Comment> {
                           ),
                         ),
                       );
-                    } else {
+                    }
+                    //데이터 받아올 때 까지 대기
+                    else {
                       return Container();
                     }
                   },
