@@ -180,6 +180,7 @@ class _CommentState extends State<Comment> {
                                   //댓글 추가 코드
                                   Container(
                                     width: 1000,
+                                    color: Colors.black12,
                                     child: TextField(
                                       controller: mycomment,
                                       decoration: InputDecoration(
