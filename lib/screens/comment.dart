@@ -19,13 +19,12 @@ class Comment extends StatefulWidget {
   State<Comment> createState() => _CommentState();
 }
 
-TextEditingController mycomment = TextEditingController();
-
 class _CommentState extends State<Comment> {
   TextEditingController mycomment = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    //
     providerVariable provar = Provider.of<providerVariable>(context);
 
     List<String> commentsOrignList = List<String>.empty(growable: true);
@@ -365,7 +364,15 @@ class _CommentState extends State<Comment> {
                     }
                     //데이터 받아올 때 까지 대기
                     else {
-                      return Container();
+                      return Container(
+                        child: Text(
+                          "로딩중...",
+                          style: TextStyle(
+                            fontSize: 40,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      );
                     }
                   },
                 ),
