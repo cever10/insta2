@@ -178,70 +178,74 @@ class _CommentState extends State<Comment> {
                                   ),
 
                                   //댓글 추가 코드
-                                  Container(
-                                    width: 1000,
-                                    color: Colors.black12,
-                                    child: TextField(
-                                      controller: mycomment,
-                                      decoration: InputDecoration(
-                                        hintText: '댓글 달기...',
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(3)),
-                                          borderSide:
-                                              BorderSide(color: Colors.white),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 20, right: 20),
+                                    child: Container(
+                                      width: 1500,
+                                      color: Color.fromARGB(255, 235, 235, 235),
+                                      child: TextField(
+                                        controller: mycomment,
+                                        decoration: InputDecoration(
+                                          hintText: '댓글 달기...',
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(3)),
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(3)),
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                          ),
                                         ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(3)),
-                                          borderSide:
-                                              BorderSide(color: Colors.white),
-                                        ),
-                                      ),
-                                      textInputAction: TextInputAction.go,
-                                      onSubmitted: (value) async {
-                                        LocalStorage feedCommentDB =
-                                            LocalStorage(widget.userId +
-                                                '/feed' +
-                                                widget.feedCount.toString() +
-                                                '/comments.txt');
+                                        textInputAction: TextInputAction.go,
+                                        onSubmitted: (value) async {
+                                          LocalStorage feedCommentDB =
+                                              LocalStorage(widget.userId +
+                                                  '/feed' +
+                                                  widget.feedCount.toString() +
+                                                  '/comments.txt');
 
-                                        await feedCommentDB.writeFile(
-                                            provar.myid +
-                                                ' ' +
-                                                mycomment.text +
-                                                '\n');
+                                          await feedCommentDB.writeFile(
+                                              provar.myid +
+                                                  ' ' +
+                                                  mycomment.text +
+                                                  '\n');
 
-                                        LocalStorage feedDataDB = LocalStorage(
-                                            widget.userId +
-                                                '/feed' +
-                                                widget.feedCount.toString() +
-                                                '/data.txt');
+                                          LocalStorage feedDataDB =
+                                              LocalStorage(widget.userId +
+                                                  '/feed' +
+                                                  widget.feedCount.toString() +
+                                                  '/data.txt');
 
-                                        feedDataDB
-                                            .readFileToList()
-                                            .then((value) async {
-                                          value.replaceRange(2, 3, [
-                                            'comments: ' +
-                                                (int.parse(value
-                                                            .elementAt(
-                                                                value.indexOf(
-                                                                    value[2]))
-                                                            .replaceAll(
-                                                                RegExp(
-                                                                    'comments: '),
-                                                                '')) +
-                                                        1)
-                                                    .toString()
-                                          ]);
-                                          await feedDataDB
-                                              .writeListToFile(value);
+                                          feedDataDB
+                                              .readFileToList()
+                                              .then((value) async {
+                                            value.replaceRange(2, 3, [
+                                              'comments: ' +
+                                                  (int.parse(value
+                                                              .elementAt(
+                                                                  value.indexOf(
+                                                                      value[2]))
+                                                              .replaceAll(
+                                                                  RegExp(
+                                                                      'comments: '),
+                                                                  '')) +
+                                                          1)
+                                                      .toString()
+                                            ]);
+                                            await feedDataDB
+                                                .writeListToFile(value);
 
-                                          setState(() {
-                                            mycomment.text = '';
+                                            setState(() {
+                                              mycomment.text = '';
+                                            });
                                           });
-                                        });
-                                      },
+                                        },
+                                      ),
                                     ),
                                   ),
                                   //게시글/댓글 구분선 추가 보류
