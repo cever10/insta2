@@ -376,7 +376,7 @@ class _instaFeedState extends State<instaFeed> {
                               ),
                             ),
                             TextSpan(
-                              text: widget.contents + ' ',
+                              text: widget.contents,
                               style: TextStyle(
                                 fontSize: 14,
                               ),

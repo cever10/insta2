@@ -156,10 +156,14 @@ class _CommentState extends State<Comment> {
                                       children: [
                                         Text.rich(
                                           TextSpan(
-                                            text: widget.feedContents,
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                            ),
+                                            children: [
+                                              TextSpan(
+                                                text: widget.feedContents,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
@@ -327,10 +331,21 @@ class _CommentState extends State<Comment> {
                                                             FontWeight.bold,
                                                       ),
                                                     ),
-                                                    Text(
-                                                      UserCommentsList[i],
-                                                      style: TextStyle(
-                                                        fontSize: 14,
+                                                    Container(
+                                                      width: 500,
+                                                      child: Text.rich(
+                                                        TextSpan(
+                                                          children: [
+                                                            TextSpan(
+                                                              text:
+                                                                  UserCommentsList[
+                                                                      i],
+                                                              style: TextStyle(
+                                                                fontSize: 14,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
