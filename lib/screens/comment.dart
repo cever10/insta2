@@ -7,7 +7,6 @@ import 'package:insta2/scripts.dart';
 import 'package:insta2/widgets/navigatorList.dart';
 
 double font_size = 25;
-double whiteSize = 150;
 
 class Comment extends StatefulWidget {
   final int feedCount;
