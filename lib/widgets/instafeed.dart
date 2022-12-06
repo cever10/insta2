@@ -323,9 +323,13 @@ class _instaFeedState extends State<instaFeed> {
                       ),
                     IconButton(
                       onPressed: () {
+                        Navigator.of(context).pop();
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (BuildContext context) => Comment(),
+                            builder: (BuildContext context) => Comment(
+                                int.parse(widget.feednumber),
+                                widget.id,
+                                widget.contents),
                           ),
                         );
                       },
@@ -397,9 +401,13 @@ class _instaFeedState extends State<instaFeed> {
               Container(
                 child: TextButton(
                   onPressed: () {
+                    Navigator.of(context).pop();
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (BuildContext context) => Comment(),
+                        builder: (BuildContext context) => Comment(
+                            int.parse(widget.feednumber),
+                            widget.id,
+                            widget.contents),
                       ),
                     );
                   },
