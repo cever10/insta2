@@ -110,51 +110,60 @@ class _CommentState extends State<Comment> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   //게시글의 사진+id+게시글 내용
-                                  Row(
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          if (provar.checkmyimage == true)
-                                            Image.file(
-                                              provar.myimage,
-                                              width: 40,
-                                              height: 40,
-                                            ),
-                                          if (provar.checkmyimage == false)
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 10, left: 10),
+                                    child: Row(
+                                      children: [
+                                        Stack(
+                                          children: [
+                                            if (provar.checkmyimage == true)
+                                              Image.file(
+                                                provar.myimage,
+                                                width: 40,
+                                                height: 40,
+                                              ),
+                                            if (provar.checkmyimage == false)
+                                              Image.asset(
+                                                'images/normal_profile.png',
+                                                width: 40,
+                                                height: 40,
+                                              ),
                                             Image.asset(
-                                              'images/normal_profile.png',
+                                              'images/frame.png',
                                               width: 40,
                                               height: 40,
                                             ),
-                                          Image.asset(
-                                            'images/frame.png',
-                                            width: 40,
-                                            height: 40,
-                                          ),
-                                        ],
-                                      ),
-                                      //
-                                      Padding(padding: EdgeInsets.all(8)),
-                                      Text(
-                                        widget.userId,
-                                        style: TextStyle(
-                                            fontSize: font_size,
-                                            color: Colors.black),
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                        //
+                                        Padding(padding: EdgeInsets.all(8)),
+                                        Text(
+                                          widget.userId,
+                                          style: TextStyle(
+                                              fontSize: font_size,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
                                   ),
 
-                                  Column(
-                                    children: [
-                                      Text.rich(
-                                        TextSpan(
-                                          text: widget.feedContents,
-                                          style: TextStyle(
-                                            fontSize: font_size,
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 10, left: 10),
+                                    child: Column(
+                                      children: [
+                                        Text.rich(
+                                          TextSpan(
+                                            text: widget.feedContents,
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                   //게시글이랑 댓글 구분선
                                   Padding(
