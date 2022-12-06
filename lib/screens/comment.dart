@@ -326,7 +326,12 @@ class _CommentState extends State<Comment> {
                                                       ),
                                                     ),
                                                     Container(
-                                                      width: 500,
+                                                      width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width -
+                                                              243) *
+                                                          0.5,
                                                       child: Text.rich(
                                                         TextSpan(
                                                           children: [
