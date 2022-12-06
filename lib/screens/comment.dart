@@ -27,15 +27,16 @@ class _CommentState extends State<Comment> {
   TextEditingController mycomment = TextEditingController();
   int mycomment_count = 10;
 
-  List<String> commentsOrignList = List<String>.empty(growable: true);
-  List<List<dynamic>> UserDataList = List<List<dynamic>>.empty(growable: true);
-  List<String> UserCommentsList = List<String>.empty(growable: true);
-
   @override
   Widget build(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
 
-    Future<bool> initComments() async {
+    List<String> commentsOrignList = List<String>.empty(growable: true);
+    List<List<dynamic>> UserDataList =
+        List<List<dynamic>>.empty(growable: true);
+    List<String> UserCommentsList = List<String>.empty(growable: true);
+
+    Future<List<String>> initComments() async {
       LocalStorage feedCommentsDB = LocalStorage(widget.userId +
           '/feed' +
           widget.feedCount.toString() +
@@ -47,11 +48,14 @@ class _CommentState extends State<Comment> {
 
       for (var str in commentsOrignList) {
         UserDataList.add(await load_Memberdata(str.split(' ')[0]));
-        UserCommentsList.add(
-            str.replaceAll(RegExp(str.split(' ')[0] + ' '), ''));
+
+        if (commentsOrignList.length > UserCommentsList.length) {
+          UserCommentsList.add(
+              str.replaceAll(RegExp(str.split(' ')[0] + ' '), ''));
+        }
       }
 
-      return true;
+      return UserCommentsList;
     }
 
     return Scaffold(
