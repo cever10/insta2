@@ -243,7 +243,9 @@ class _instaFeedState extends State<instaFeed> {
                 ),
               ),
               Container(
-                child: Image.file(widget.img),
+                child: Center(
+                  child: Image.file(widget.img),
+                ),
               ),
               Container(
                 padding: EdgeInsets.all(5),
