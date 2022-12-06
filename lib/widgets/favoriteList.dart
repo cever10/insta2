@@ -141,8 +141,8 @@ class favoriteList extends StatelessWidget {
                                                     width: 50,
                                                     height: 50,
                                                   ),
-                                                SvgPicture.asset(
-                                                  'images/frame.svg',
+                                                Image.asset(
+                                                  'images/frame.png',
                                                   width: 50,
                                                   height: 50,
                                                 ),

@@ -62,8 +62,8 @@ class _MyWidgetState extends State<CompilePage> {
               width: 400,
               height: 400,
             ),
-          SvgPicture.asset(
-            'images/frame.svg',
+          Image.asset(
+            'images/frame.png',
             width: 400,
             height: 400,
           ),

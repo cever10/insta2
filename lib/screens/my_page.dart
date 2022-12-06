@@ -55,8 +55,8 @@ class _MyPageState extends State<MyPage> {
                 width: MediaQuery.of(context).size.width * 0.2,
                 height: MediaQuery.of(context).size.width * 0.2,
               ),
-            SvgPicture.asset(
-              'images/frame.svg',
+            Image.asset(
+              'images/frame.png',
               width: MediaQuery.of(context).size.width * 0.2,
               height: MediaQuery.of(context).size.width * 0.2,
             ),

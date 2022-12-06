@@ -200,8 +200,8 @@ class _AnotherUserPageState extends State<AnotherUserPage> {
                     width: MediaQuery.of(context).size.width * 0.2,
                     height: MediaQuery.of(context).size.width * 0.2,
                   ),
-                SvgPicture.asset(
-                  'images/frame.svg',
+                Image.asset(
+                  'images/frame.png',
                   width: MediaQuery.of(context).size.width * 0.2,
                   height: MediaQuery.of(context).size.width * 0.2,
                 ),

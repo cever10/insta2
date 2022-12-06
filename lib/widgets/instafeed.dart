@@ -131,8 +131,8 @@ class _instaFeedState extends State<instaFeed> {
                                 width: 50,
                                 height: 50,
                               ),
-                            SvgPicture.asset(
-                              'images/frame.svg',
+                            Image.asset(
+                              'images/frame.png',
                               width: 50,
                               height: 50,
                             ),
@@ -355,7 +355,8 @@ class _instaFeedState extends State<instaFeed> {
                               builder: (BuildContext context) => Comment(
                                   int.parse(widget.feednumber),
                                   widget.id,
-                                  widget.contents),
+                                  widget.contents,
+                                  widget.profileimage),
                             ),
                           );
                         },
@@ -433,7 +434,8 @@ class _instaFeedState extends State<instaFeed> {
                           builder: (BuildContext context) => Comment(
                               int.parse(widget.feednumber),
                               widget.id,
-                              widget.contents),
+                              widget.contents,
+                              widget.profileimage),
                         ),
                       );
                     },

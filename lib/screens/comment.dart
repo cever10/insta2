@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:insta2/providerVar/providerVars.dart';
@@ -13,8 +15,9 @@ class Comment extends StatefulWidget {
   final int feedCount;
   final String userId;
   final String feedContents;
+  final File UserProfile;
 
-  Comment(this.feedCount, this.userId, this.feedContents);
+  Comment(this.feedCount, this.userId, this.feedContents, this.UserProfile);
 
   @override
   State<Comment> createState() => _CommentState();
@@ -117,7 +120,7 @@ class _CommentState extends State<Comment> {
                                           children: [
                                             if (provar.checkmyimage == true)
                                               Image.file(
-                                                provar.myimage,
+                                                widget.UserProfile,
                                                 width: 40,
                                                 height: 40,
                                               ),
@@ -127,8 +130,8 @@ class _CommentState extends State<Comment> {
                                                 width: 40,
                                                 height: 40,
                                               ),
-                                            SvgPicture.asset(
-                                              'images/frame.svg',
+                                            Image.asset(
+                                              'images/frame.png',
                                               width: 40,
                                               height: 40,
                                             ),
