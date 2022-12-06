@@ -252,11 +252,8 @@ class _CommentState extends State<Comment> {
                                           color: Colors.grey,
                                         ),
                                         */
-
                                   /*
-                          
                                         댓글 구현 시작
-                          
                                         */
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
