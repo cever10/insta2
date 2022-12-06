@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/screens/anotheruser_page.dart';
 import 'package:insta2/screens/main_home.dart';
@@ -16,8 +15,10 @@ class Comment extends StatefulWidget {
   final String userId;
   final String feedContents;
   final File UserProfile;
+  final bool checkProfile;
 
-  Comment(this.feedCount, this.userId, this.feedContents, this.UserProfile);
+  Comment(this.feedCount, this.userId, this.feedContents, this.UserProfile,
+      this.checkProfile);
 
   @override
   State<Comment> createState() => _CommentState();
@@ -119,18 +120,20 @@ class _CommentState extends State<Comment> {
                                       children: [
                                         Stack(
                                           children: [
-                                            if (provar.checkmyimage == true)
+                                            if (widget.checkProfile ==
+                                                true) ...[
                                               Image.file(
                                                 widget.UserProfile,
                                                 width: 40,
                                                 height: 40,
                                               ),
-                                            if (provar.checkmyimage == false)
+                                            ] else ...[
                                               Image.asset(
                                                 'images/normal_profile.png',
                                                 width: 40,
                                                 height: 40,
                                               ),
+                                            ],
                                             Image.asset(
                                               'images/frame.png',
                                               width: 40,
