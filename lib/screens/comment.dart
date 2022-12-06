@@ -107,6 +107,7 @@ class _CommentState extends State<Comment> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 20),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   //게시글의 사진+id+게시글 내용
                                   Row(
@@ -168,36 +169,70 @@ class _CommentState extends State<Comment> {
                                   ),
 
                                   //댓글 추가 코드
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        width: 1000,
-                                        child: TextField(
-                                          cursorColor: Colors.black,
-                                          decoration: InputDecoration(
-                                              labelText: "댓글입력",
-                                              labelStyle: TextStyle(
-                                                  color: Colors.black),
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Colors
-                                                              .black26)),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color:
-                                                              Colors.black54))),
-                                          controller: mycomment,
-                                          onChanged: (mycomment_count) {
-                                            if (mycomment == '\n') {
-                                              mycomment_count += 1 as String;
-                                            }
-                                          },
+                                  Container(
+                                    width: 1000,
+                                    child: TextField(
+                                      controller: mycomment,
+                                      decoration: InputDecoration(
+                                        hintText: '댓글 달기...',
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(3)),
+                                          borderSide:
+                                              BorderSide(color: Colors.white),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(3)),
+                                          borderSide:
+                                              BorderSide(color: Colors.white),
                                         ),
                                       ),
-                                    ],
+                                      textInputAction: TextInputAction.go,
+                                      onSubmitted: (value) async {
+                                        LocalStorage feedCommentDB =
+                                            LocalStorage(widget.userId +
+                                                '/feed' +
+                                                widget.feedCount.toString() +
+                                                '/comments.txt');
+
+                                        await feedCommentDB.writeFile(
+                                            provar.myid +
+                                                ' ' +
+                                                mycomment.text +
+                                                '\n');
+
+                                        LocalStorage feedDataDB = LocalStorage(
+                                            widget.userId +
+                                                '/feed' +
+                                                widget.feedCount.toString() +
+                                                '/data.txt');
+
+                                        feedDataDB
+                                            .readFileToList()
+                                            .then((value) async {
+                                          value.replaceRange(2, 3, [
+                                            'comments: ' +
+                                                (int.parse(value
+                                                            .elementAt(
+                                                                value.indexOf(
+                                                                    value[2]))
+                                                            .replaceAll(
+                                                                RegExp(
+                                                                    'comments: '),
+                                                                '')) +
+                                                        1)
+                                                    .toString()
+                                          ]);
+                                          await feedDataDB
+                                              .writeListToFile(value);
+
+                                          setState(() {
+                                            mycomment.text = '';
+                                          });
+                                        });
+                                      },
+                                    ),
                                   ),
                                   //게시글/댓글 구분선 추가 보류
                                   /*
