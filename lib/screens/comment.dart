@@ -122,18 +122,27 @@ class _CommentState extends State<Comment> {
                                 color: Colors.black38,
                               ),
                             ),
-
+                            Padding(
+                                padding: EdgeInsets.only(top: 8, bottom: 20)),
                             //댓글 추가 코드
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  width: 1000,
+                                  width: 1290,
+                                  height: 50,
                                   child: TextField(
+                                    cursorColor: Colors.black,
                                     decoration: InputDecoration(
-                                      labelText: "댓글입력",
-                                      hintText: "<Enter>입력 시 댓글 추가",
-                                    ),
+                                        labelText: "댓글입력",
+                                        labelStyle:
+                                            TextStyle(color: Colors.black),
+                                        enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.black26)),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.black54))),
                                     controller: mycomment,
                                     onChanged: (mycomment_count) {
                                       if (mycomment == '\n') {
