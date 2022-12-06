@@ -174,10 +174,21 @@ class _CommentState extends State<Comment> {
                                       Container(
                                         width: 1000,
                                         child: TextField(
+                                          cursorColor: Colors.black,
                                           decoration: InputDecoration(
-                                            labelText: "댓글입력",
-                                            hintText: "<Enter>입력 시 댓글 추가",
-                                          ),
+                                              labelText: "댓글입력",
+                                              labelStyle: TextStyle(
+                                                  color: Colors.black),
+                                              enabledBorder:
+                                                  UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .black26)),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              Colors.black54))),
                                           controller: mycomment,
                                           onChanged: (mycomment_count) {
                                             if (mycomment == '\n') {
