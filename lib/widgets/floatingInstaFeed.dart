@@ -43,85 +43,98 @@ class floatingInstaFeed extends StatelessWidget {
     List<List<dynamic>> UserDataList =
         List<List<dynamic>>.empty(growable: true);
 
-    AsyncMemoizer amemoizer = AsyncMemoizer();
+    Future<Widget> initFeedData() async {
+      LocalStorage memberDB = LocalStorage("members.txt");
+      List<String> memberList = List<String>.empty(growable: true);
+      List<String> memberNameList = List<String>.empty(growable: true);
+      List<int> memberFeedCountList = List<int>.empty(growable: true);
 
-    Future<dynamic> initFeedData() async {
-      return amemoizer.runOnce(() async {
-        LocalStorage memberDB = LocalStorage("members.txt");
-        List<String> memberList = List<String>.empty(growable: true);
-        List<String> memberNameList = List<String>.empty(growable: true);
-        List<int> memberFeedCountList = List<int>.empty(growable: true);
+      templist = await memberDB.readFileToList();
 
-        templist = await memberDB.readFileToList();
-
-        for (String str in templist) {
-          if (str.contains('id: ') == true) {
-            if (int.parse(templist
-                    .elementAt(templist.indexOf(str) + 3)
-                    .replaceAll(RegExp('feedcount: '), '')) >
-                0) {
-              memberList.add(str.replaceAll('id: ', ''));
-
-              memberFeedCountList.add(int.parse(templist
+      for (String str in templist) {
+        if (str.contains('id: ') == true) {
+          if (int.parse(templist
                   .elementAt(templist.indexOf(str) + 3)
-                  .replaceAll(RegExp('feedcount: '), '')));
+                  .replaceAll(RegExp('feedcount: '), '')) >
+              0) {
+            memberList.add(str.replaceAll('id: ', ''));
 
-              memberNameList.add(templist
-                  .elementAt(templist.indexOf(str) - 1)
-                  .replaceAll(RegExp('name: '), ''));
-            }
+            memberFeedCountList.add(int.parse(templist
+                .elementAt(templist.indexOf(str) + 3)
+                .replaceAll(RegExp('feedcount: '), '')));
+
+            memberNameList.add(templist
+                .elementAt(templist.indexOf(str) - 1)
+                .replaceAll(RegExp('name: '), ''));
           }
         }
+      }
 
-        templist2 = await load_Memberdata(UserId);
-        tempid = UserId;
-        tempname = templist2[0];
-        tempdata = feedCount;
+      templist2 = await load_Memberdata(UserId);
+      tempid = UserId;
+      tempname = templist2[0];
+      tempdata = feedCount;
 
-        LocalStorage feedImgDB = LocalStorage(
-            tempid + '/feed' + tempdata.toString() + '/feedimg.png');
+      LocalStorage feedImgDB =
+          LocalStorage(tempid + '/feed' + tempdata.toString() + '/feedimg.png');
 
-        tempimg = await feedImgDB.get_filePath();
+      tempimg = await feedImgDB.get_filePath();
 
-        LocalStorage imgdb = LocalStorage(tempid + '/profile.png');
+      LocalStorage imgdb = LocalStorage(tempid + '/profile.png');
 
-        await imgdb.createDir(tempid);
-        tempprofileimg = await imgdb.get_filePath();
-        tempcheckimg = await imgdb.checkFile();
+      await imgdb.createDir(tempid);
+      tempprofileimg = await imgdb.get_filePath();
+      tempcheckimg = await imgdb.checkFile();
 
-        LocalStorage feedDataDB =
-            LocalStorage(tempid + '/feed' + tempdata.toString() + '/data.txt');
+      LocalStorage feedDataDB =
+          LocalStorage(tempid + '/feed' + tempdata.toString() + '/data.txt');
 
-        templist = await feedDataDB.readFileToList();
-        tempcontents =
-            templist.elementAt(0).replaceAll(RegExp('contents: '), '');
-        tempfavorite =
-            templist.elementAt(1).replaceAll(RegExp('favorite: '), '');
-        tempcomments =
-            templist.elementAt(2).replaceAll(RegExp('comments: '), '');
-        tempyear = templist.elementAt(3).replaceAll(RegExp('year: '), '');
-        tempmonth = templist.elementAt(4).replaceAll(RegExp('month: '), '');
-        tempday = templist.elementAt(5).replaceAll(RegExp('day: '), '');
-        temphour = templist.elementAt(6).replaceAll(RegExp('hour: '), '');
-        tempminute = templist.elementAt(7).replaceAll(RegExp('minute: '), '');
-        tempsecond = templist.elementAt(8).replaceAll(RegExp('second: '), '');
+      templist = await feedDataDB.readFileToList();
+      tempcontents = templist.elementAt(0).replaceAll(RegExp('contents: '), '');
+      tempfavorite = templist.elementAt(1).replaceAll(RegExp('favorite: '), '');
+      tempcomments = templist.elementAt(2).replaceAll(RegExp('comments: '), '');
+      tempyear = templist.elementAt(3).replaceAll(RegExp('year: '), '');
+      tempmonth = templist.elementAt(4).replaceAll(RegExp('month: '), '');
+      tempday = templist.elementAt(5).replaceAll(RegExp('day: '), '');
+      temphour = templist.elementAt(6).replaceAll(RegExp('hour: '), '');
+      tempminute = templist.elementAt(7).replaceAll(RegExp('minute: '), '');
+      tempsecond = templist.elementAt(8).replaceAll(RegExp('second: '), '');
 
-        LocalStorage feedfavoriteUserDB = LocalStorage(
-            tempid + '/feed' + tempdata.toString() + '/favoriteUsers.txt');
+      LocalStorage feedfavoriteUserDB = LocalStorage(
+          tempid + '/feed' + tempdata.toString() + '/favoriteUsers.txt');
 
-        templist = await feedfavoriteUserDB.readFileToList();
-        checkFavoriteUser = templist.contains(provar.myid);
+      templist = await feedfavoriteUserDB.readFileToList();
+      checkFavoriteUser = templist.contains(provar.myid);
 
-        LocalStorage followDB = LocalStorage(provar.myid + '/follow.txt');
+      LocalStorage followDB = LocalStorage(provar.myid + '/follow.txt');
 
-        templist = await followDB.readFileToList();
+      templist = await followDB.readFileToList();
 
-        if (templist.contains(tempid) == true) {
-          checkFollow = true;
-        }
+      if (templist.contains(tempid) == true) {
+        checkFollow = true;
+      }
 
-        return true;
-      });
+      Widget thisfeed = instaFeed(
+        tempimg,
+        tempprofileimg,
+        tempcheckimg,
+        tempid,
+        tempname,
+        tempcontents,
+        tempfavorite,
+        feedCount.toString(),
+        checkFavoriteUser,
+        tempcomments,
+        checkFollow,
+        tempyear,
+        tempmonth,
+        tempday,
+        temphour,
+        tempminute,
+        tempsecond,
+      );
+
+      return thisfeed;
     }
 
     return FutureBuilder(
@@ -141,27 +154,7 @@ class floatingInstaFeed extends StatelessWidget {
               Visibility(
                 visible: checkNumBiggerWidth(460, context),
                 child: Center(
-                  child: SingleChildScrollView(
-                    child: instaFeed(
-                      tempimg,
-                      tempprofileimg,
-                      tempcheckimg,
-                      tempid,
-                      tempname,
-                      tempcontents,
-                      tempfavorite,
-                      feedCount.toString(),
-                      checkFavoriteUser,
-                      tempcomments,
-                      checkFollow,
-                      tempyear,
-                      tempmonth,
-                      tempday,
-                      temphour,
-                      tempminute,
-                      tempsecond,
-                    ),
-                  ),
+                  child: SingleChildScrollView(child: snapshot.data),
                 ),
               ),
             ],
