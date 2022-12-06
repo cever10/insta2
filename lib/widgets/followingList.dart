@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/screens/anotheruser_page.dart';
 import 'package:insta2/scripts.dart';
@@ -138,8 +139,8 @@ class followingList extends StatelessWidget {
                                                     width: 50,
                                                     height: 50,
                                                   ),
-                                                Image.asset(
-                                                  'images/frame.png',
+                                                SvgPicture.asset(
+                                                  'images/frame.svg',
                                                   width: 50,
                                                   height: 50,
                                                 ),

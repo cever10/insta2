@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/screens/anotheruser_page.dart';
 import 'package:insta2/screens/main_home.dart';
@@ -125,8 +126,8 @@ class _CommentState extends State<Comment> {
                                                 width: 40,
                                                 height: 40,
                                               ),
-                                            Image.asset(
-                                              'images/frame.png',
+                                            SvgPicture.asset(
+                                              'images/frame.svg',
                                               width: 40,
                                               height: 40,
                                             ),

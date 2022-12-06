@@ -1,6 +1,7 @@
 //본인 프로필
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/screens/compile_page.dart';
 import 'package:insta2/scripts.dart';
@@ -54,8 +55,8 @@ class _MyPageState extends State<MyPage> {
                 width: MediaQuery.of(context).size.width * 0.2,
                 height: MediaQuery.of(context).size.width * 0.2,
               ),
-            Image.asset(
-              'images/frame.png',
+            SvgPicture.asset(
+              'images/frame.svg',
               width: MediaQuery.of(context).size.width * 0.2,
               height: MediaQuery.of(context).size.width * 0.2,
             ),
