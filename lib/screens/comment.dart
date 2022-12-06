@@ -143,11 +143,15 @@ class _CommentState extends State<Comment> {
                                     ],
                                   ),
 
-                                  Row(
+                                  Column(
                                     children: [
-                                      Text(
-                                        widget.feedContents,
-                                        style: TextStyle(fontSize: font_size),
+                                      Text.rich(
+                                        TextSpan(
+                                          text: widget.feedContents,
+                                          style: TextStyle(
+                                            fontSize: font_size,
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
