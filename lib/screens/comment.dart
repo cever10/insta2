@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insta2/providerVar/providerVars.dart';
+import 'package:insta2/screens/main_home.dart';
 import 'package:provider/provider.dart';
 import 'package:insta2/scripts.dart';
 import 'package:insta2/widgets/navigatorList.dart';
@@ -23,15 +24,15 @@ class _CommentState extends State<Comment> {
   Widget build(BuildContext context) {
     providerVariable provar = Provider.of<providerVariable>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "댓글",
-          style: TextStyle(fontSize: 30, color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        leading: BackButton(color: Colors.black),
-      ),
-      /*
+      // appBar: AppBar(
+      //   title: Text(
+      //     "댓글",
+      //     style: TextStyle(fontSize: 30, color: Colors.black),
+      //   ),
+      //   backgroundColor: Colors.white,
+      //   leading: BackButton(color: Colors.black),
+      // ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(
@@ -40,8 +41,9 @@ class _CommentState extends State<Comment> {
             ),
           );
         },
-        child: Icon(Icons.arrow_back_ios_sharp),
-      ),*/
+        child: Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
+        backgroundColor: Colors.black38,
+      ),
 
       body: Row(
         children: [
@@ -198,6 +200,9 @@ class _CommentState extends State<Comment> {
                                                       ],
                                                     ),
                                                     //댓글 프로필 아이디와 실제 댓글 구현/중간에 padding추가
+                                                    Padding(
+                                                        padding:
+                                                            EdgeInsets.all(8)),
                                                     Text(
                                                       "ID",
                                                       style: TextStyle(
@@ -234,33 +239,35 @@ class _CommentState extends State<Comment> {
                                                     icon: Icon(
                                                         Icons.favorite_border),
                                                     onPressed: () {
-                                                      h_color += 1;
-                                                      if (h_color % 2 == 1) {
-                                                        onTap:
-                                                        () {
-                                                          icon:
-                                                          Icon(
-                                                              Icons
-                                                                  .favorite_outlined,
-                                                              color:
-                                                                  Colors.red);
-                                                        };
-                                                        setState(() {
-                                                          h_count += 1;
-                                                        });
-                                                      } else {
-                                                        onTap:
-                                                        () {
-                                                          icon:
-                                                          Icon(Icons
-                                                              .favorite_border);
-                                                        };
-                                                        setState(
+                                                      setState(() {
+                                                        h_color += 1;
+                                                        if (h_color % 2 == 1) {
+                                                          onTap:
                                                           () {
-                                                            h_count -= 1;
-                                                          },
-                                                        );
-                                                      }
+                                                            icon:
+                                                            Icon(
+                                                                Icons
+                                                                    .favorite_outlined,
+                                                                color:
+                                                                    Colors.red);
+                                                          };
+                                                          setState(() {
+                                                            h_count += 1;
+                                                          });
+                                                        } else {
+                                                          onTap:
+                                                          () {
+                                                            icon:
+                                                            Icon(Icons
+                                                                .favorite_border);
+                                                          };
+                                                          setState(
+                                                            () {
+                                                              h_count -= 1;
+                                                            },
+                                                          );
+                                                        }
+                                                      });
                                                     },
                                                   ),
                                                 ],

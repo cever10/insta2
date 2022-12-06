@@ -47,6 +47,7 @@ class _main_homeState extends State<main_home> {
                                 if (MainScrolView.length == index) {
                                   addInstaFeed(MainScrolView, provar.myid)
                                       .then((value) {
+                                    setState(() {});
                                     return MainScrolView[index];
                                   });
                                 } else {

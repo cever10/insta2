@@ -131,7 +131,11 @@ class _instaFeedState extends State<instaFeed> {
                     if (provar.current_profile_user != '' &&
                         widget.id != provar.myid &&
                         widget.checkFollow == true)
-                      Padding(padding: EdgeInsets.only(left: 280)),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 280),
+                        ),
+                      ),
                     if (provar.current_profile_user != '' &&
                         widget.id != provar.myid &&
                         widget.checkFollow == true)
@@ -198,7 +202,11 @@ class _instaFeedState extends State<instaFeed> {
                     if (provar.current_profile_user != '' &&
                         widget.id != provar.myid &&
                         widget.checkFollow == false)
-                      Padding(padding: EdgeInsets.only(left: 210)),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 210),
+                        ),
+                      ),
                     if (provar.current_profile_user != '' &&
                         widget.id != provar.myid &&
                         widget.checkFollow == false)
@@ -214,7 +222,11 @@ class _instaFeedState extends State<instaFeed> {
                       ),
                     if (provar.current_profile_user != '' &&
                         widget.id == provar.myid)
-                      Padding(padding: EdgeInsets.only(left: 280)),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 280),
+                        ),
+                      ),
                     if (provar.current_profile_user != '' &&
                         widget.id == provar.myid)
                       IconButton(
