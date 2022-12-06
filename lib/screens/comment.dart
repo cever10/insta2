@@ -7,7 +7,6 @@ import 'package:insta2/scripts.dart';
 import 'package:insta2/widgets/navigatorList.dart';
 
 double font_size = 25;
-double whiteSize = 150;
 
 class Comment extends StatefulWidget {
   final int feedCount;
@@ -23,9 +22,7 @@ class Comment extends StatefulWidget {
 TextEditingController mycomment = TextEditingController();
 
 class _CommentState extends State<Comment> {
-  int h_color = 0, h_count = 0;
   TextEditingController mycomment = TextEditingController();
-  int mycomment_count = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +184,7 @@ class _CommentState extends State<Comment> {
                                         left: 20, right: 20),
                                     child: Container(
                                       width: 1500,
-                                      color: Color.fromARGB(255, 235, 235, 235),
+                                      color: Colors.black12,
                                       child: TextField(
                                         controller: mycomment,
                                         decoration: InputDecoration(
@@ -260,11 +257,8 @@ class _CommentState extends State<Comment> {
                                           color: Colors.grey,
                                         ),
                                         */
-
                                   /*
-                          
                                         댓글 구현 시작
-                          
                                         */
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
