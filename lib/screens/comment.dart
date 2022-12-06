@@ -89,7 +89,9 @@ class _CommentState extends State<Comment> {
               child: Container(
                 height: MediaQuery.of(context).size.height,
                 child: FutureBuilder(
+                  //미리 불러오는 기능
                   future: initComments(),
+                  //snapshot: 불러온 데이터가 들어가는 저장소
                   builder: (context, snapshot) {
                     if (snapshot.hasData == true) {
                       return SingleChildScrollView(
