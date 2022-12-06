@@ -23,9 +23,7 @@ class Comment extends StatefulWidget {
 TextEditingController mycomment = TextEditingController();
 
 class _CommentState extends State<Comment> {
-  int h_color = 0, h_count = 0;
   TextEditingController mycomment = TextEditingController();
-  int mycomment_count = 10;
 
   @override
   Widget build(BuildContext context) {
