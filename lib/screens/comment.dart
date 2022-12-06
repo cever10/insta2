@@ -183,7 +183,7 @@ class _CommentState extends State<Comment> {
                                         left: 20, right: 20),
                                     child: Container(
                                       width: 1500,
-                                      color: Color.fromARGB(255, 235, 235, 235),
+                                      color: Colors.black12,
                                       child: TextField(
                                         controller: mycomment,
                                         decoration: InputDecoration(
