@@ -71,11 +71,8 @@ class _CommentState extends State<Comment> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (BuildContext context) => main_home(),
-            ),
-          );
+          Navigator.of(context).pop();
+          provar.updatingCurrentPage('');
         },
         child: Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
         backgroundColor: Colors.black38,

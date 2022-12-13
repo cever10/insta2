@@ -348,7 +348,6 @@ class _instaFeedState extends State<instaFeed> {
                         ),
                       IconButton(
                         onPressed: () {
-                          Navigator.of(context).pop();
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) => Comment(
@@ -359,6 +358,7 @@ class _instaFeedState extends State<instaFeed> {
                                   widget.checkimage),
                             ),
                           );
+                          provar.updatingCurrentPage('comment');
                         },
                         icon: Icon(Icons.chat_bubble_outline),
                       ),
@@ -439,6 +439,7 @@ class _instaFeedState extends State<instaFeed> {
                               widget.checkimage),
                         ),
                       );
+                      provar.updatingCurrentPage('comment');
                     },
                     child: Text(
                       '댓글 ' + widget.comments + '개 모두 보기',

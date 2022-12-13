@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/screens/login_page.dart';
 import 'package:insta2/screens/main_home.dart';
 import 'package:insta2/screens/my_page.dart';
 import 'package:insta2/screens/post_add_page.dart';
 import 'package:insta2/screens/search_page.dart';
 import 'package:insta2/scripts.dart';
+import 'package:provider/provider.dart';
 
 class navigatorList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    providerVariable provar = Provider.of<providerVariable>(context);
+
     return Row(
       children: [
         SingleChildScrollView(
@@ -34,6 +38,11 @@ class navigatorList extends StatelessWidget {
                   padding: const EdgeInsets.all(30),
                   child: TextButton(
                     onPressed: () {
+                      if (provar.current_page == 'comment') {
+                        Navigator.of(context).pop();
+                        provar.updatingCurrentPage('');
+                      }
+
                       Navigator.of(context).pop();
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (builder) => main_home()));
@@ -60,6 +69,11 @@ class navigatorList extends StatelessWidget {
                   padding: const EdgeInsets.all(30),
                   child: TextButton(
                     onPressed: () {
+                      if (provar.current_page == 'comment') {
+                        Navigator.of(context).pop();
+                        provar.updatingCurrentPage('');
+                      }
+
                       Navigator.of(context).pop();
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (builder) => search_page()));
@@ -110,6 +124,11 @@ class navigatorList extends StatelessWidget {
                   padding: const EdgeInsets.all(30),
                   child: TextButton(
                     onPressed: () {
+                      if (provar.current_page == 'comment') {
+                        Navigator.of(context).pop();
+                        provar.updatingCurrentPage('');
+                      }
+
                       Navigator.of(context).pop();
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (builder) => PostAddPage()));
@@ -136,6 +155,11 @@ class navigatorList extends StatelessWidget {
                   padding: const EdgeInsets.all(30),
                   child: TextButton(
                     onPressed: () {
+                      if (provar.current_page == 'comment') {
+                        Navigator.of(context).pop();
+                        provar.updatingCurrentPage('');
+                      }
+
                       Navigator.of(context).pop();
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (builder) => MyPage()));
@@ -162,6 +186,11 @@ class navigatorList extends StatelessWidget {
                   padding: const EdgeInsets.all(30),
                   child: TextButton(
                     onPressed: () {
+                      if (provar.current_page == 'comment') {
+                        Navigator.of(context).pop();
+                        provar.updatingCurrentPage('');
+                      }
+
                       Navigator.of(context).pop();
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (builder) => login_page()));

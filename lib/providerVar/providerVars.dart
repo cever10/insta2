@@ -26,6 +26,7 @@ class providerVariable extends ChangeNotifier {
   String current_feed_user = '';
   String current_feed_number = '';
   String current_profile_user = '';
+  String current_page = '';
 
   void load_mydata(List<String> list, String id) async {
     myname = list
@@ -82,6 +83,11 @@ class providerVariable extends ChangeNotifier {
 
   void updatingCurrentProfileUser(String value) {
     current_profile_user = value;
+    notifyListeners();
+  }
+
+  void updatingCurrentPage(String value) {
+    current_page = value;
     notifyListeners();
   }
 }
