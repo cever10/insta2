@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:insta2/providerVar/providerVars.dart';
 import 'package:insta2/scripts.dart';
 import 'package:insta2/widgets/floatingInstaFeed.dart';
