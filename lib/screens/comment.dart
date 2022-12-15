@@ -69,6 +69,7 @@ class _CommentState extends State<Comment> {
       //   leading: BackButton(color: Colors.black),
       // ),
 
+      //이전페이지로 돌아가게 버튼설정
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pop();
@@ -80,6 +81,9 @@ class _CommentState extends State<Comment> {
 
       body: Row(
         children: [
+          //화면 크기를 줄였을때 위젯에서 오버플로우가 남
+          //visibility를 사용해 위젯 크기보다 화면이 작아지면 위젯을 안보이게함
+
           Visibility(
             visible: checkNumBiggerWidth(243, context),
             child: navigatorList(),
@@ -115,6 +119,7 @@ class _CommentState extends State<Comment> {
                                         right: 10, left: 10),
                                     child: Row(
                                       children: [
+                                        //stack으로 프로필구현
                                         Stack(
                                           children: [
                                             if (widget.checkProfile ==
@@ -156,6 +161,9 @@ class _CommentState extends State<Comment> {
                                         right: 10, left: 10),
                                     child: Column(
                                       children: [
+                                        //rich 와 spam을 같이 써야함
+                                        //그냥 text만 쓰면 지정된 범위 넘었을때 오버플로우 오류가 남,
+                                        //범위 넘어갔을때 자동으로 줄바꿈 해주는 함수
                                         Text.rich(
                                           TextSpan(
                                             children: [
