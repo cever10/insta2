@@ -359,6 +359,7 @@ class _instaFeedState extends State<instaFeed> {
                             ),
                           );
                           provar.updatingCurrentPage('comment');
+                          provar.updatingCurrentProfileUser('');
                         },
                         icon: Icon(Icons.chat_bubble_outline),
                       ),
@@ -428,7 +429,6 @@ class _instaFeedState extends State<instaFeed> {
                 Container(
                   child: TextButton(
                     onPressed: () {
-                      Navigator.of(context).pop();
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (BuildContext context) => Comment(
@@ -440,6 +440,7 @@ class _instaFeedState extends State<instaFeed> {
                         ),
                       );
                       provar.updatingCurrentPage('comment');
+                      provar.updatingCurrentProfileUser('');
                     },
                     child: Text(
                       '댓글 ' + widget.comments + '개 모두 보기',
@@ -451,6 +452,22 @@ class _instaFeedState extends State<instaFeed> {
                   ),
                 ),
                 if (widget.year == DateTime.now().year.toString() &&
+                    widget.month == DateTime.now().month.toString() &&
+                    widget.day == DateTime.now().day.toString() &&
+                    widget.hour == DateTime.now().hour.toString() &&
+                    widget.minute == DateTime.now().minute.toString() &&
+                    widget.second == DateTime.now().second.toString()) ...[
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    child: Text(
+                      '방금 전',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ] else if (widget.year == DateTime.now().year.toString() &&
                     widget.month == DateTime.now().month.toString() &&
                     widget.day == DateTime.now().day.toString() &&
                     widget.hour == DateTime.now().hour.toString() &&
@@ -470,8 +487,7 @@ class _instaFeedState extends State<instaFeed> {
                     widget.month == DateTime.now().month.toString() &&
                     widget.day == DateTime.now().day.toString() &&
                     widget.hour == DateTime.now().hour.toString() &&
-                    widget.minute != DateTime.now().minute.toString() &&
-                    widget.second != DateTime.now().second.toString()) ...[
+                    widget.minute != DateTime.now().minute.toString()) ...[
                   Container(
                     padding: EdgeInsets.all(5),
                     child: Text(
@@ -487,9 +503,7 @@ class _instaFeedState extends State<instaFeed> {
                 ] else if (widget.year == DateTime.now().year.toString() &&
                     widget.month == DateTime.now().month.toString() &&
                     widget.day == DateTime.now().day.toString() &&
-                    widget.hour != DateTime.now().hour.toString() &&
-                    widget.minute != DateTime.now().minute.toString() &&
-                    widget.second != DateTime.now().second.toString()) ...[
+                    widget.hour != DateTime.now().hour.toString()) ...[
                   Container(
                     padding: EdgeInsets.all(5),
                     child: Text(
@@ -504,10 +518,7 @@ class _instaFeedState extends State<instaFeed> {
                   ),
                 ] else if (widget.year == DateTime.now().year.toString() &&
                     widget.month == DateTime.now().month.toString() &&
-                    widget.day != DateTime.now().day.toString() &&
-                    widget.hour != DateTime.now().hour.toString() &&
-                    widget.minute != DateTime.now().minute.toString() &&
-                    widget.second != DateTime.now().second.toString()) ...[
+                    widget.day != DateTime.now().day.toString()) ...[
                   Container(
                     padding: EdgeInsets.all(5),
                     child: Text(
@@ -520,11 +531,7 @@ class _instaFeedState extends State<instaFeed> {
                     ),
                   ),
                 ] else if (widget.year == DateTime.now().year.toString() &&
-                    widget.month != DateTime.now().month.toString() &&
-                    widget.day != DateTime.now().day.toString() &&
-                    widget.hour != DateTime.now().hour.toString() &&
-                    widget.minute != DateTime.now().minute.toString() &&
-                    widget.second != DateTime.now().second.toString()) ...[
+                    widget.month != DateTime.now().month.toString()) ...[
                   Container(
                     padding: EdgeInsets.all(5),
                     child: Text(
@@ -537,12 +544,7 @@ class _instaFeedState extends State<instaFeed> {
                       ),
                     ),
                   ),
-                ] else if (widget.year != DateTime.now().year.toString() &&
-                    widget.month != DateTime.now().month.toString() &&
-                    widget.day != DateTime.now().day.toString() &&
-                    widget.hour != DateTime.now().hour.toString() &&
-                    widget.minute != DateTime.now().minute.toString() &&
-                    widget.second != DateTime.now().second.toString()) ...[
+                ] else if (widget.year != DateTime.now().year.toString()) ...[
                   Container(
                     padding: EdgeInsets.all(5),
                     child: Text(
