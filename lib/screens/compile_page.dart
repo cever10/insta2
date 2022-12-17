@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_windows/image_picker_windows.dart';
 import 'package:insta2/providerVar/providerVars.dart';
